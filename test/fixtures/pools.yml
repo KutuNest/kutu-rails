@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  groupement: one
+  title: MyString
+  amount: 1
+  position: 1
+  feeders_count: 1
+  timeout: 1
+
+two:
+  groupement: two
+  title: MyString
+  amount: 1
+  position: 1
+  feeders_count: 1
+  timeout: 1
