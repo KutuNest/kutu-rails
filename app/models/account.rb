@@ -9,8 +9,8 @@ class Account < ApplicationRecord
 
   has_and_belongs_to_many :accounts
 
-  has_many :transaction_feeders, model: 'Transaction', foreign_key: 'feeder_id'
-  has_many :transaction_eaters, model: 'Transaction', foreign_key: 'eater_id'
+  has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
+  has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
 
   before_validation :set_defaults
 
