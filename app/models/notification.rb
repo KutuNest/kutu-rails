@@ -1,5 +1,9 @@
+require 'twilio-ruby'
+
 class Notification < ApplicationRecord
-  belongs_to :transaction
+  SmsSender = "+17088882081"
+
+  belongs_to :account_transaction, class_name: 'Transaction'
   belongs_to :account
 
   Types    = {sms: 'S', email: 'E'}
@@ -10,11 +14,18 @@ class Notification < ApplicationRecord
   validates :body, presence: true
 
   def deliver_sms
-    #TODO: 
+    @client = Twilio::REST::Client.new
+    @client.messages.create(
+      from: Notification::SmsSender,
+      to: self.receiver_mobile_number,
+      body: self.short_body
+    )
   end
 
   def deliver_email
-    #TODO:
+    if self.receiver_email.present?
+      AppMailer.notification(self).deliver_now
+    end
   end
 
 end

@@ -30,4 +30,10 @@ class Member < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :role, presence: true, inclusion: {in: Roles.values}
 
+  def enter_pool
+  end
+
+  def send_money
+  end
+
 end

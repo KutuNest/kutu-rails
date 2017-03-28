@@ -12,7 +12,13 @@ class Transaction < ApplicationRecord
   validates :eater_id, :feeder_id, presence: true
   validates :completed_date, presence: true
   validates :timeout, :value, numericality: true, presence: true
+
+  mount_uploader :sender_receipt, ReceiptUploader
   
+  def confirmed?
+    sender_ack? and receiver_ack? and admin_confirmed?
+  end
+
 private
   def set_defaults
     if self.new_record?

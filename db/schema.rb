@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308071844) do
+ActiveRecord::Schema.define(version: 20170328181805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170308071844) do
     t.string   "status"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "short_body"
     t.index ["account_id"], name: "index_notifications_on_account_id", using: :btree
     t.index ["transaction_id"], name: "index_notifications_on_transaction_id", using: :btree
   end
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 20170308071844) do
     t.boolean  "admin_confirmed"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "sender_receipt"
   end
 
   add_foreign_key "accounts", "groupements"

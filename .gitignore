@@ -14,8 +14,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+/uploads/*
 !/log/.keep
 !/tmp/.keep
 
 # Ignore Byebug command history file.
 .byebug_history
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
