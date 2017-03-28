@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :groupements
-  devise_for :members
-  get 'home/index'
 
-  get "/uploads/:id/:basename.:extension" => 'home#receipt', :as => :receipt
+
+  devise_for :members
+
+  get "/uploads/:id/:basename.:extension" => 'transaction#receipt', :as => :receipt
+
+  get 'dashboard/member'
+
+  get 'dashboard/admin'
+
+  get 'dashboard/group'
+
+  get 'transaction/list'
+
+  get 'transaction/show'
+
+  get 'transaction/confirm'
 
   root to: 'home#index'
 

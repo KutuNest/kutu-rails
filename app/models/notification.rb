@@ -2,6 +2,7 @@ require 'twilio-ruby'
 
 class Notification < ApplicationRecord
   SmsSender = "+17088882081"
+  TitlePrefix = "PlayKutu: "
 
   belongs_to :account_transaction, class_name: 'Transaction'
   belongs_to :account
@@ -25,6 +26,16 @@ class Notification < ApplicationRecord
   def deliver_email
     if self.receiver_email.present?
       AppMailer.notification(self).deliver_now
+    end
+  end
+
+  class << self
+    def money_sent(trx)
+      n = Notification.new
+      n.account = eater
+      n.title = "#{Notification::TitlePrefix} #{trx.feeder.member.username} just sent you money!"
+      n.body  = "#{trx.feeder.member.full_name} (#{trx.feeder.member.username}) sent you amount of #{trx.value}"
+      n.status = Statuses[:n]
     end
   end
 

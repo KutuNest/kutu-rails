@@ -30,10 +30,53 @@ class Member < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :role, presence: true, inclusion: {in: Roles.values}
 
-  def enter_pool
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 
-  def send_money
+  def super_admin?
+    self.role == Roles[:super_admin]
   end
 
+  def group_admin?
+    self.role == Roles[:group_admin]
+  end
+
+  def regular_member?
+    self.role == Roles[:regular_member]
+  end
+
+  # Pooling
+  def enter_pool(pool)
+    #TODO: 
+  end
+
+  def become_eater
+  end
+
+  def change_position(pos)
+    #TODO:
+  end
+
+  # Transactions
+  def send_money(account_feeder, account_eater)
+    t = Transaction.where(eater_id: account_eater.id, feeder_id: self.account_feeder.id).first
+    if t.present?
+      t.sender_ack = true
+      t.save
+    end
+  end
+
+  def current_transaction(account)
+    if account.member_id == self.id
+      Transaction.where(feeder_id: account.id, admin_confirmed: true).first
+    end
+  end
+
+  def transaction_history(account)
+    if account.member_id == self.id
+      Transaction.where(feeder_id: account.id, admin_confirmed: false)
+    end
+  end
 end

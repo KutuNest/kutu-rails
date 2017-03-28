@@ -2,7 +2,10 @@ class HomeController < ApplicationController
   def index
   end
 
-  def receipt
+  def setting
+  end
+
+  def support
   end
 
 end
