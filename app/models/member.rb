@@ -12,6 +12,7 @@ class Member < ApplicationRecord
   has_one :groupement, foreign_key: 'default_member_id'
 
   has_many :accounts, dependent: :nullify
+  has_many :transactions, dependent: :nullify
 
   # Include default devise modules. Others available are:
   #  :timeoutable and :omniauthable

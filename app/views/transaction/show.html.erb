@@ -1,2 +1,9 @@
-<h1>Transaction#show</h1>
-<p>Find me in app/views/transaction/show.html.erb</p>
+<h1>Transaction</h1>
+
+<p>
+  Eater: <%= @transaction.eater.member.try(:full_name) %> <br/>
+  Amount: <%= @transaction.value %> <br/>
+  Timeout: <%= @transaction.timeout.to_s(:short) %> <br/>
+  Account: <%= @transaction.eater.member.account_holder_name %> <%= @transaction.eater.member.account_number %> <%= @transaction.eater.member.bank.title %> <br/>  
+  <%= link_to "Download receipt", @transaction.sender_receipt.url %>
+</p>

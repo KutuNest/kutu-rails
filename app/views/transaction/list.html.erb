@@ -1,2 +1,14 @@
-<h1>Transaction#list</h1>
-<p>Find me in app/views/transaction/list.html.erb</p>
+<h1>Transaction list</h1>
+
+<%- for transaction in @transactions do %>
+  Eater: <%= transaction.eater.member.full_name %> <br/>
+  Amount: <%= transaction.value %> <br/>
+  Timeout: <%= transaction.timeout.to_s(:short) %> <br/>
+  Account: <%= transaction.eater.member.account_holder_name %> <%= transaction.eater.member.account_number %> <%= transaction.eater.member.bank.title %> <br/>
+  <%= link_to "Detail", transaction_path(transaction) %> 
+  <%= form_tag upload_receipt_path(transaction), multipart: true do %>
+    Confirm (receipt) <%= file_field_tag :receipt %>
+    <%= submit_tag "Submit" %>
+  <%- end %>
+  <hr/>
+<%- end %>

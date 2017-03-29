@@ -109,7 +109,28 @@ namespace :db do
     end
 
     task transaction: :environment do
-      
+      Transaction.destroy_all
+      Pool.all.each do |pool|
+        pool.accounts.each_with_index do |a, i|
+          t = Transaction.new
+          t.eater  = pool.accounts.first
+          t.feeder = a
+          t.completed_date = nil
+          t.sender_ack = false
+          t.receiver_ack = false
+          t.admin_confirmed = false
+          t.timeout = DateTime.now + pool.timeout.to_i.seconds
+          t.failed = false
+          t.value = pool.amount
+          t.sender_receipt = nil
+          t.member = a.member
+          if t.save
+            puts "Transaction: #{t.id} saved"
+          else
+            puts "Transaction: #{t.id} error - #{t.errors.to_a.first}"
+          end            
+        end
+      end
     end
 
   end

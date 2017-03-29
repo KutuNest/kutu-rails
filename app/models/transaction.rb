@@ -2,6 +2,7 @@ class Transaction < ApplicationRecord
 
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
+  belongs_to :member #TODO:
 
   has_many :notifications
 
@@ -10,7 +11,7 @@ class Transaction < ApplicationRecord
   before_validation :set_defaults
 
   validates :eater_id, :feeder_id, presence: true
-  validates :completed_date, presence: true
+  #validates :completed_date, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
   mount_uploader :sender_receipt, ReceiptUploader
