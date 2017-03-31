@@ -1,4 +1,15 @@
 class DashboardController < ApplicationController
+  def index
+    if current_member.super_admin?
+      @groupements = Groupement.includes(:pools => :accounts).all
+    elsif current_member.group_admin?
+      @groupement = current_member.groupement
+    elsif current_member.regular_member?
+      @current_transaction = current_member.current_transaction
+      @transaction_history = current_member.transaction_history      
+    end
+  end
+
   def member
     @current_transaction = current_member.current_transaction
     @transaction_history = current_member.transaction_history

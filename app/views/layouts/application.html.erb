@@ -10,7 +10,14 @@
 
   <body>
     <%= render 'layouts/notice' %>
-    <%= link_to "Transactions", transaction_list_path %>
+    <%- if member_signed_in? %>
+      <%= link_to "Dashboard", dashboard_path %>
+      <%= link_to "Transactions", transactions_path %>
+      <%= link_to "Logout", destroy_member_session_path %>
+    <%- else %>
+      <%= link_to "Login", new_member_session_path %>
+      <%= link_to "Register", new_member_registration_path %>
+    <%- end %>
     <%= yield %>
   </body>
 </html>

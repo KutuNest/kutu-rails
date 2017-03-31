@@ -14,6 +14,10 @@ class Member < ApplicationRecord
   has_many :accounts, dependent: :nullify
   has_many :transactions, dependent: :nullify
 
+  scope :super_admin, -> {where(role: Roles[:super_admin])}
+  scope :group_admin, -> {where(role: Roles[:group_admin])}
+  scope :regular_member, -> {where(role: Roles[:regular_member])}
+
   # Include default devise modules. Others available are:
   #  :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable, :lockable,
@@ -48,6 +52,10 @@ class Member < ApplicationRecord
     self.role == Roles[:regular_member]
   end
 
+  def role_name
+    Member::Roles.find{|a| a.last == self.role }.first.to_s
+  end
+
   # Pooling
   def enter_pool(pool)
     #TODO: 
@@ -69,13 +77,15 @@ class Member < ApplicationRecord
     end
   end
 
-  def current_transaction(account)
+  def current_transaction(account=nil)
+    account = self.accounts.first if account.nil?
     if account.member_id == self.id
       Transaction.where(feeder_id: account.id, admin_confirmed: true).first
     end
   end
 
-  def transaction_history(account)
+  def transaction_history(account=nil)
+    account = self.accounts.first if account.nil?
     if account.member_id == self.id
       Transaction.where(feeder_id: account.id, admin_confirmed: false)
     end

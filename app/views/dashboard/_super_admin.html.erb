@@ -1,0 +1,15 @@
+<%- for groupement in @groupements do %>
+  <%- for pool in groupement.pools do %>
+    <p><%= pool.title %></p>
+    <br/>
+    <%- for account in pool.accounts do %>
+    <%= account.member.full_name %><br/>
+    <%= account.arrival_date.to_s(:short) %><br/>
+      <%- if account.action_available? %>
+        <%= "Feeder" %>
+        <br/>
+      <%- end %>
+    <%- end %>
+    <hr/>
+  <%- end %>
+<%- end %>
