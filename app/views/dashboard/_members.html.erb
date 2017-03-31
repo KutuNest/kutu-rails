@@ -1,0 +1,7 @@
+<%- for member in @members do %>
+  <%= member.full_name %><br/>
+  <%- for account in member.accounts do %>
+    <%= account.name %>
+  <%- end %>
+  <hr/>
+<%- end %>
