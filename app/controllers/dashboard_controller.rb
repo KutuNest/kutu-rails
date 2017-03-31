@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
   def index
     if current_member.super_admin?
       @groupements = Groupement.includes(:pools => :accounts).all
+      @members = Member.all
     elsif current_member.group_admin?
       @groupement = current_member.groupement
     elsif current_member.regular_member?

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>Webarch - Responsive Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="assets/plugins/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/plugins/owl-carousel/owl.theme.default.min.css" />
+    <!-- END PLUGIN CSS -->
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/bootstrap.flex.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/plugins/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- END PLUGIN CSS -->
+    <!-- BEGIN CORE CSS FRAMEWORK -->
+    <link href="webarch/css/webarch.css" rel="stylesheet" type="text/css" />
+    <!-- END CORE CSS FRAMEWORK -->
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <!-- END HEAD -->
+
+  <body class="bg--white">
+     <!-- page loading spinner -->
+    <div class="pageload">
+        <div class="loader"></div>
+        <div class="text-loader">loading...</div>
+    </div>
+    <!-- /page loading spinner -->
+
+    <div class="aside">
+        <div class="aside-header">
+            Menu
+        </div>
+        <div class="aside-contents" id="asideMenu">
+            <ul class="list-group">
+              <li class="list-group-item dropdown">
+                <a href="#" data-toggle="collapse" data-target="#list01" data-parent="#asideMenu"><i class="fa fa-user-circle" aria-hidden="true"></i> Acounts</a>
+                <ul id="list01" class="sublist-item collapse clearfix">
+                  <li class="">
+                    <a href="#">
+                      User Acount 1
+                    </a>
+                  </li>
+                  <li class="">
+                    <a href="#">
+                      User Acount 2
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="list-group-item">
+                <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Setting</a>
+              </li>
+              <li class="list-group-item">
+                <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i>Support</a>
+              </li>
+              <li class="list-group-item active">
+                <a href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i> Selected</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+    <div class="aside-backdrop"></div>
+
+    <header>
+      <div class="navbar navbar-inverse bg-default">
+        <div class="container-fluid no-gutters container-no-pad">
+          <div class="row no-gutters">
+            <div class="col-md-5 col-lg-5 col-sm-5 col-6 text-left text-left-xs">
+              <button class="navbar-back hidden-sm-down" type="button">
+                <i class="material-icons">&#xE5C4;</i>
+              </button>
+              <button class="navbar-toggler" type="button" onclick="$('.aside').asidebar('open')" aria-label="Toggle navigation">
+                <span class="menu-logo"></span>
+              </button>
+              <a class="navbar-brand text-uppercase" href="#">
+                <!--<img src="img/dummy_logo.jpg" width="30" height="30" class="d-inline-block" alt="">-->
+                PlayKutu
+              </a>
+              <!--<a href="#" class="navbar-brand text-uppercase">PlayKutu</a>-->
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-7 col-6">
+              <form class="form-inline float-right">
+                  <div class="dropdown header hidden-sm-down">
+                    <button class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      My Acount 
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <button class="dropdown-item" type="button">Acount 1</button>
+                      <button class="dropdown-item" type="button">Acount 2</button>
+                      <button class="dropdown-item" type="button">Acount 3</button>
+                      <button class="dropdown-item" type="button">Acount 4</button>
+                      <button class="dropdown-item" type="button">Acount 5</button>
+                    </div>
+                  </div>
+                  <button class="btn btn-default-clear font-bold btn-font-sm" type="button">Sign up</button>
+                  <button class="btn btn-default-clear font-bold btn-font-sm" type="button">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="content-section dashboard">
+      <div class="container p-0">
+        <div class="row">
+          <div class="card col-12 col-sm-12 p-0 mb-0">
+            <div class="card-panel bg-white  text-grey box-shadow p-2">
+              <button type="button" class="btn btn-link btn-sm text-grey"><i class="material-icons">&#xE317;</i></button>
+              Transaction
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container paddingBottom-10">
+        <div class="row no-gutters">
+          <div class="col-12 col-sm-8 offset-sm-2">
+            <div class="sub-heading paddingLeft-15 paddingRight-15">
+              <h4 class="text-bold">Account Details</h4>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <ul class="details list-group">
+                  <li class="list-group-item">
+                    <div class="container-fluid no-gutters padding-0">
+                      <div class="row no-gutters">
+                      <div class="col-5">Name</div>
+                      <div class="col-7"><label class="details-text">John Adams </label></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="container-fluid no-gutters padding-0">
+                      <div class="row no-gutters">
+                      <div class="col-5">Bank</div>
+                      <div class="col-7 text-uppercase"><label class="details-text">HSBC</label></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="container-fluid no-gutters padding-0">
+                      <div class="row no-gutters">
+                      <div class="col-5">Bank Account</div>
+                      <div class="col-7 text-uppercase"><label class="details-text">123456789-0</label></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="container paddingBottom-10">
+              <div class="sub-heading paddingLeft-15 paddingRight-15">
+                <h4 class="text-bold">Contact Details</h4>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <ul class="details list-group">
+                    <li class="list-group-item">
+                      <div class="container-fluid no-gutters padding-0">
+                        <div class="row no-gutters">
+                        <div class="col-5">Tel</div>
+                        <div class="col-7"><label class="details-text">+6012-345-6789 </label></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="container-fluid no-gutters padding-0">
+                        <div class="row no-gutters">
+                        <div class="col-5">Email</div>
+                        <div class="col-7"><label class="details-text">john.adams@gmail.com</label></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row marginTop-20">
+                <div class="col-12">
+                  <div class="details btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-danger btn-detail">Send Money</button>
+                    <button type="button" class="btn btn-secondary btn-detail">Button 1</button>
+                    <button type="button" class="btn btn-secondary btn-detail">Button 2</button>
+                    <button type="button" class="btn btn-secondary btn-detail">Button 3</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-muted footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <small>Copyright &copy; 2017</small>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <!-- BEGIN JS DEPENDECENCIES-->
+    <script src="assets/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <!-- END CORE JS DEPENDECENCIES-->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="webarch/js/webarch.js" type="text/javascript"></script>
+    <!-- <script src="assets/js/chat.js" type="text/javascript"></script> -->
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+    
+    <script src="assets/plugins/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
+    
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="assets/js/script.js" type="text/javascript"></script>
+    <script>
+      $('.dropdown.header').hover(function() {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+      }, function() {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+      });
+    </script>
+  </body>
+</html>
