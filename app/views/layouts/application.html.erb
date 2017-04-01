@@ -1,23 +1,101 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KutuRails</title>
-    <%= csrf_meta_tags %>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>PlayKutu | Welcome to PlayKutu</title>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="PlayKutu" name="description" />
+    <meta content="PlayKutu" name="author" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <%= stylesheet_link_tag "application", media: :all %>
+    
   </head>
+  
 
-  <body>
-    <%= render 'layouts/notice' %>
-    <%- if member_signed_in? %>
-      <%= link_to "Dashboard", dashboard_path %>
-      <%= link_to "Transactions", transactions_path %>
-      <%= link_to "Logout", destroy_member_session_path %>
-    <%- else %>
-      <%= link_to "Login", new_member_session_path %>
-      <%= link_to "Register", new_member_registration_path %>
-    <%- end %>
-    <%= yield %>
+  <body class="bg--white">
+    <div class="pageload">
+        <div class="loader"></div>
+        <div class="text-loader">loading...</div>
+    </div>
+
+    <%= render 'layouts/sidebar' %>
+    <div class="aside-backdrop"></div>
+
+    <header>
+      <div class="navbar navbar-inverse bg-default">
+        <div class="container-fluid no-gutters container-no-pad">
+          <div class="row no-gutters">
+            <div class="col-md-5 col-lg-5 col-sm-5 col-6 text-left text-left-xs">
+              <button class="navbar-toggler" type="button" onclick="$('.aside').asidebar('open')" aria-label="Toggle navigation">
+                <span class="menu-logo"></span>
+              </button>
+              <a class="navbar-brand text-uppercase" href="#">
+                PlayKutu
+              </a>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-7 col-6">
+              <!--
+              <form class="form-inline float-right">
+                  <div class="dropdown header hidden-sm-down">
+                    <button class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      My Acount 
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <button class="dropdown-item" type="button">Acount 1</button>
+                      <button class="dropdown-item" type="button">Acount 2</button>
+                      <button class="dropdown-item" type="button">Acount 3</button>
+                      <button class="dropdown-item" type="button">Acount 4</button>
+                      <button class="dropdown-item" type="button">Acount 5</button>
+                    </div>
+                  </div>
+                  <button class="btn btn-default-clear font-bold btn-font-sm" type="button">Sign up</button>
+                  <button class="btn btn-default-clear font-bold btn-font-sm" type="button">Login</button>
+              </form>
+            -->
+            <form class="form-inline float-right">
+              <%- if member_signed_in? %>
+                <%= link_to "Dashboard", dashboard_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+                <%= link_to "Transactions", transactions_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+                <%= link_to "Logout", destroy_member_session_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+              <%- else %>
+                <%= link_to "Login", new_member_session_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+                <%= link_to "Register", new_member_registration_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+              <%- end %>  
+              </form>          
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- HEADER -->
+    <div class="wrap-content">
+      <%= render 'layouts/notice' %>
+      <%= yield %>
+    </div>
+
+    <footer class="text-muted footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-signin">
+               <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
+               <button class="btn btn-lg btn-primary btn-block marginTop-20" type="submit">Sign up</button>
+            </form>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col text-center">
+            <small>Copyright &copy; 2017. PlayKutu.com</small>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
