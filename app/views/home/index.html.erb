@@ -24,7 +24,7 @@
                     <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda pariatur sed voluptate suscipit nihil debitis ducimus molestias tempore ut.
                     </p>
                     <div class="text-left marginTop-30">
-                      <a href="#" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
+                      <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
                     </div>
                 </div>
             </div>
@@ -99,4 +99,17 @@
           </div>
         </div>
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="form-signin">
+               <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
+               <a href="<%= new_member_registration_path %>" class="btn btn-lg btn-primary btn-block marginTop-20" type="submit">Sign up</a>
+            </form>
+          </div>
+        </div>
+        <hr/>
+      </div>
+
     </section>
