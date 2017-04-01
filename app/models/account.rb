@@ -12,6 +12,8 @@ class Account < ApplicationRecord
   has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
   has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
 
+  scope :active, -> { where(kicked_out: false) }
+
   before_validation :set_defaults
 
   validates :pool_id, presence: true

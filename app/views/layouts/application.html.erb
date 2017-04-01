@@ -19,13 +19,13 @@
   <body class="bg--white">
     <div class="pageload">
         <div class="loader"></div>
-        <div class="text-loader">loading...</div>
+        <div class="text-loader">Loading...</div>
     </div>
 
     <%= render 'layouts/sidebar' %>
     <div class="aside-backdrop"></div>
 
-    <header>
+    <header class="header--white">
       <div class="navbar navbar-inverse bg-default">
         <div class="container-fluid no-gutters container-no-pad">
           <div class="row no-gutters">
@@ -33,7 +33,7 @@
               <button class="navbar-toggler" type="button" onclick="$('.aside').asidebar('open')" aria-label="Toggle navigation">
                 <span class="menu-logo"></span>
               </button>
-              <a class="navbar-brand text-uppercase" href="#">
+              <a class="navbar-brand strong-logo" href="<%= root_path %>">
                 PlayKutu
               </a>
             </div>

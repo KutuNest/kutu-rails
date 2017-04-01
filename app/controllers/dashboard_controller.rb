@@ -8,6 +8,14 @@ class DashboardController < ApplicationController
     elsif current_member.regular_member?
       @current_transaction = current_member.current_transaction
       @transaction_history = current_member.transaction_history      
+      @summary = {
+        money_sent: 10000,
+        money_received: 9000,
+        total_transaction: 10,
+        pending_transaction: 2,
+        failed_transaction: 1,
+        
+      }
     end
   end
 

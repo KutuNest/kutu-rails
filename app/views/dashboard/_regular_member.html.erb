@@ -1,0 +1,186 @@
+    <section class="content-section dashboard-public">
+      <div class="container paddingBottom-10">
+        <div class="row flex cards marginTop-10">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+              <div class="row flex tiles-container tiles-border h-full">
+                <div class="col-md-4 col-xs-5 no-padding h-full">
+                  <div class="tiles green h-full content-center">
+                    <i class="fa fa-chevron-circle-down"></i>
+                  </div>
+                </div>
+                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
+                  <h3 class="text-uppercase text-bold"><%= number_to_currency(current_member.summary[:money_received]) %></h3>
+                  <small class="text-uppercase">Total Money</small><br/>
+                  <small class="text-uppercase">Received</small>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            
+            <div class="col-xs-12 col-md-6 col-lg-3">
+              <div class="row flex tiles-container tiles-border h-full">
+                <div class="col-md-4 col-xs-5 no-padding h-full">
+                  <div class="tiles blue h-full content-center">
+                    <i class="fa fa-chevron-circle-up"></i>
+                  </div>
+                </div>
+                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
+                  <h3 class="text-uppercase text-bold">
+                    <%= number_to_currency(current_member.summary[:money_sent]) %>
+                  </h3>
+                  <small class="text-uppercase">Total Money</small><br/>
+                  <small class="text-uppercase">Sent</small>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            
+            <div class="col-xs-12 col-md-6 col-lg-3">
+              <div class="row flex tiles-container tiles-border h-full">
+                <div class="col-md-4 col-xs-5 no-padding h-full">
+                  <div class="tiles orange h-full content-center">
+                    <i class="fa fa-exchange"></i>
+                  </div>
+                </div>
+                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
+                  <h3 class="text-uppercase text-bold">
+                    <%= current_member.summary[:total_transaction] %>
+                    <small>&nbsp; TRX's</small>
+                  </h3>
+                  <small class="text-uppercase"><%= current_member.summary[:pending_transaction] %> PENDING</small><br/>
+                  <small class="text-uppercase"><%= current_member.summary[:failed_transaction] %> FAILED</small>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+            
+            <div class="col-xs-12 col-md-6 col-lg-3">
+              <div class="row flex tiles-container tiles-border h-full">
+                <div class="col-md-4 col-xs-5 no-padding h-full">
+                  <div class="tiles red h-full content-center">
+                    <i class="fa fa-user"></i>
+                  </div>
+                </div>
+                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
+                  <h3 class="text-uppercase text-bold">
+                    <%= current_member.summary[:total_accounts] %>
+                    <small>&nbsp; Accounts</small>
+                  </h3>
+                  <small class="text-uppercase"><%= current_member.summary[:active_accounts] %> ACTIVE</small><br/>
+                  <small class="text-uppercase"><%= current_member.summary[:inactive_accounts] %> INACTIVE</small>
+                </div>
+              </div>
+            </div>
+            <!-- item -->
+
+        </div>
+      </div>
+      <div class="container paddingTop-10 paddingBottom-10">
+        <div class="row no-gutters marginTop-10">
+          <div class="col-12">
+            <dl class="accordion">
+              <dt href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="js-accordionTrigger">
+                <span class="icon-square bg-warning text-white"><i class="material-icons">&#xE01D;</i></span>
+                  <a href="">CURRENT TRANSACTIONS</a>
+              </dt>
+              <dd class="accordion-content accordionItem is-expanded" id="accordion1" aria-hidden="true">
+                <div class="flex-base-50">
+                  <div class="flex__item list-transaction">
+                    <figure class="item-img">
+                      <a href="#"><img src="assets/img/faceless.jpg" alt="" class="rounded-circle"></a>
+                    </figure>
+                    <div class="item-desc">
+                      <h3>RM 1000</h3>
+                      <a href="#">
+                        <strong>John Paul Ivan</strong>
+                      </a>
+                      <i class="fa fa-credit-card"></i> HSBC | 123456789-123<br>
+                      <i class="fa fa-clock-o"></i> 11/3/2017<br>
+                      <i class="fa fa-phone"></i> <a href="tel:+60123456789" class="in-block">+60123456789</a>
+                    </div>
+                    <div class="item-action">
+                      <button type="button" class="btn btn-link btn-sm-table">SHOW <i class="material-icons">&#xE895;</i></button>
+                      <button type="button" class="btn btn-danger btn-detail">Send Money <i class="fa fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+                  <!-- item -->
+                  <div class="flex__item list-transaction">
+                    <figure class="item-img">
+                      <a href="#"><img src="assets/img/faceless.jpg" alt="" class="rounded-circle"></a>
+                    </figure>
+                    <div class="item-desc">
+                      <h3>RM 1000</h3>
+                      <a href="#">
+                        <strong>John Paul Ivan</strong>
+                      </a>
+                      <i class="fa fa-credit-card"></i> HSBC | 123456789-123<br>
+                      <i class="fa fa-clock-o"></i> 11/3/2017<br>
+                      <i class="fa fa-phone"></i> <a href="tel:+60123456789" class="in-block">+60123456789</a>
+                    </div>
+                    <div class="item-action">
+                      <button type="button" class="btn btn-link btn-sm-table">SHOW <i class="material-icons">&#xE895;</i></button>
+                      <button type="button" class="btn btn-danger btn-detail">Send Money <i class="fa fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+                  <!-- item -->
+                </div>
+              </dd>
+              <dt href="#accordion1" aria-expanded="false" aria-controls="accordion2" class="js-accordionTrigger">
+                <span class="icon-square bg-primary text-white"><i class="material-icons">&#xE915;</i></span>
+                  <a href="" class="is-expanded">PREVIOUS TRANSACTIONS</a>
+              </dt>
+              <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
+                <div class="row no-gutters">
+                  <div class="col-12 col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table table-hover table-dash ">
+                        <thead class="">
+                          <tr>
+                            <th>Time Out</th>
+                            <th>Name</th>
+                            <th>Bank</th>
+                            <th>Bank Acount</th>
+                            <th>Amount</th>
+                            <th>Tel</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>11/3/2017</td>
+                            <td>Jhon Paul</td>
+                            <td>HSBC</td>
+                            <td>123456789-123</td>
+                            <td>$1000</td>
+                            <td>+60123456789</td>
+                            <td><button type="button" class="btn btn-link btn-sm-table">SHOW <i class="material-icons">&#xE895;</i></button></td>
+                          </tr>
+                          <tr>
+                            <td>11/3/2017</td>
+                            <td>Jhon Paul</td>
+                            <td>HSBC</td>
+                            <td>123456789-123</td>
+                            <td>$1000</td>
+                            <td>+60123456789</td>
+                            <td><button type="button" class="btn btn-link btn-sm-table">SHOW <i class="material-icons">&#xE895;</i></button></td>
+                          </tr>
+                          <tr>
+                            <td>11/3/2017</td>
+                            <td>Jhon Paul</td>
+                            <td>HSBC</td>
+                            <td>123456789-123</td>
+                            <td>$1000</td>
+                            <td>+60123456789</td>
+                            <td><button type="button" class="btn btn-link btn-sm-table">SHOW <i class="material-icons">&#xE895;</i></button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>

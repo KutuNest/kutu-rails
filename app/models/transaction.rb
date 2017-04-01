@@ -10,6 +10,10 @@ class Transaction < ApplicationRecord
 
   before_validation :set_defaults
 
+  scope :success, -> { where(admin_confirmed: true) }
+  scope :pending, -> { where(sender_ack: false).or(Transaction.where(receiver_ack: false)) }
+  scope :failed, -> { where(failed: true) }
+
   validates :eater_id, :feeder_id, presence: true
   #validates :completed_date, presence: true
   validates :timeout, :value, numericality: true, presence: true
