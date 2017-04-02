@@ -15,6 +15,6 @@
 //= require jquery.validate
 //= require main
 //= require jquery-ui-1.10.1.custom.min
-//= require owl.carousel.js
+//= require owl.carousel.min
 //= require script
 

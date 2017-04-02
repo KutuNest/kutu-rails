@@ -122,12 +122,11 @@ var playKutu = function () {
   function homeSlideShow() {
     var $carousel   = $('.owl-carousel')
     if(!$carousel.length) return;
-    
     $carousel.owlCarousel({
         loop: true,
-        margin: 5,
+        margin: 100,
         nav: false,
-        autoplay: true,
+        autoPlay: true,
         autoplaySpeed: 1000,
         responsive: {
             0:{

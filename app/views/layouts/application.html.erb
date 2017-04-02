@@ -18,14 +18,14 @@
   <body class="bg--white">
     <div class="pageload">
         <div class="loader"></div>
-        <div class="text-loader">Loading...</div>
+        <div class="text-loader">loading...</div>
     </div>
 
     <%= render 'layouts/sidebar' %>
     <div class="aside-backdrop"></div>
 
     <header class="<%= 'header--white' if params[:controller] == 'home' and params[:action] == 'index' %>">
-      <div class="navbar navbar-inverse bg-default">
+      <div class="navbar navbar-inverse bg-default container">
         <div class="container-fluid no-gutters container-no-pad">
           <div class="row no-gutters">
             <div class="col-md-5 col-lg-5 col-sm-5 col-6 text-left text-left-xs">

@@ -20,3 +20,29 @@
 .mg-top-10 {
   margin-top: 10px;
 }
+
+.jumbotron {
+  padding-top: 9rem;
+  padding-bottom: 2rem;
+}
+
+.pd-left-30 {
+  padding-left: 30px;
+}
+
+.color-secondary {
+  color: #0aa699;
+}
+
+header {
+  border-bottom: 0.1px solid #dce0e0;
+  background-color: #F15152;
+}
+
+.navbar {
+  border-bottom: none;
+}
+
+.header--white {
+  background-color: #fff;
+}

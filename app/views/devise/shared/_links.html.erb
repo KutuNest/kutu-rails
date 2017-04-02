@@ -1,4 +1,5 @@
 
+<div class="color-secondary">
 <%- if false #controller_name != 'sessions' %>
   <%= link_to "Login", new_session_path(resource_name) %> 
 <% end -%>
@@ -24,3 +25,4 @@
     <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
   <% end -%>
 <% end -%>
+</div>
