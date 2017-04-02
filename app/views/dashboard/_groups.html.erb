@@ -1,0 +1,77 @@
+<%- for group in groupements do %>      
+  <div class="container paddingBottom-10">
+    <h1 class="title block"><%= group.title %></h1>
+
+    <div class="tabbable tabs-left">
+      <ul class="nav nav-tabs" role="tablist">
+        <%- group.pools.each_with_index do |p,i| %>
+          <li class="<%= 'active' if i.zero? %>">
+            <a href="#tab-pool-<%= "#{group.id}-#{p.id}" %>" role="tab" data-toggle="tab"><%= p.title %></a>
+          </li>            
+        
+      </ul>
+      <div class="tab-content">
+
+        <div class="tab-pane active" id="tab2hellowWorld">
+          <div class="table-responsive">
+            <table class="table table-hover table-dash ">
+              <thead>
+                <tr>
+                  <th>Sender</th>
+                  <th>Receiver</th>
+                  <th>Order</th>
+                  <th>Timeout</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <%- for a in p.accounts do %>
+                    <div class="flex">
+                      <figure class="item-img m-r-10">
+                        <a href="#"><img src="<%= asset_url 'faceless.jpg' %>" alt="" width="60" class="rounded-circle"></a>
+                      </figure>
+                      <div class="item-desc">
+                        <a href="#">
+                          <strong><%= a.member.account_holder_name %></strong>
+                        </a><br>
+                        <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                      </div>
+                    </div>
+                    <%- end %>
+                  </td>
+                  <td>
+                    <%- for a in p.accounts do %>
+                    <div class="flex">
+                      <figure class="item-img m-r-10">
+                        <a href="#"><img src="<%= asset_url 'faceless.jpg' %>" alt="" width="60" class="rounded-circle"></a>
+                      </figure>
+                      <div class="item-desc">
+                        <a href="#">
+                          <strong><%= a.member.account_holder_name %></strong>
+                        </a><br>
+                        <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                      </div>
+                    </div>
+                    <%- end %>
+                  </td>
+                  <td>
+                    <select name="" id="" class="form-control">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                  </td>
+                  <td>
+                    <b>2 days</b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <%- end %>
+    </div>
+  </div>
+<%- end %>

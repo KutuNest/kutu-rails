@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
       @groupements = Groupement.includes(:pools => :accounts).all
       @members = Member.all
     elsif current_member.group_admin?
-      @groupement = current_member.groupement
+      @groupements = [current_member.groupement]
     elsif current_member.regular_member?
       @current_transaction = current_member.current_transaction
       @transaction_history = current_member.transaction_history      

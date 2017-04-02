@@ -1,7 +1,53 @@
-<%- for member in @members do %>
-  <%= member.full_name %><br/>
-  <%- for account in member.accounts do %>
-    <%= account.name %>
-  <%- end %>
-  <hr/>
-<%- end %>
+      <div class="container paddingBottom-10">
+        <h1 class="title block">Manage Member</h1>
+        
+        <div class="table-responsive">
+          <table class="table table-hover table-dash ">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Bank</th>
+                <th>Accounts</th>
+                <th>Total Sent</th>
+                <th>Total Received</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%- for member in @members do %>
+              <tr>
+                <td>
+                  <strong><a href="#"><%= member.full_name %></a></strong><br>
+                  <small>Last login : <%= member.last_sign_in_at %></small>
+                </td>
+                <td><%= member.bank.title %><br/> <%= member.account_number %></td>
+                <td>
+                  <ul class="list-nostyle">
+                    <%- for account in member.accounts do %>                    
+                    <li>
+                      <a href="#"><%= account.name %></a>
+                    </li>
+                    <%- end %>
+                  </ul>
+                </td>
+                <td>
+                  <b><%= number_to_currency member.summary[:money_sent] %></b>
+                </td>
+                <td><b><%= number_to_currency member.summary[:money_received] %></b></td>
+                <td>
+                  <button class="btn btn-white" type="button">
+                    <span class="fa fa-external-link"></span>
+                  </button>
+                  <button class="btn btn-success">
+                    <span class="fa fa-pencil-square-o"></span>
+                  </button>
+                  <button class="btn btn-danger">
+                    <span class="fa fa-trash"></span>
+                  </button>
+                </td>
+              </tr>
+              <%- end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
