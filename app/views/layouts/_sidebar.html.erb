@@ -5,28 +5,39 @@
         <div class="aside-contents" id="asideMenu">
             <ul class="list-group">
               <li class="list-group-item dropdown">
-                <a href="#" data-toggle="collapse" data-target="#list01" data-parent="#asideMenu"><i class="fa fa-user-circle" aria-hidden="true"></i> Acounts</a>
+                <a href="#" data-toggle="collapse" data-target="#list01" data-parent="#asideMenu"><i class="fa fa-user" aria-hidden="true"></i> Acounts</a>
                 <ul id="list01" class="sublist-item collapse clearfix">
-                  <li class="">
-                    <a href="#">
-                      User Acount 1
-                    </a>
-                  </li>
-                  <li class="">
-                    <a href="#">
-                      User Acount 2
-                    </a>
-                  </li>
+                  <%- if member_signed_in? %>
+                    <%- for account in current_member.accounts do %>
+                    <li class="">
+                      <a href="#">
+                        <i class="fa fa-chevron-right"></i>
+                        <%= account.name %>
+                      </a>
+                    </li>
+                    <%- end %>
+                    <li class="">
+                      <a href="#">
+                        <i class="fa fa-plus"></i>
+                        Add Account
+                      </a>
+                    </li>                    
+                  <%- else %>
+                    <li class="">
+                      <a href="<%= new_member_session_path %>">
+                        Login
+                      </a>
+                    </li>
+                  <%- end %>
                 </ul>
               </li>
+              <%- if member_signed_in? %>
               <li class="list-group-item">
-                <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Setting</a>
+                <a href="<%= setting_path %>"><i class="fa fa-cog" aria-hidden="true"></i> Setting</a>
               </li>
+              <%- end %>
               <li class="list-group-item">
-                <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i>Support</a>
-              </li>
-              <li class="list-group-item active">
-                <a href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i> Selected</a>
+                <a href="<%= support_path %>"><i class="fa fa-question-circle" aria-hidden="true"></i>Support</a>
               </li>
             </ul>
         </div>

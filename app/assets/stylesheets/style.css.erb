@@ -149,7 +149,7 @@ footer p {
 }
 
 .navbar-inverse .navbar-toggler-icon {
-    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://ww…p='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E);
+    
 }
 
 .navbar {
@@ -833,13 +833,7 @@ h5 {
   background-clip: padding-box;
   border: none;
   border-radius: 0;
-  -webkit-box-shadow: 1px 0px 5px 1px rgba(0,0,0,0.14);
-  box-shadow: 0px 4px 7px 1px rgba(0,0,0,0.14);
-  transform: rotate(0deg) scale(1) skew(1deg) translate(0);
-  -webkit-transform: rotate(0deg) scale(1) skew(1deg) translate(-65%);
-  -moz-transform: rotate(0deg) scale(1) skew(1deg) translate(-65%);
-  -o-transform: rotate(0deg) scale(1) skew(1deg) translate(-65%);
-  -ms-transform: rotate(0deg) scale(1) skew(1deg) translate(-65%);
+
 }
 
 .dropdown.header .dropdown-item {
@@ -1881,4 +1875,37 @@ form .form-group .input-error {
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   border-right: none;
   box-shadow: none;
+}
+
+.header--white {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 20;
+}
+
+.header--white .bg-default {
+  background: #FFF;
+  color: #F15152;
+}
+
+.header--white .navbar-inverse .navbar-brand, .header--white .navbar-inverse .navbar-toggler {
+  color: #F15152;
+}
+
+.header--white .btn-default-clear {
+  color: #F15152;
+}
+
+.header--white .menu-logo {
+  background-image: url(<%= asset_url 'logo--red.svg' %>);
+}
+
+@media (min-width: 56.25em) {
+  .dropdown.header .dropdown-menu {
+    -webkit-transform: rotate(0deg) scale(1) skew(1deg) translateX(0);
+        -ms-transform: rotate(0deg) scale(1) skew(1deg) translateX(0);
+            transform: rotate(0deg) scale(1) skew(1deg) translateX(0);
+  }
 }

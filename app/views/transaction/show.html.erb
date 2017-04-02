@@ -7,3 +7,5 @@
   Account: <%= @transaction.eater.member.account_holder_name %> <%= @transaction.eater.member.account_number %> <%= @transaction.eater.member.bank.title %> <br/>  
   <%= link_to "Download receipt", @transaction.sender_receipt.url %>
 </p>
+
+<%- page_title 'Transaction detail' %>

@@ -21,3 +21,12 @@
 
 en:
   hello: "Hello world"
+
+  number:
+    currency:
+      format:
+        unit: 'RM '
+        delimiter: ','
+        separator: '.'
+        precision: 0
+        format: '%u%n'
