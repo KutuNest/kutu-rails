@@ -2,3 +2,17 @@
   font-size: 30px;
   font-weight: bold;
 }
+
+.user-comment-wrapper .profile-wrapper {
+  width: 100px;
+  height: 100px;
+}
+
+.unrounded {
+  border-radius: 0px;
+  font-size: 20px;
+}
+
+.user-comment-wrapper-padding {
+  padding-top: 14px;
+}

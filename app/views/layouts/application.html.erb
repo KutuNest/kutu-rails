@@ -58,12 +58,13 @@
             -->
             <form class="form-inline float-right">
               <%- if member_signed_in? %>
-                <%= link_to "Dashboard", dashboard_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
-                <%= link_to "Transactions", transactions_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
-                <%= link_to "Logout", destroy_member_session_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+                
+              <a href="<%= dashboard_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-bar-chart-o"></i> Dashboard</a>
+              <a href="<%= transactions_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-exchange"></i> Transactions</a>
+              <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Logout</a>
               <%- else %>
-                <%= link_to "Login", new_member_session_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
-                <%= link_to "Register", new_member_registration_path, class: 'btn btn-default-clear font-bold btn-font-sm' %>
+              <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Dashboard</a>
+              <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-user"></i> Dashboard</a>
               <%- end %>  
               </form>          
             </div>
