@@ -24,7 +24,7 @@
     <%= render 'layouts/sidebar' %>
     <div class="aside-backdrop"></div>
 
-    <header class="<%= 'header--white' if params[:controller] == 'home' and params[:action] == 'index' %>">
+    <header class="<%= 'header--white' if (params[:controller] == 'home' and params[:action] == 'index') or params[:controller].include?('devise') %>">
       <div class="navbar navbar-inverse bg-default container">
         <div class="container-fluid no-gutters container-no-pad">
           <div class="row no-gutters">
@@ -58,7 +58,7 @@
               <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Logout</a>
               <%- else %>
               <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Login</a>
-              <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-user"></i> Signup</a>
+              <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-user"></i> Sign up</a>
               <%- end %>  
               </form>          
             </div>

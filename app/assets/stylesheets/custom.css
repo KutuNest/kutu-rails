@@ -46,3 +46,42 @@ header {
 .header--white {
   background-color: #fff;
 }
+
+.padding-top-90 {
+  padding-top: 90px;
+}
+
+.padding-top-5 {
+  padding-top: 5px;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-35 {
+  font-size: 35px;
+}
+
+.padding-hz-30 {
+  padding: 0px 30px;
+}
+
+.border-envelope {
+  border-bottom: 1px dashed #ccc;
+  border-left: 1px dashed #ccc;
+  border-right: 1px dashed #ccc;
+  margin-bottom: 30px;
+}
+
+.width-30pct {
+  width: 30%;
+}
+
+.dark-grey {
+  background-color: #ccc;
+}
+
+.padding-left-0 {
+  padding-left:0px;
+}

@@ -1,11 +1,99 @@
-<h1>Transaction</h1>
+    <section class="content-section dashboard">
+      <div class="container p-0">
+        <div class="row">
+          <div class="card col-12 col-sm-8 offset-sm-2">
+            <div class="card-panel bg-white  text-grey box-shadow p-0">
+              <button type="button" class="btn btn-link btn-sm text-grey padding-left-0"><i class="fa fa-chevron-left"></i></button>
+              <a class="text-black" href="<%= dashboard_path %>">Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<p>
-  Eater: <%= @transaction.eater.member.try(:full_name) %> <br/>
-  Amount: <%= @transaction.value %> <br/>
-  Timeout: <%= @transaction.timeout.to_s(:short) %> <br/>
-  Account: <%= @transaction.eater.member.account_holder_name %> <%= @transaction.eater.member.account_number %> <%= @transaction.eater.member.bank.title %> <br/>  
-  <%= link_to "Download receipt", @transaction.sender_receipt.url %>
-</p>
+      <div class="container p-0">
+        <div class="row">
+          <div class="card col-12 col-sm-8 offset-sm-2">
+            <span class="label label-success pull-right font-35"><%= number_to_currency @transaction.value %></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container paddingBottom-10">
+        <div class="row no-gutters">
+          <div class="col-12 col-sm-8 offset-sm-2">
+            <div class="sub-heading paddingLeft-15 paddingRight-15">
+              <h4 class="text-bold">Account Details</h4>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <ul class="details list-group">
+                  <li class="list-group-item">
+                    <div class="container-fluid no-gutters padding-0">
+                      <div class="row no-gutters">
+                      <div class="col-5">Name</div>
+                      <div class="col-7"><label class="details-text"><%= @transaction.eater.member.try(:full_name) %> </label></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="container-fluid no-gutters padding-0">
+                      <div class="row no-gutters">
+                      <div class="col-5">Bank Name</div>
+                      <div class="col-7 text-uppercase"><label class="details-text"><%= @transaction.eater.member.bank.title %></label></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="container-fluid no-gutters padding-0">
+                      <div class="row no-gutters">
+                      <div class="col-5">Account Number</div>
+                      <div class="col-7 text-uppercase"><label class="details-text"><%= @transaction.eater.member.account_number %></label></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="container paddingBottom-10">
+              <div class="sub-heading paddingLeft-15 paddingRight-15">
+                <h4 class="text-bold">Contact Details</h4>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <ul class="details list-group">
+                    <li class="list-group-item">
+                      <div class="container-fluid no-gutters padding-0">
+                        <div class="row no-gutters">
+                        <div class="col-5">Phone Number</div>
+                        <div class="col-7"><label class="details-text"><%= @transaction.eater.member.phone_number %> </label></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item">
+                      <div class="container-fluid no-gutters padding-0">
+                        <div class="row no-gutters">
+                        <div class="col-5">Email</div>
+                        <div class="col-7"><label class="details-text"><%= @transaction.eater.member.email %></label></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row marginTop-20">
+                <div class="col-12">
+                  <div class="details btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-danger btn-detail">Send money</button>
+                    <button type="button" class="btn btn-secondary btn-detail">Confirm settlement</button>
+                    <button type="button" class="btn btn-secondary btn-detail">Download receipt</button>
+                    <button type="button" class="btn btn-secondary btn-detail"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 <%- page_title 'Transaction detail' %>

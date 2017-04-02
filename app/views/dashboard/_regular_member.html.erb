@@ -4,7 +4,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles blue h-full content-center">
+                  <div class="tiles dark-grey h-full content-center">
                     <i class="fa fa-chevron-circle-down"></i>
                   </div>
                 </div>
@@ -19,7 +19,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles purple h-full content-center">
+                  <div class="tiles dark-grey h-full content-center">
                     <i class="fa fa-chevron-circle-up"></i>
                   </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles orange h-full content-center">
+                  <div class="tiles dark-grey h-full content-center">
                     <i class="fa fa-exchange"></i>
                   </div>
                 </div>
@@ -54,7 +54,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles red h-full content-center">
+                  <div class="tiles dark-grey h-full content-center">
                     <i class="fa fa-user"></i>
                   </div>
                 </div>
@@ -88,7 +88,10 @@
                   <div class="overlayer bottom-right fullwidth">
                     <div class="overlayer-wrapper">
                       <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
-                        <div class="pull-right"> <a href="#" class="hashtags transparent unrounded"> Send Money </a> </div>
+                        <div class="pull-right"> 
+                          <a href="<%= transaction_path(@current_transaction) %>" class="transparent unrounded text-white"> show detail </a>&nbsp; or &nbsp;
+                          <a href="#" class="hashtags transparent unrounded"> send money now </a> 
+                        </div>
                         <div class="clearfix"></div>
                       </div>
                     </div>
@@ -96,34 +99,37 @@
                   <br>
                 </div>
               </div>
-              <div class="tiles white ">
+              <div class="tiles white border-envelope">
                 <div class="tiles-body">
                   <div class="row">
-                    <div class="user-comment-wrapper pull-left user-comment-wrapper-padding ">
-                      <div class="profile-wrapper"> 
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Transaction timeout at</div>
+                      <p class="text-black">
+                        <i class="fa fa-clock-o m-r-3"></i>
+                        <span><%= (@current_transaction.created_at + @current_transaction.timeout.seconds).to_s(:short) %></span> <br/>
                         
-                      </div>
-                      <div class="comment">
-                        <div class="preview-wrapper">Transaction timeout at</div>
-                        <div class="user-name text-black bold"> <%= (@current_transaction.created_at + @current_transaction.timeout.seconds).to_s(:short) %> </div>
-                      </div>
-                      <div class="clearfix"></div>
+                      </p>
                     </div>
-                    <div class="pull-right m-r-20"> <span class="bold text-black small-text"></span> </div>
-                    <div class="clearfix"></div>
-                    <div class="p-l-15 p-t-10 p-r-20">
-                      <p>
-                        <%= @current_transaction.eater.member.bank.title %> <br/>
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Transfer to</div>
+                      <p class="text-black">
+                        <i class="fa fa-bank m-r-3"></i>
+                        <span><%= @current_transaction.eater.member.bank.title %></span> <br/>
                         <%= @current_transaction.eater.member.account_number %> <br/>
                         <%= @current_transaction.eater.member.account_holder_name %>
                       </p>
-                      <div class="post p-t-10 p-b-10">
-                        <ul class="action-bar no-margin p-b-20 ">
-                          <li><a href="#" class="muted bold"><i class="fa fa-phone  m-r-10"></i><%= @current_transaction.eater.member.phone_number %></a> </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
                     </div>
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Contact to</div>
+                      <p class="text-black">
+                        <i class="fa fa-phone m-r-3"></i>
+                        <span><%= @current_transaction.eater.member.phone_number %></span> <br/>
+                      </p>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -133,11 +139,11 @@
 
           <div class="col-12">
             <dl class="accordion">
-              <dt href="#accordion1" aria-expanded="true" aria-controls="accordion2" class="js-accordionTrigger">
-                <span class="icon-square bg-primary text-white">
-                  <i class="fa fa-exchange"></i>
+              <dt href="#accordion2" aria-expanded="true" aria-controls="accordion2" class="dark-grey js-accordionTrigger">
+                <span class="icon-square  text-white">
+                  <i class="fa fa-check"></i>
                 </span>
-                  <a href="" class="is-expanded">COMPLETED TRANSACTIONS</a>
+                  <a href="" class="is-expanded text-white">COMPLETED TRANSACTIONS</a>
               </dt>
               <dd class="accordion-content accordionItem is-expanded" id="accordion2" aria-hidden="false">
                 <div class="row no-gutters">
@@ -146,12 +152,12 @@
                       <table class="table table-hover table-dash ">
                         <thead class="">
                           <tr>
-                            <th>Completed Date</th>
-                            <th>Name</th>
-                            <th>Bank Account</th>
-                            <th>Account Name</th>
-                            <th>Amount</th>
-                            <th>Phone Number</th>
+                            <th class="text-black">Completed Date</th>
+                            <th class="text-black">Name</th>
+                            <th class="text-black">Bank Account</th>
+                            <th class="text-black">Account Name</th>
+                            <th class="text-black">Amount</th>
+                            <th class="text-black">Phone Number</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -164,7 +170,7 @@
                             <td><%= t.eater.member.account_holder_name %></td>
                             <td><label class="label label-success"><%= number_to_currency t.value %></label></td>
                             <td><%= t.eater.member.phone_number %></td>
-                            <td><a class="btn btn-info btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
+                            <td><a class="btn btn-danger btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
                           </tr>
                           <%- end %>
                         </tbody>
