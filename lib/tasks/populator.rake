@@ -1,25 +1,42 @@
 namespace :db do
   namespace :populate do
 
-    task all: [ :groupement, :pool, :member, :account, :transaction ]
+    task all: [ :member, :groupement, :pool, :account, :transaction ]
 
     task groupement: :environment do
+      Groupement.destroy_all
+
+      members = Member.limit(4).to_a
+
       3.times do |i|
+        member = members.pop
+
         g = Groupement.new
         g. title = "Groupement #{i+1}"
         g.activated_on_create = true
         g.initial_accounts = 2
         g.maximum_accounts = 100
         g.accounts_added_on_success = 2
+        
+        g.default_member = member
+        g.default_member.role = Member::Roles[:group_admin]
+        puts "Member: #{g.default_member.username} now group admin" if g.default_member.save
+        
+        # Super Admin
+        member.role = Member::Roles[:super_admin]
+        puts "Member: #{member.username} now super admin" if member.save
+
         if g.save
           puts "Groupement: #{g.title} saved"
         else
           puts "Groupement: #{g.title} error - #{g.errors.to_a.first}"
         end
+
       end
     end
 
     task pool: :environment do
+      Pool.destroy_all
       Groupement.all.each_with_index do |g, i|
         3.times do |j|
           p = Pool.new
@@ -39,6 +56,7 @@ namespace :db do
     end
 
     task member: :environment do
+      Member.destroy_all
       20.times do |i|
         country = Country.first
         banks   = Bank.all.to_a
@@ -66,25 +84,12 @@ namespace :db do
           puts "Member: #{m.username} error - #{m.errors.to_a.first}"
         end
       end
-
-      members = Member.limit(4).to_a
-      # Super Admin
-      member = members.pop
-      member.role = Member::Roles[:super_admin]
-      puts "Member: #{member.username} now super admin" if member.save
-
-      # Group Admin
-      Groupement.all.each_with_index do |g, i|
-        g.default_member = members[i]
-        g.default_member.role = Member::Roles[:group_admin]
-        puts "Member: #{g.default_member.username} now group admin" if g.default_member.save
-      end  
-
     end
 
 
     task account: :environment do
       groupements = Groupement.all
+      Account.destroy_all
       Member.all.each_with_index do |m,i|
         groupement = groupements.sample
         (0..(rand(4))).to_a.each do |j|
