@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   end
 
   def setting
+    @member = current_member
   end
 
   def support

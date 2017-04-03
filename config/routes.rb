@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   get "uploads/:id/:basename.:extension" => 'transaction#receipt', :as => :receipt
   get 'transactions' => 'transaction#list', :as => :transactions
   get 'transaction/:id' => 'transaction#show', :as => :transaction
+
   post 'upload-receipt/:id' => 'transaction#upload_receipt', :as => :upload_receipt
   get 'dashboard' => 'dashboard#index', :as => :dashboard
+
   get 'support' => 'home#support', :as => :support
-  get 'setting' => 'home#setting', :as => :setting
+  post 'setting' => 'home#setting', :as => :setting
 
 
   root to: 'home#index'
