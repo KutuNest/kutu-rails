@@ -10,7 +10,7 @@
 
                 <div class="field">
                   <%= f.label :first_name %>
-                  <%= f.email_field :first_name, class: 'form-control' %><br />
+                  <%= f.email_field :first_name, autofocus: true, class: 'form-control' %><br />
                 </div>
 
                 <div class="field">
@@ -50,7 +50,7 @@
 
                 <div class="field">
                   <%= f.label :email %>
-                  <%= f.email_field :email, autofocus: true, class: 'form-control' %><br />
+                  <%= f.email_field :email, class: 'form-control' %><br />
                 </div>         
 
                 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

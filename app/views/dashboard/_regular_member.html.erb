@@ -1,4 +1,4 @@
-    <section class="content-section dashboard-public">
+    <section class="content-section dashboard-public margin-top-50">
       <div class="container paddingBottom-10">
         <div class="row flex cards marginTop-10">
             <div class="col-xs-12 col-md-6 col-lg-3">
@@ -91,7 +91,7 @@
                         <div class="pull-right"> 
                           <a href="<%= transaction_path(@current_transaction) %>" class="text-black"> show detail </a>
                           <span class="text-black">&nbsp; or &nbsp;</span>
-                          <a href="#" class="btn btn-danger btn-lg"> send money now </a> 
+                          <a href="#" class="btn text-uppercase btn-primary btn-lg"> send money now </a> 
                         </div>
                         <div class="clearfix"></div>
                       </div>
@@ -165,7 +165,7 @@
                         <tbody>
                           <%- for t in @transaction_history do %>
                           <tr>
-                            <td><%= t.completed_date %></td>
+                            <td><%= t.completed_date ||= "N/A" %></td>
                             <td><%= t.eater.member.full_name %></td>
                             <td><%= t.eater.member.bank.try(:title).to_s + " " + t.eater.member.account_number.to_s %></td>
                             <td><%= t.eater.member.account_holder_name %></td>
