@@ -8,11 +8,11 @@
           <li class="<%= 'active' if i.zero? %>">
             <a href="#tab-pool-<%= "#{group.id}-#{p.id}" %>" role="tab" data-toggle="tab"><%= p.title %></a>
           </li>            
-        
+        <%- end %>
       </ul>
       <div class="tab-content">
 
-        <div class="tab-pane active" id="tab2hellowWorld">
+        <div class="tab-pane active">
           <div class="table-responsive">
             <table class="table table-hover table-dash ">
               <thead>
@@ -24,6 +24,7 @@
                 </tr>
               </thead>
               <tbody>
+                <%- group.pools.each_with_index do |p,i| %>
                 <tr>
                   <td>
                     <%- for a in p.accounts do %>
@@ -66,12 +67,13 @@
                     <b>2 days</b>
                   </td>
                 </tr>
+                <%- end %>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <%- end %>
+      
     </div>
   </div>
 <%- end %>

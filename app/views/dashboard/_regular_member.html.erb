@@ -4,7 +4,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles dark-grey h-full content-center">
+                  <div class="tiles green h-full content-center">
                     <i class="fa fa-chevron-circle-down"></i>
                   </div>
                 </div>
@@ -19,7 +19,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles dark-grey h-full content-center">
+                  <div class="tiles green h-full content-center">
                     <i class="fa fa-chevron-circle-up"></i>
                   </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles dark-grey h-full content-center">
+                  <div class="tiles green h-full content-center">
                     <i class="fa fa-exchange"></i>
                   </div>
                 </div>
@@ -54,7 +54,7 @@
             <div class="col-xs-12 col-md-6 col-lg-3">
               <div class="row flex tiles-container tiles-border h-full">
                 <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles dark-grey h-full content-center">
+                  <div class="tiles green h-full content-center">
                     <i class="fa fa-user"></i>
                   </div>
                 </div>
@@ -82,15 +82,16 @@
                 <a href="javascript:;" class="reload"></a>
                 <a href="javascript:;" class="remove"></a>
               </div>
-              <div class="tiles green " style="max-height:345px">
+              <div class="tiles" style="border: 2px solid #F15152;background-color:#fff">
                 <div class="tiles-body">
-                  <h3 class="text-white m-t-50 m-b-30 m-r-20"> <span class="semi-bold"><%= distance_of_time_in_words(DateTime.now, (DateTime.now + @current_transaction.timeout.seconds)) %> </span> to send <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span> </h3>
+                  <h3 class="text-black"> <span class="semi-bold"><%= distance_of_time_in_words(DateTime.now, (DateTime.now + @current_transaction.timeout.seconds)) %> </span> to send <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span> </h3>
                   <div class="overlayer bottom-right fullwidth">
                     <div class="overlayer-wrapper">
                       <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
                         <div class="pull-right"> 
-                          <a href="<%= transaction_path(@current_transaction) %>" class="transparent unrounded text-white"> show detail </a>&nbsp; or &nbsp;
-                          <a href="#" class="hashtags transparent unrounded"> send money now </a> 
+                          <a href="<%= transaction_path(@current_transaction) %>" class="text-black"> show detail </a>
+                          <span class="text-black">&nbsp; or &nbsp;</span>
+                          <a href="#" class="btn btn-danger btn-lg"> send money now </a> 
                         </div>
                         <div class="clearfix"></div>
                       </div>
