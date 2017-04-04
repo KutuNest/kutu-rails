@@ -22,7 +22,7 @@
                 </td>
                 <td><%= member.bank.title %><br/> <%= member.account_number %></td>
                 <td>
-                  <ul class="list-nostyle">
+                  <ul class="">
                     <%- for account in member.accounts do %>                    
                     <li>
                       <a href="#"><%= account.name %></a>
@@ -31,20 +31,27 @@
                   </ul>
                 </td>
                 <td>
-                  <b><%= number_to_currency member.summary[:money_sent] %></b>
+                  <span class="label label-success"><%= number_to_currency member.summary[:money_sent] %></span>
                 </td>
-                <td><b><%= number_to_currency member.summary[:money_received] %></b></td>
+                <td><span class="label label-success"><%= number_to_currency member.summary[:money_received] %></span></td>
                 <td>
+                  <a href="<%= member_path(member) %>" class="btn btn-white">
+                    <i class="fa fa-expand"></i>
+                    &nbsp; more <br/>
+                  </a>                  
                   <a href="<%= edit_member_path(member) %>" class="btn btn-white">
                     <i class="fa fa-pencil"></i>
-                    &nbsp; edit
+                    &nbsp; edit <br/>
                   </a>
-                  <button class="btn btn-success">
-                    <span class="fa fa-pencil-square-o"></span>
-                  </button>
-                  <button class="btn btn-danger">
-                    <span class="fa fa-trash"></span>
-                  </button>
+                  <a href="<%= lock_member_path(member) %>" class="btn btn-white">
+                    <%- if member.access_locked? %>
+                      <i class="fa fa-unlock-alt"></i>
+                      &nbsp; unlock <br/>
+                    <%- else %>
+                      <i class="fa fa-lock"></i>
+                      &nbsp; lock <br/>                 
+                    <%- end %>
+                  </a>                  
                 </td>
               </tr>
               <%- end %>

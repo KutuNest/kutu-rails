@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'account/add' => 'account#add', :as => :add_account
   get 'member/:id/edit' => 'member#edit', :as => :edit_member
   post 'member/:id' => 'member#update', :as => :update_member
+  get 'member/:id' => 'member#show', :as => :member
+  get 'member/:id/lock' => 'member#lock', :as => :lock_member
 
   root to: 'home#index'
 
