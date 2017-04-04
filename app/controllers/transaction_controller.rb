@@ -22,13 +22,11 @@ class TransactionController < ApplicationController
   def update
   end
 
-  def pay
-  end
-
   def confirm
   end
 
-  def store
+  def send_money
+    @transaction = Transaction.where(id: params[:id]).first
   end
 
   def upload_receipt

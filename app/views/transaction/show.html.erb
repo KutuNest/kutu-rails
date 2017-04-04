@@ -1,10 +1,12 @@
     <section class="content-section dashboard margin-top-50">
+      <br/><br/>
       <div class="container p-0">
         <div class="row">
           <div class="card col-12 col-sm-8 offset-sm-2">
             <div class="card-panel bg-white  text-grey box-shadow p-0">
               <button type="button" class="btn btn-link btn-sm text-grey padding-left-0"><i class="fa fa-chevron-left"></i></button>
               <a class="text-black" href="<%= dashboard_path %>">Dashboard</a>
+              <%= render 'layouts/notice' %>
             </div>
           </div>
         </div>
@@ -13,7 +15,10 @@
       <div class="container p-0">
         <div class="row">
           <div class="card col-12 col-sm-8 offset-sm-2">
-            <span class="label label-success pull-right font-35"><%= number_to_currency @transaction.value %></span>
+            <div class="label label-success pull-right p-10 text-center">
+              <span class="pull-right"><%= @transaction.status %></span><br/>
+              <span class="font-35"><%= number_to_currency @transaction.value %></span>
+            </div>
           </div>
         </div>
       </div>
@@ -83,7 +88,7 @@
               <div class="row marginTop-20">
                 <div class="col-12">
                   <div class="details btn-group mr-2" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-danger btn-detail">Send money</button>
+                    <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-danger btn-detail">Send money</a>
                     <button type="button" class="btn btn-secondary btn-detail">Confirm settlement</button>
                     <button type="button" class="btn btn-secondary btn-detail">Download receipt</button>
                     <button type="button" class="btn btn-secondary btn-detail"></button>

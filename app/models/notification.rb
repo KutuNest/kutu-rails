@@ -1,7 +1,7 @@
 require 'twilio-ruby'
 
 class Notification < ApplicationRecord
-  SmsSender = "+17088882081"
+  SmsSender = "+601117223008"
   TitlePrefix = "PlayKutu: "
 
   belongs_to :account_transaction, class_name: 'Transaction'
@@ -15,12 +15,16 @@ class Notification < ApplicationRecord
   validates :body, presence: true
 
   def deliver_sms
-    @client = Twilio::REST::Client.new
-    @client.messages.create(
-      from: Notification::SmsSender,
-      to: self.receiver_mobile_number,
-      body: self.short_body
-    )
+    if Rails.env.production?
+      @client = Twilio::REST::Client.new
+      @client.messages.create(
+        from: Notification::SmsSender,
+        to: self.receiver_mobile_number,
+        body: self.short_body
+      )
+    else
+      true
+    end
   end
 
   def deliver_email

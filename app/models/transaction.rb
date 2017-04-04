@@ -24,6 +24,18 @@ class Transaction < ApplicationRecord
     sender_ack? and receiver_ack? and admin_confirmed?
   end
 
+  def status
+    if confirmed?
+      "transaction completed"
+    elsif sender_ack?
+      "waiting for receiver confirmation"
+    elsif receiver_ack?
+      "waiting for sender confirmation"
+    else
+      "waiting for admin confirmation"
+    end
+  end
+
 private
   def set_defaults
     if self.new_record?
