@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'account/add'
+
   devise_for :members, path: '', path_names: {sign_in: '/login', sign_out: '/logout', sign_up: '/signup'}
 
   get "uploads/:id/:basename.:extension" => 'transaction#receipt', :as => :receipt
@@ -19,6 +21,8 @@ Rails.application.routes.draw do
 
   get 'members' => 'dashboard#members', :as => :members
   get 'groups' => 'dashboard#groups', :as => :groups
+
+  get 'account/add' => 'account#add', :as => :add_account
 
 
   root to: 'home#index'

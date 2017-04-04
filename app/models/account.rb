@@ -21,8 +21,16 @@ class Account < ApplicationRecord
   validates :member_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :member_id}
   
-  def change_pool_order(order)
-  end  
+  def change_pool_order!(order)
+    self.pool_order = order
+    self.save
+  end
+
+  def auto_populate(pool)
+    self.pool = pool
+    self.groupement = pool.groupement if pool.present?
+    generate_account_id
+  end
 
 private
 
@@ -37,7 +45,12 @@ private
   end
 
   def generate_account_id
-    
+    accounts = self.member.accounts.map{|a| a.name.to_i }.sort
+    if accounts.any?
+      self.name = self.member.username + "_#{accounts.last + 1}"
+    else
+      self.name = self.member.username + "_#{0}"
+    end
   end
 
 end

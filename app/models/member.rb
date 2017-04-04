@@ -35,6 +35,8 @@ class Member < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :role, presence: true, inclusion: {in: Roles.values}
 
+  after_create :generate_new_account
+
 
   def full_name
     "#{self.first_name} #{self.last_name}"
@@ -66,6 +68,17 @@ class Member < ApplicationRecord
 
   def change_position(pos)
     #TODO:
+  end
+
+  #Account
+  def generate_new_account(pool)
+    a = self.accounts.new
+    a.auto_populate(pool)
+    if a.save
+      a
+    else
+      false
+    end
   end
 
   # Transactions
