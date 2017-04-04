@@ -21,6 +21,8 @@ class Account < ApplicationRecord
   validates :member_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :member_id}
   
+  def change_pool_order(order)
+  end  
 
 private
 

@@ -17,12 +17,20 @@ class DashboardController < ApplicationController
     @transaction_history = current_member.transaction_history
   end
 
+  def members
+    if current_member.super_admin?
+      @members = Member.all
+    elsif current_member.group_admin?
+      @members = current_member.groupement.pools.map {|p| p.members }.compact
+    end
+  end  
+
   def admin
     @groupement = current_member.groupement
   end
 
-  def group
-    @groupements = Groupement.includes([:pools, :members]).all
+  def groups
+    @groupements = Groupement.includes(:pools).all
   end
 
   def add

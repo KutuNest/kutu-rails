@@ -1,14 +1,27 @@
-<h1>Transaction list</h1>
+      <div class="container padding-top-90">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'layouts/notice' %>
 
-<%- for transaction in @transactions do %>
-  Eater: <%= transaction.eater.member.full_name %> <br/>
-  Amount: <%= transaction.value %> <br/>
-  Timeout: <%= transaction.timeout.to_s(:short) %> <br/>
-  Account: <%= transaction.eater.member.account_holder_name %> <%= transaction.eater.member.account_number %> <%= transaction.eater.member.bank.title %> <br/>
-  <%= link_to "Detail", transaction_path(transaction) %> 
-  <%= form_tag upload_receipt_path(transaction), multipart: true do %>
-    Confirm (receipt) <%= file_field_tag :receipt %>
-    <%= submit_tag "Submit" %>
-  <%- end %>
-  <hr/>
-<%- end %>
+            <h2 class="color-secondary font-bold">Transactions</h2>
+
+              <%- for transaction in @transactions do %>
+                Eater: <%= transaction.eater.member.full_name %> <br/>
+                Amount: <%= transaction.value %> <br/>
+                Timeout: <%= transaction.timeout.to_s(:short) %> <br/>
+                Account: <%= transaction.eater.member.account_holder_name %> <%= transaction.eater.member.account_number %> <%= transaction.eater.member.bank.title %> <br/>
+                <%= link_to "Detail", transaction_path(transaction) %> 
+                <%= form_tag upload_receipt_path(transaction), multipart: true do %>
+                  Confirm (receipt) <%= file_field_tag :receipt %>
+                  <%= submit_tag "Submit" %>
+                <%- end %>
+                <hr/>
+              <%- end %>
+
+            <br/>
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+<%- page_title 'Transactions' %>

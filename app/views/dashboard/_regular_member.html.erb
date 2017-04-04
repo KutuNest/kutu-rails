@@ -89,9 +89,15 @@
                     <div class="overlayer-wrapper">
                       <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
                         <div class="pull-right"> 
-                          <a href="<%= transaction_path(@current_transaction) %>" class="text-black"> show detail </a>
+                          <a href="<%= transaction_path(@current_transaction) %>" class="btn btn-default"> 
+                            <i class="fa fa-search-plus "></i>
+                            show detail 
+                          </a>
                           <span class="text-black">&nbsp; or &nbsp;</span>
-                          <a href="#" class="btn text-uppercase btn-primary btn-lg"> send money now </a> 
+                          <a href="<%= send_money_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg"> 
+                            send money now 
+                            <i class="fa fa-chevron-circle-right "></i>
+                          </a> 
                         </div>
                         <div class="clearfix"></div>
                       </div>
@@ -171,7 +177,7 @@
                             <td><%= t.eater.member.account_holder_name %></td>
                             <td><label class="label label-success"><%= number_to_currency t.value %></label></td>
                             <td><%= t.eater.member.phone_number %></td>
-                            <td><a class="btn btn-danger btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
+                            <td><a class="btn btn-default btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
                           </tr>
                           <%- end %>
                         </tbody>

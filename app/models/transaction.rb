@@ -24,6 +24,10 @@ class Transaction < ApplicationRecord
     sender_ack? and receiver_ack? and admin_confirmed?
   end
 
+  def timed_out?
+    (self.created_at + self.timeout.seconds).to_datetime > DateTime.now
+  end
+
   def status
     if confirmed?
       "transaction completed"

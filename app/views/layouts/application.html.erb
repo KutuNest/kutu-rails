@@ -37,30 +37,7 @@
               </a>
             </div>
             <div class="col-md-7 col-lg-7 col-sm-7 col-6">
-            <form class="form-inline float-right">
-              <%- if member_signed_in? %>
-
-                  <div class="dropdown header hidden-sm-down">
-                    <button class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-user"></i> Accounts
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <%- for a in current_member.accounts do %>
-                      <button class="dropdown-item" type="button"><i class="fa fa-chevron-right"></i>&nbsp; <%= a.name %></button>
-                      <%- end %>
-                      <button class="dropdown-item" type="button"><i class="fa fa-plus"></i>&nbsp; Add Account</button>
-                    </div>
-                  </div>
-              <%- if false %>
-              <a href="<%= dashboard_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-bar-chart-o"></i> Dashboard</a>
-              <a href="<%= transactions_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-exchange"></i> Transactions</a>
-              <%- end %>
-              <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Logout</a>
-              <%- else %>
-              <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Login</a>
-              <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-user"></i> Sign up</a>
-              <%- end %>  
-              </form>          
+              <%= render 'layouts/nav' %>       
             </div>
           </div>
         </div>
@@ -68,7 +45,6 @@
     </header>
     
     <div class="wrap-content">
-      <%#= render 'layouts/notice' %>
       <%= yield %>
     </div>
 

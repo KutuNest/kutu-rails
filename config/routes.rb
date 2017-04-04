@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get 'support' => 'home#support', :as => :support
   post 'setting' => 'home#setting', :as => :setting
 
+  get 'members' => 'dashboard#members', :as => :members
+  get 'groups' => 'dashboard#groups', :as => :groups
+
 
   root to: 'home#index'
 
