@@ -35,9 +35,10 @@
                 </td>
                 <td><b><%= number_to_currency member.summary[:money_received] %></b></td>
                 <td>
-                  <button class="btn btn-white" type="button">
-                    <span class="fa fa-external-link"></span>
-                  </button>
+                  <a href="<%= edit_member_path(member) %>" class="btn btn-white">
+                    <i class="fa fa-pencil"></i>
+                    &nbsp; edit
+                  </a>
                   <button class="btn btn-success">
                     <span class="fa fa-pencil-square-o"></span>
                   </button>

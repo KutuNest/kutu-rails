@@ -33,18 +33,4 @@ class DashboardController < ApplicationController
     @groupements = Groupement.includes(:pools).all
   end
 
-  def add
-    account = Account.new
-    if current_member.regular_member?
-      account.member = current_member
-
-    else
-      account.member = params[:member_id]
-    end
-    #TODO: more columns
-    account.arrival_date = DateTime.now
-    account.admin_account = false
-    account.save
-  end
-
 end

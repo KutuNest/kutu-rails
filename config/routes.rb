@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-
-  get 'account/add'
+  get 'member/edit'
 
   devise_for :members, path: '', path_names: {sign_in: '/login', sign_out: '/logout', sign_up: '/signup'}
 
@@ -23,7 +22,8 @@ Rails.application.routes.draw do
   get 'groups' => 'dashboard#groups', :as => :groups
 
   get 'account/add' => 'account#add', :as => :add_account
-
+  get 'member/:id/edit' => 'member#edit', :as => :edit_member
+  post 'member/:id' => 'member#update', :as => :update_member
 
   root to: 'home#index'
 

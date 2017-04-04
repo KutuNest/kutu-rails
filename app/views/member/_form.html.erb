@@ -1,0 +1,33 @@
+                <div class="field">
+                  <%= f.label :first_name %>
+                  <%= f.text_field :first_name, autofocus: true, class: 'form-control' %><br />
+                </div>
+
+                <div class="field">
+                  <%= f.label :last_name %>
+                  <%= f.text_field :last_name, class: 'form-control' %><br />
+                </div>
+                
+                <div class="field">
+                  <%= f.label :phone_number %>
+                  <%= f.text_field :phone_number, class: 'form-control' %><br />
+                </div>
+
+                <div class="field">
+                  <%= f.label :bank_id %>
+                  <%= f.select :bank_id, Bank.all.map{|b| [b.title, b.id] }, class: 'form-control' %><br />
+                </div>
+
+                <div class="field">
+                  <%= f.label :account_number %>
+                  <%= f.text_field :account_number, class: 'form-control' %><br />
+                </div>                
+
+                <div class="field">
+                  <%= f.label :account_holder_name %>
+                  <%= f.text_field :account_holder_name, class: 'form-control' %><br />
+                </div>            
+
+                <div class="actions">
+                  <%= f.submit "Update Profile", class: 'btn btn-primary' %>
+                </div>

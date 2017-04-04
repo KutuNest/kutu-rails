@@ -8,39 +8,7 @@
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                 <%= devise_error_messages! %>
 
-                <div class="field">
-                  <%= f.label :first_name %>
-                  <%= f.email_field :first_name, autofocus: true, class: 'form-control' %><br />
-                </div>
-
-                <div class="field">
-                  <%= f.label :last_name %>
-                  <%= f.email_field :last_name, class: 'form-control' %><br />
-                </div>
-                
-                <div class="field">
-                  <%= f.label :phone_number %>
-                  <%= f.email_field :phone_number, class: 'form-control' %><br />
-                </div>
-
-                <div class="field">
-                  <%= f.label :bank_id %>
-                  <%= f.select :bank_id, Bank.all.map{|b| [b.title, b.id] }, class: 'form-control' %><br />
-                </div>
-
-                <div class="field">
-                  <%= f.label :account_number %>
-                  <%= f.email_field :account_number, class: 'form-control' %><br />
-                </div>                
-
-                <div class="field">
-                  <%= f.label :account_holder_name %>
-                  <%= f.email_field :account_holder_name, class: 'form-control' %><br />
-                </div>            
-
-                <div class="actions">
-                  <%= f.submit "Update Profile", class: 'btn btn-primary' %>
-                </div>
+                <%= render 'member/form', f: f %>
               <% end %>
 
               <br/><br/><hr/>
