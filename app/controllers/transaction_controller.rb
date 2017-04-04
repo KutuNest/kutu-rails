@@ -16,13 +16,35 @@ class TransactionController < ApplicationController
     @transaction = Transaction.where(id: params[:id]).first
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def confirm
+    @transaction = Transaction.where(id: params[:id]).first
+    if @transaction
+      @transaction.admin_confirmed = true
+      @transaction.completed_date = Date.today
+      @transaction.failed = false
+      if @transaction.save
+        redirect_to :back, notice: 'Transaction has been confirmed'
+      else
+        redirect_to :back, notice: 'Unable to perform action'
+      end
+    else
+      redirect_to :back, notice: 'Unable to perform action'
+    end
+  end
+
+  def reject
+    @transaction = Transaction.where(id: params[:id]).first
+    if @transaction
+      @transaction.admin_confirmed = false
+      @transaction.failed = false
+      if @transaction.save
+        redirect_to :back, notice: 'Transaction has been rejected'
+      else
+        redirect_to :back, notice: 'Unable to perform action'
+      end
+    else
+      redirect_to :back, notice: 'Unable to perform action'
+    end    
   end
 
   def send_money

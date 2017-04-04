@@ -24,19 +24,23 @@ class Transaction < ApplicationRecord
     sender_ack? and receiver_ack? and admin_confirmed?
   end
 
+  def timeout_datetime
+    (self.created_at + self.timeout.seconds).to_datetime
+  end
+
   def timed_out?
-    (self.created_at + self.timeout.seconds).to_datetime > DateTime.now
+     timeout_datetime > DateTime.now
   end
 
   def status
     if confirmed?
       "transaction completed"
     elsif sender_ack?
-      "waiting for receiver confirmation"
+      "receiver confirmation"
     elsif receiver_ack?
-      "waiting for sender confirmation"
+      "sender confirmation"
     else
-      "waiting for admin confirmation"
+      "admin confirmation"
     end
   end
 

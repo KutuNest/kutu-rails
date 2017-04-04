@@ -6,22 +6,84 @@
             <h2 class="color-secondary font-bold">Transactions</h2>
 
               <%- for transaction in @transactions do %>
-                Eater: <%= transaction.eater.member.full_name %> <br/>
-                Amount: <%= transaction.value %> <br/>
-                Timeout: <%= transaction.timeout.to_s(:short) %> <br/>
-                Account: <%= transaction.eater.member.account_holder_name %> <%= transaction.eater.member.account_number %> <%= transaction.eater.member.bank.title %> <br/>
-                <%= link_to "Detail", transaction_path(transaction) %> 
-                <%= form_tag upload_receipt_path(transaction), multipart: true do %>
-                  Confirm (receipt) <%= file_field_tag :receipt %>
-                  <%= submit_tag "Submit" %>
-                <%- end %>
-                <hr/>
-              <%- end %>
+              <hr/>
+              <div class="row">
+              <div class="col-md-12">
+                <div class="tiles white">
+                  <div class="row">
+                      <div class="col-md-4 col-sm-4">
+                        <p class="no-margin">SENDER</p>
+                        <h4>
+                          <span class="item-count">
+                            <%= transaction.feeder.member.full_name %>
+                          </span> 
+                        </h4>
+                        <p>
+                          <i class="fa fa-bank"></i>&nbsp;
+                          <%= transaction.eater.member.bank.title %> <br/>
+                          <%= transaction.eater.member.account_number %> <br/>
+                          <%= transaction.eater.member.account_holder_name %>
+                        </p>
+                      </div>
+                      <div class="col-md-4">
+                        <p class="semi-bold">RECEIVER</p>
+                        <h4>
+                          <span class="item-count">
+                            <%= transaction.eater.member.full_name %>
+                          </span>
+                        </h4>
+                        <p>
+                          <i class="fa fa-bank"></i>&nbsp;
+                          <%= transaction.feeder.member.bank.title %> <br/>
+                          <%= transaction.feeder.member.account_number %> <br/>
+                          <%= transaction.feeder.member.account_holder_name %>                          
+                        </p>
+                      </div>
 
-            <br/>
+                      <div class="col-md-4">
+                        <p class="semi-bold">Amount</p>
+                        <h3><span class="item-count semi-bold">
+                          <span class="label label-success label-lg"><%= number_to_currency transaction.value %></span>
+                          <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %></span>
+                        </h3>
+                        <span>
+                          <i class="fa fa-clock-o"></i>
+                          <%= transaction.timeout_datetime.to_s(:short) %></span><br/>
+                      </div>
+
+                      <div class="clearfix"></div>
+                  </div>
+                  <h5 class="semi-bold m-t-30 m-l-30"></h5>
+                  <table class="table no-more-tables m-t-20 m-l-20 m-b-30">
+                    <thead style="display:none">
+                      <tr>
+                        <th style="width:45%"></th>
+                        <th style="width:45%"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="v-align-middle red pull-left">
+                          <i class="fa fa-exchange"></i>
+                          <%= transaction.status %>
+                        </td>
+                        <td class="v-align-middle bold text-success pull-right">
+                          <a href="<%= transaction.sender_receipt.url %>" class="btn btn-white"><i class="fa fa-file"></i>&nbsp;show receipt</a>
+                          <a href="<%= confirm_path(transaction) %>" class="btn btn-white"><i class="fa fa-check"></i>&nbsp;confirm payment</a>
+                          <a href="<%= reject_path(transaction) %>" class="btn btn-white"><i class="fa fa-times"></i>&nbsp;reject payment</a>
+                        </td>                        
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+              <%- end %>
           </div>
         </div>
-        <hr/>
+        
+      </div>
       </div>
 
 <%- page_title 'Transactions' %>

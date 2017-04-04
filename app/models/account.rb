@@ -36,4 +36,8 @@ private
     end
   end
 
+  def generate_account_id
+    
+  end
+
 end
