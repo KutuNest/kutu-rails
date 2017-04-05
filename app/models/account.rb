@@ -13,6 +13,10 @@ class Account < ApplicationRecord
   has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
 
   scope :active, -> { where(kicked_out: false) }
+  scope :completed, -> { where(kicked_out: true) }
+
+  scope :feeder, -> {where(action_available: true)}
+  scope :eater, -> {where(action_available: false)}
 
   before_validation :set_defaults
 
@@ -23,6 +27,7 @@ class Account < ApplicationRecord
   
   def change_pool_order!(order)
     self.pool_order = order
+    #TODO: other account order
     self.save
   end
 

@@ -1,11 +1,20 @@
 class AccountController < ApplicationController
   def add
-    pool = Pool.first
-    account = current_member.generate_new_account(pool)
+    pool = Groupement.first.pools.first
+    account = current_member.generate_new_account
     if account
       redirect_to dashboard_path, notice: "New account: #{account.name} has been successfully created"
     else
       redirect_to dashboard_path, notice: 'Unable to create new account. Please contact admin'
     end
+  end
+
+  def change_pool_order
+  	account = Account.where(id: params[:id]).first
+  	if account.present? and account.change_pool_order!(params[:pool_order])
+  		redirect_to :back, notice: 'Account order has been updated'
+  	else
+  		redirect_to :back, notice: 'An error occured on changing pool order'
+  	end
   end
 end

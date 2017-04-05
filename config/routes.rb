@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'groups' => 'dashboard#groups', :as => :groups
 
   get 'account/add' => 'account#add', :as => :add_account
+  post 'account/change-pool-order/:id' => 'account#change_pool_order', :as => :change_pool_order
+
   get 'member/:id/edit' => 'member#edit', :as => :edit_member
   post 'member/:id' => 'member#update', :as => :update_member
   get 'member/:id' => 'member#show', :as => :member

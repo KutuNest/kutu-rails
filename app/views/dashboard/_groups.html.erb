@@ -17,20 +17,23 @@
             <table class="table table-hover table-dash ">
               <thead>
                 <tr>
-                  <th>Sender</th>
-                  <th>Receiver</th>
-                  <th>Order</th>
+                  <th>Sending</th>
+                  <th>Receiving</th>
+                  <th>Completed</th>
+                  <!--
                   <th>Timeout</th>
+                  -->
                 </tr>
               </thead>
               <tbody>
                 <%- group.pools.each_with_index do |p,i| %>
+                POOL AMOUNT: <%= p.amount %>
                 <tr>
                   <td>
-                    <%- for a in p.accounts do %>
+                    <%- for a in p.accounts.feeder do %>
                     <div class="flex">
                       <figure class="item-img m-r-10">
-                        <a href="#"><img src="<%= asset_url 'faceless.jpg' %>" alt="" width="60" class="rounded-circle"></a>
+                        <a href="#"><i class="fa fa-user text-lg"></i></a>
                       </figure>
                       <div class="item-desc">
                         <a href="#">
@@ -42,34 +45,50 @@
                     <%- end %>
                   </td>
                   <td>
-                    <%- for a in p.accounts do %>
-                    <div class="flex">
-                      <figure class="item-img m-r-10">
-                        <a href="#"><img src="<%= asset_url 'faceless.jpg' %>" alt="" width="60" class="rounded-circle"></a>
-                      </figure>
-                      <div class="item-desc">
-                        <a href="#">
-                          <strong><%= a.member.account_holder_name %></strong>
-                        </a><br>
-                        <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                    <%- for a in p.accounts.eater.order(:pool_order) do %>
+                      <div class="flex">
+                      <%= form_tag change_pool_order_path(a) do %>
+                        <%= select_tag :pool_order, options_for_select((0..p.accounts.eater.count).to_a, a.pool_order), class: 'form-control', onclick: 'this.form.submit()' %>
+                      <%- end %>                         
+                        <figure class="item-img m-r-10">
+                          <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
+                        </figure>
+                        <div class="item-desc">
+                          <a href="#">
+                            <strong><%= a.member.account_holder_name %></strong>
+                          </a><br>
+                          <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                        </div>
                       </div>
-                    </div>
                     <%- end %>
                   </td>
                   <td>
-                    <select name="" id="" class="form-control">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </select>
+                    <%- for a in p.accounts.completed do %>
+                      <div class="flex">                   
+                        <figure class="item-img m-r-10">
+                          <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
+                        </figure>
+                        <div class="item-desc">
+                          <a href="#">
+                            <strong><%= a.member.account_holder_name %></strong>
+                          </a><br>
+                          <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                        </div>
+                      </div>
+                    <%- end %>
+                  </td>                  
+                  <!--
+                  <td>
                   </td>
                   <td>
-                    <b>2 days</b>
+                    <b></b>
                   </td>
+                  -->
                 </tr>
                 <%- end %>
               </tbody>
             </table>
+
           </div>
         </div>
       </div>
