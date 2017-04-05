@@ -16,6 +16,18 @@ class TransactionController < ApplicationController
     @transaction = Transaction.where(id: params[:id]).first
   end
 
+  def settle
+    #TODO: limit member
+    @transaction = Transaction.where(id: params[:id]).first
+    @transaction.receiver_ack = true
+    notice = if @transaction.save
+      "You've successfully confirmed settlement of the transfer"
+    else
+      "Unable to confirm settlement"
+    end
+    redirect_to transaction_path(@transaction), notice: notice
+  end
+
   def confirm
     @transaction = Transaction.where(id: params[:id]).first
     if @transaction

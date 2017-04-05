@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'transaction/:id/send-money' => 'transaction#send_money', :as => :send_money
   get 'transaction/:id/reject' => 'transaction#reject', :as => :reject
   get 'transaction/:id/confirm' => 'transaction#confirm', :as => :confirm
+  get 'transaction/:id/settle' => 'transaction#settle', :as => :settle
 
   post 'upload-receipt/:id' => 'transaction#upload_receipt', :as => :upload_receipt
   get 'dashboard' => 'dashboard#index', :as => :dashboard
