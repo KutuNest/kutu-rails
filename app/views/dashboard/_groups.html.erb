@@ -20,16 +20,13 @@
                   <th>Sending</th>
                   <th>Receiving</th>
                   <th>Completed</th>
-                  <!--
-                  <th>Timeout</th>
-                  -->
                 </tr>
               </thead>
               <tbody>
                 <%- group.pools.each_with_index do |p,i| %>
-                POOL AMOUNT: <%= p.amount %>
                 <tr>
                   <td>
+                  POOL AMOUNT: <%= p.amount %> <%= link_to "EDIT POOL", "#" %>
                     <%- for a in p.accounts.feeder do %>
                     <div class="flex">
                       <figure class="item-img m-r-10">

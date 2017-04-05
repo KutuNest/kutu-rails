@@ -1,30 +1,45 @@
 <form class="form-inline float-right">
   <%- if member_signed_in? %>
     <div class="dropdown header hidden-sm-down">
-      <button class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-user"></i> Accounts
-      </button>
+      </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <%- for a in current_member.accounts do %>
-        <button class="dropdown-item" type="button"><i class="fa fa-chevron-right"></i>&nbsp; <%= a.name %></button>
+        <a href="<%= switch_account_path(a.id) %>" class="dropdown-item">
+          <i class="fa fa-chevron-right"></i>&nbsp; <%= a.name %>
+        </a>
         <%- end %>
-        <button class="dropdown-item" type="button"><i class="fa fa-plus"></i>&nbsp; Add Account</button>
+        <a href="<%= add_account_path %>" class="dropdown-item">
+          <i class="fa fa-plus"></i>&nbsp; Add Account
+        </a>
         <%- unless current_member.regular_member? %>
-        <button class="dropdown-item" type="button"><i class="fa fa-exchange"></i>&nbsp; Transactions</button>
-        <!--
-        <button class="dropdown-item" type="button"><i class="fa fa-retweet"></i>&nbsp; Pools</button>
-        -->
-        <button class="dropdown-item" type="button"><i class="fa fa-users"></i>&nbsp; Members</button>
+        <a href="<%= transactions_path %>" class="dropdown-item">
+          <i class="fa fa-exchange"></i>&nbsp; Transactions
+        </a>
+        <a href="<%= members_path %>" class="dropdown-item">
+          <i class="fa fa-users"></i>&nbsp; Members
+        </a>
           <%- if current_member.super_admin? %>
-          <button class="dropdown-item" type="button"><i class="fa fa-clone"></i>&nbsp; Groupements</button>
+          <a href="<%= groups_path %>" class="dropdown-item">
+            <i class="fa fa-clone"></i>&nbsp; Groupements
+          </a>
           <%- end %>
         <%- end %>
-        <button class="dropdown-item" type="button"><i class="fa fa-gear"></i>&nbsp; Settings</button>
+        <a href="<%= edit_member_registration_path %>" class="dropdown-item">
+          <i class="fa fa-gear"></i>&nbsp; Settings
+        </a>
       </div>
     </div>
-    <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Logout</a>
+    <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm">
+      <i class="fa fa-key"></i> Logout
+    </a>
   <%- else %>
-    <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-key"></i> Login</a>
-    <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm"><i class="fa fa-user"></i> Sign up</a>
+    <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm">
+      <i class="fa fa-key"></i> Login
+    </a>
+    <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm">
+      <i class="fa fa-user"></i> Sign up
+    </a>
   <%- end %>  
 </form>   

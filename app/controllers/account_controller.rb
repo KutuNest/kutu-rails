@@ -17,4 +17,10 @@ class AccountController < ApplicationController
   		redirect_to :back, notice: 'An error occured on changing pool order'
   	end
   end
+
+  def switch
+    account = Account.where(id: params[:id], member_id: current_member.id).first
+    session[:current_account] = account.id
+    redirect_to dashboard_path, notice: "Account switched to #{account.name}"
+  end
 end
