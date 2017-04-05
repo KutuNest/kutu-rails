@@ -71,7 +71,8 @@ class Member < ApplicationRecord
   end
 
   #Account
-  def generate_new_account(pool)
+  def generate_new_account
+    pool = Pool.first
     a = self.accounts.new
     a.auto_populate(pool)
     if a.save
