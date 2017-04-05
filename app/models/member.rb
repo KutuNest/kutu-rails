@@ -27,7 +27,7 @@ class Member < ApplicationRecord
   #validates :country, presence: true
   validates :country_id, :bank_id, presence: true
 
-  validates :account_holder_name, presence: true
+  #validates :account_holder_name, presence: true
   validates :account_number, presence: true, uniqueness: {scope: :bank_id}
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
@@ -37,6 +37,9 @@ class Member < ApplicationRecord
 
   after_create :generate_new_account
 
+  def bank_information_completed?
+    self.account_holder_name.present? and self.account_number.present? and self.bank_id.present?
+  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"

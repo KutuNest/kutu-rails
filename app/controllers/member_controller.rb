@@ -3,6 +3,10 @@ class MemberController < ApplicationController
     @member = Member.where(id: params[:id]).first
   end
 
+  def complete
+    @member = current_member
+  end
+
   def update
     member_params = params.require(:member).permit(:first_name, :last_name, :phone_number, :bank_id, :account_number, :account_holder_name)
     @member = Member.where(id: params[:id]).first

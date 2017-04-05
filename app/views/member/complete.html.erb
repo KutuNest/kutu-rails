@@ -1,0 +1,20 @@
+      <div class="container padding-top-90">
+        <div class="row">
+          <div class="col-md-12">
+
+              <%= render 'layouts/notice' %>
+              <h2 class="color-secondary font-bold">Complete Bank Information</h2>
+
+              <%= form_for(@member, url: update_member_path(@member), html: { method: :post }) do |f| %>
+
+                <%= render 'member/form', f: f %>
+              <% end %>
+
+              <br/>
+
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+<%- page_title 'Complete Bank Information' %>

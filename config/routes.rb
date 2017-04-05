@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   post 'member/:id' => 'member#update', :as => :update_member
   get 'member/:id' => 'member#show', :as => :member
   get 'member/:id/lock' => 'member#lock', :as => :lock_member
+  get 'member/complete' => 'member#complete', :as => :complete_member
 
   root to: 'home#index'
 
