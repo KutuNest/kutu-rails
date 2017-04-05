@@ -7,7 +7,7 @@ class Account < ApplicationRecord
 
   has_many :notifications
 
-  has_and_belongs_to_many :accounts
+  has_and_belongs_to_many :a_transactions, class_name: 'Transaction'
 
   has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
   has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
