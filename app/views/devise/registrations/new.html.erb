@@ -10,7 +10,7 @@
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                 <%= devise_error_messages! %>
 
-                <%= render 'members/member_account', f: f %>              
+                <%= render 'member/member_account', f: f %>              
 
                 <div class="actions">
                   <%= f.submit "Sign up", class: 'btn btn-primary' %>
