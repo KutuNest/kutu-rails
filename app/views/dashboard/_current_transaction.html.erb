@@ -1,0 +1,66 @@
+          <div class="col-md-12 m-b-10">
+            <div class="widget-item ">
+              <div class="controller overlay right">
+                <a href="javascript:;" class="reload"></a>
+                <a href="javascript:;" class="remove"></a>
+              </div>
+              <div class="tiles" style="border: 2px solid #F15152;background-color:#fff">
+                <div class="tiles-body">
+                  <h3 class="text-black"> <span class="semi-bold"><%= distance_of_time_in_words(DateTime.now, (DateTime.now + @current_transaction.timeout.seconds)) %> </span> to send <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span> </h3>
+                  <div class="overlayer bottom-right fullwidth">
+                    <div class="overlayer-wrapper">
+                      <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
+                        <div class="pull-right"> 
+                          <a href="<%= transaction_path(@current_transaction) %>" class="btn btn-default"> 
+                            <i class="fa fa-search-plus "></i>
+                            show detail 
+                          </a>
+                          <span class="text-black">&nbsp; or &nbsp;</span>
+                          <a href="<%= send_money_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg"> 
+                            send money now 
+                            <i class="fa fa-chevron-circle-right "></i>
+                          </a> 
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+              </div>
+              <div class="tiles white border-envelope">
+                <div class="tiles-body">
+                  <div class="row">
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Transaction timeout at</div>
+                      <p class="text-black">
+                        <i class="fa fa-clock-o m-r-3"></i>
+                        <span><%= (@current_transaction.created_at + @current_transaction.timeout.seconds).to_s(:short) %></span> <br/>
+                        
+                      </p>
+                    </div>
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Transfer to</div>
+                      <p class="text-black">
+                        <i class="fa fa-bank m-r-3"></i>
+                        <span><%= @current_transaction.eater.member.bank.title %></span> <br/>
+                        <%= @current_transaction.eater.member.account_number %> <br/>
+                        <%= @current_transaction.eater.member.account_holder_name %>
+                      </p>
+                    </div>
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Contact to</div>
+                      <p class="text-black">
+                        <i class="fa fa-phone m-r-3"></i>
+                        <span><%= @current_transaction.eater.member.phone_number %></span> <br/>
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

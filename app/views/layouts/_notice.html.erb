@@ -1,7 +1,13 @@
 <%- if notice.present? %>
-<div class="alert alert-success"><%= notice %></div>
+<div class="alert alert-success">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<%= notice %>
+</div>
 <%- end %>
 
 <%- if alert.present? %>
-<div class="alert alert-warning"><%= alert %></div> 
+<div class="alert alert-warning">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<%= alert %>
+</div> 
 <%- end %>
