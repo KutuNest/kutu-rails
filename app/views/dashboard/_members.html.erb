@@ -5,6 +5,7 @@
           <table class="table table-hover table-dash ">
             <thead>
               <tr>
+                <th>Group</th>
                 <th>Member</th>
                 <th>Bank</th>
                 <th>Accounts</th>
@@ -16,6 +17,7 @@
             <tbody>
               <%- for member in @members do %>
               <tr>
+                <td><%= member.accounts.first.groupement.title %></td>
                 <td>
                   <strong><a href="#"><%= member.full_name %></a></strong><br>
                   <small>Last login : <%= member.last_sign_in_at %></small>
@@ -29,21 +31,28 @@
                     </li>
                     <%- end %>
                   </ul>
+                  Limit: <%= member.accounts_limit.to_i %>. Increase to
+                  <%= form_tag increase_accounts_limit_path(member) do %>
+                    <%= text_field_tag :accounts_limit, "" %>
+                    <%= submit_tag "Submit" %>
+                  <%- end %>
                 </td>
                 <td>
                   <span class="label label-success"><%= number_to_currency member.summary[:money_sent] %></span>
                 </td>
                 <td><span class="label label-success"><%= number_to_currency member.summary[:money_received] %></span></td>
                 <td>
-                  <a href="<%= member_path(member) %>" class="btn btn-white">
+                  <a href="<%= member_path(member) %>" class="btn btn-white width-80">
                     <i class="fa fa-expand"></i>
                     &nbsp; more <br/>
                   </a>                  
-                  <a href="<%= edit_member_path(member) %>" class="btn btn-white">
+                  <br/>
+                  <a href="<%= edit_member_path(member) %>" class="btn btn-white width-80">
                     <i class="fa fa-pencil"></i>
                     &nbsp; edit <br/>
                   </a>
-                  <a href="<%= lock_member_path(member) %>" class="btn btn-white">
+                  <br/>
+                  <a href="<%= lock_member_path(member) %>" class="btn btn-white width-80">
                     <%- if member.access_locked? %>
                       <i class="fa fa-unlock-alt"></i>
                       &nbsp; unlock <br/>

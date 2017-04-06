@@ -67,10 +67,7 @@ class Member < ApplicationRecord
   end
 
   def become_eater
-  end
 
-  def change_position(pos)
-    #TODO:
   end
 
   #Account
