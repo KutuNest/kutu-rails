@@ -28,7 +28,6 @@ class MemberController < ApplicationController
     else
       redirect_to :back, notice: 'Unable to change member lock setting'
     end
-
   end
 
   def show

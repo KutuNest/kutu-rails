@@ -2,7 +2,14 @@ class TransactionController < ApplicationController
   before_action :authenticate_member!
 
   def list
-    @transactions = current_member.transactions
+    @transactions = Transaction.all
+  end
+
+  def disputes
+    @transactions = Transaction.all
+  end
+
+  def dispute
   end
 
   def show

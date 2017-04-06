@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get "uploads/:id/:basename.:extension" => 'transaction#receipt', :as => :receipt
   get 'transactions' => 'transaction#list', :as => :transactions
+  get 'disputes' => 'transaction#disputes', :as => :disputes
+  get 'dispute/:id' => 'transaction#dispute', :as => :dispute
   get 'transaction/:id' => 'transaction#show', :as => :transaction
 
   get 'transaction/:id/send-money' => 'transaction#send_money', :as => :send_money

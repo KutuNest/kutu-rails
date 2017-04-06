@@ -15,7 +15,6 @@ class Transaction < ApplicationRecord
   scope :failed, -> { where(failed: true) }
 
   validates :eater_id, :feeder_id, presence: true
-  #validates :completed_date, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
   mount_uploader :sender_receipt, ReceiptUploader
@@ -39,6 +38,8 @@ class Transaction < ApplicationRecord
       "receiver confirmation"
     elsif receiver_ack?
       "sender confirmation"
+    elsif failed?
+      "under dispute"
     else
       "admin confirmation"
     end

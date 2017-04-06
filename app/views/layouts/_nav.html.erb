@@ -13,6 +13,8 @@
         <a href="<%= add_account_path %>" class="dropdown-item">
           <i class="fa fa-plus"></i>&nbsp; Add Account
         </a>
+
+        <!--
         <%- unless current_member.regular_member? %>
         <a href="<%= transactions_path %>" class="dropdown-item">
           <i class="fa fa-exchange"></i>&nbsp; Transactions
@@ -26,8 +28,9 @@
           </a>
           <%- end %>
         <%- end %>
+        -->
         <a href="<%= edit_member_registration_path %>" class="dropdown-item">
-          <i class="fa fa-gear"></i>&nbsp; Settings
+          <i class="fa fa-gear"></i>&nbsp; Account Setting
         </a>
       </div>
     </div>

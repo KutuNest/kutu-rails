@@ -11,7 +11,7 @@
         </div>
       </div>
 
-<%= render 'layouts/notice' %>
+    <%= render 'layouts/notice' %>
 
       <div class="container p-0">
         <div class="row">
@@ -93,7 +93,8 @@
                     <%- unless @transaction.receiver_ack? %>
                     <a href="<%= settle_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Confirm settlement</a>
                     <%- end %>
-                    <a href="<%= @transaction.sender_receipt.url %>" class="btn btn-secondary btn-detail">Download receipt</a>
+                    <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Dispute transaction</a>                    
+                    <a href="<%= @transaction.sender_receipt.url %>" class="btn btn-secondary btn-detail">Sender receipt</a>
                   </div>
                 </div>
               </div>

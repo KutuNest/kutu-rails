@@ -35,21 +35,27 @@
                 <%- unless current_member.regular_member? %>
                   <li class="list-group-item">
                     <a href="<%= transactions_path %>"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions</a>
-                  </li>         
+                  </li>     
                   <li class="list-group-item">
-                    <a href="<%= "#" %>"><i class="fa fa-retweet" aria-hidden="true"></i> Add Pool</a>
-                  </li>                 
+                    <a href="<%= disputes_path %>"><i class="fa fa-random" aria-hidden="true"></i> Disputes <label class="label label-default"><%= Transaction.failed.count %></label></a>
+                  </li>                                     
                   <li class="list-group-item">
                     <a href="<%= members_path %>"><i class="fa fa-users" aria-hidden="true"></i> Members</a>
                   </li>   
                     <%- if current_member.super_admin? %>
-                    <li class="list-group-item">
-                      <a href="<%= groups_path %>"><i class="fa fa-clone" aria-hidden="true"></i> Groupements</a>
-                    </li>   
+                      <li class="list-group-item">
+                        <a href="<%= groups_path %>"><i class="fa fa-clone" aria-hidden="true"></i> Groupements</a>
+                      </li> 
+                      <li class="list-group-item">
+                        <a href="<%= "#" %>"><i class="fa fa-retweet" aria-hidden="true"></i> Add Pool</a>
+                      </li>          
+                      <li class="list-group-item">
+                        <a href="<%= "#" %>"><i class="fa fa-retweet" aria-hidden="true"></i> Add Super User</a>
+                      </li>                                           
                     <%- end %>                                           
                 <%- end %>
                 <li class="list-group-item">
-                  <a href="<%= edit_member_registration_path %>"><i class="fa fa-cog" aria-hidden="true"></i> Setting</a>
+                  <a href="<%= edit_member_registration_path %>"><i class="fa fa-cog" aria-hidden="true"></i>Account Setting</a>
                 </li>                
               <%- end %>
 

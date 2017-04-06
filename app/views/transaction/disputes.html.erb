@@ -3,7 +3,7 @@
           <div class="col-md-12">
             <%= render 'layouts/notice' %>
 
-            <h2 class="color-secondary font-bold">Transactions</h2>
+            <h2 class="color-secondary font-bold">Disputes</h2>
 
               <%- for transaction in @transactions do %>
               <hr/>
@@ -64,13 +64,11 @@
                     <tbody>
                       <tr>
                         <td class="v-align-middle red pull-left">
-
                         </td>
                         <td class="v-align-middle bold text-success pull-right">
-                          <span class="label label-default">
-                            <i class="fa fa-exchange"></i>
-                            <%= transaction.status.upcase %>
-                          </span>
+                          <a href="<%= transaction.sender_receipt.url %>" class="btn btn-white"><i class="fa fa-file"></i>&nbsp;show receipt</a>
+                          <a href="<%= confirm_path(transaction) %>" class="btn btn-white"><i class="fa fa-check"></i>&nbsp;confirm payment</a>
+                          <a href="<%= reject_path(transaction) %>" class="btn btn-white"><i class="fa fa-times"></i>&nbsp;reject payment</a>
                         </td>                        
                       </tr>
 
