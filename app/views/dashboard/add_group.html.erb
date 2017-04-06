@@ -1,0 +1,18 @@
+      <div class="container padding-top-90">
+        <div class="row">
+          <div class="col-md-12">
+
+              <%= render 'layouts/notice' %>
+              <h2 class="color-secondary font-bold">Add Group</h2>
+              
+              <%= form_for(@group, url: save_group_path) do |f| %>
+                <%= render 'dashboard/form_group', f: f %>
+              <% end %>
+              <br/>
+
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+<%- page_title 'Add Groupement' %>

@@ -9,6 +9,10 @@
                 <%= devise_error_messages! %>
 
                 <%= render 'member/form', f: f %>
+                
+               <div class="actions">
+                  <%= f.submit "Update Profile", class: 'btn btn-primary' %>
+                </div>                
               <% end %>
 
               <br/><br/><hr/>

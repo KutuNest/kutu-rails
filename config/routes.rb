@@ -4,18 +4,20 @@ Rails.application.routes.draw do
 
   devise_for :members, path: '', path_names: {sign_in: '/login', sign_out: '/logout', sign_up: '/signup'}
 
-  get "uploads/:id/:basename.:extension" => 'transaction#receipt', :as => :receipt
+  
   get 'transactions' => 'transaction#list', :as => :transactions
   get 'disputes' => 'transaction#disputes', :as => :disputes
+
+  get "transaction-receipt/:id/:basename.:extension" => 'transaction#receipt', :as => :receipt
   get 'dispute/:id' => 'transaction#dispute', :as => :dispute
   get 'transaction/:id' => 'transaction#show', :as => :transaction
-
   get 'transaction/:id/send-money' => 'transaction#send_money', :as => :send_money
   get 'transaction/:id/reject' => 'transaction#reject', :as => :reject
   get 'transaction/:id/confirm' => 'transaction#confirm', :as => :confirm
   get 'transaction/:id/settle' => 'transaction#settle', :as => :settle
 
   post 'upload-receipt/:id' => 'transaction#upload_receipt', :as => :upload_receipt
+
   get 'dashboard' => 'dashboard#index', :as => :dashboard
 
   get 'support' => 'home#support', :as => :support
@@ -35,6 +37,14 @@ Rails.application.routes.draw do
   get 'member/:id' => 'member#show', :as => :member
   get 'member/:id/lock' => 'member#lock', :as => :lock_member
   get 'member/complete' => 'member#complete', :as => :complete_member
+
+  get 'add-pool' => 'dashboard#add_pool', :as => :add_pool
+  get 'add-super-user' => 'dashboard#add_super_user', :as => :add_super_user
+  get 'add-group' => 'dashboard#add_group', :as => :add_group
+
+  get 'save-group' => 'dashboard#save_group', :as => :save_group
+  get 'save-pool' => 'dashboard#save_pool', :as => :save_pool
+  get 'save-super-user' => 'dashboard#save_super_user', :as => :save_super_user
 
   root to: 'home#index'
 

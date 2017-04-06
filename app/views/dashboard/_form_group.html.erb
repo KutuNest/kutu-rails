@@ -1,0 +1,28 @@
+                <div class="field">
+                  <%= f.label :title %>
+                  <%= f.text_field :title, class: 'form-control' %><br />
+                </div>                
+
+                <div class="field">
+                  <%= f.label :activated_on_create %>
+                  <%= f.check_box :activated_on_create, class: 'form-control' %><br />
+                </div>       
+
+                <div class="field">
+                  <%= f.label :accounts_added_on_success %>
+                  <%= f.text_field :accounts_added_on_success, class: 'form-control' %><br />
+                </div>       
+
+                <div class="field">
+                  <%= f.label :initial_accounts %>
+                  <%= f.text_field :initial_accounts, class: 'form-control' %><br />
+                </div>       
+
+                <div class="field">
+                  <%= f.label :maximum_accounts %>
+                  <%= f.text_field :maximum_accounts, class: 'form-control' %><br />
+                </div>                       
+
+                <div class="actions">
+                  <%= f.submit "Add Group", class: 'btn btn-primary' %>
+                </div>

@@ -1,5 +1,5 @@
 class Groupement < ApplicationRecord
-  belongs_to :default_member, class_name: 'Member', foreign_key: 'default_member_id'
+  belongs_to :default_member, class_name: 'Member', foreign_key: 'default_member_id', required: false
 
   has_many :pools
 
