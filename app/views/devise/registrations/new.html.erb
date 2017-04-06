@@ -4,24 +4,31 @@
 
               <%= render 'layouts/notice' %>
               <h2 class="color-secondary font-bold">Sign up</h2>
+
+              <%- resource.referrer_code = params[:referrer_code] if params[:referrer_code].present? %>
               
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                 <%= devise_error_messages! %>
 
                 <div class="field">
-                  <%= f.label :email %><br />
-                  <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, class: 'form-control' %><br />
                 </div>
 
                 <div class="field">
                   <%= f.label :password %>
-                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %><br />
                 </div>
 
                 <div class="field">
-                  <%= f.label :password_confirmation %><br />
+                  <%= f.label :password_confirmation %>
                   <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %><br/>
                 </div>
+
+                <div class="field">
+                  <%= f.label :referrer_code, "Referrer code (optional)" %>
+                  <%= f.text_field :referrer_code, class: 'form-control' %><br />
+                </div>                
 
                 <div class="actions">
                   <%= f.submit "Sign up", class: 'btn btn-primary' %>

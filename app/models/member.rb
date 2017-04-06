@@ -35,6 +35,8 @@ class Member < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :role, presence: true, inclusion: {in: Roles.values}
 
+  before_validation :generate_referral_code
+
   after_create :generate_new_account
 
   def bank_information_completed?
@@ -67,7 +69,7 @@ class Member < ApplicationRecord
   end
 
   def become_eater
-
+    #TODO: 
   end
 
   #Account
@@ -80,6 +82,12 @@ class Member < ApplicationRecord
     else
       false
     end
+  end
+
+  def generate_referral_code
+    ref_code = SecureRandom.hex(3)
+    ref_code = ref_code + rand(10) if Member.where(referral_code: ref_code).any?
+    self.referral_code = ref_code
   end
 
   # Transactions

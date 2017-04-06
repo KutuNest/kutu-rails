@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get 'account/switch/:id' => 'account#switch', :as => :switch_account
   post 'account/change-pool-order/:id' => 'account#change_pool_order', :as => :change_pool_order
 
+  post 'member/increase-accounts-limit/:id' => 'member#increase_accounts_limit', :as => :increase_accounts_limit
+
   get 'member/:id/edit' => 'member#edit', :as => :edit_member
   post 'member/:id' => 'member#update', :as => :update_member
   get 'member/:id' => 'member#show', :as => :member
