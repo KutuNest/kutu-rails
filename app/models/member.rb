@@ -6,8 +6,8 @@ class Member < ApplicationRecord
     regular_member: 'RM' # Have privilege to his all accounts
   }
 
-  belongs_to :country
-  belongs_to :bank
+  belongs_to :country, required: false
+  belongs_to :bank, required: false
 
   has_one :groupement, foreign_key: 'default_member_id'
 
@@ -20,24 +20,27 @@ class Member < ApplicationRecord
 
   # Include default devise modules. Others available are:
   #  :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :lockable,
+  devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :account_holder_name, :bank_name, presence: true
   #validates :country, presence: true
-  validates :country_id, :bank_id, presence: true
+  #validates :country_id, :bank_id, presence: true
 
   #validates :account_holder_name, presence: true
-  validates :account_number, presence: true, uniqueness: {scope: :bank_id}
+  #validates :account_number, presence: true, uniqueness: {scope: :bank_id}
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
-  validates :phone_number, presence: true, format: {with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/i}
-  validates :first_name, :last_name, presence: true
+  validates :phone_number, allow_blank: true, format: {with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/i}
+  #validates :first_name, :last_name, presence: true
   validates :role, presence: true, inclusion: {in: Roles.values}
+  validates :username, presence: true
 
   before_validation :generate_referral_code
 
-  after_create :generate_new_account
+  before_validation :set_default_role
+
+  #after_create :generate_new_account
 
   def bank_information_completed?
     self.account_holder_name.present? and self.account_number.present? and self.bank_id.present?
@@ -101,14 +104,14 @@ class Member < ApplicationRecord
 
   def current_transaction(account=nil)
     account = self.accounts.first if account.nil?
-    if account.member_id == self.id
+    if account and account.member_id == self.id
       Transaction.where(feeder_id: account.id, admin_confirmed: true).first
     end
   end
 
   def transaction_history(account=nil)
     account = self.accounts.first if account.nil?
-    if account.member_id == self.id
+    if account and account.member_id == self.id
       Transaction.where(feeder_id: account.id, admin_confirmed: false)
     end
   end
@@ -125,4 +128,10 @@ class Member < ApplicationRecord
       money_received: Transaction.where(eater_id: self.accounts.map(&:id)).sum(&:value)
     }
   end
+
+private
+  def set_default_role
+    self.role = Roles[:regular_member]
+  end
+
 end

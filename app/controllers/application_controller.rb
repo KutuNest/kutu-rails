@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   #before_action :force_complete_registration
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || dashboard_path
   end
@@ -12,6 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  def configure_permitted_parameters
+    added_attrs = [:username, :email, :password, :password_confirmation, :remember_me, :referrer_code]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  end
 
   def force_complete_registration
   	if member_signed_in? and !current_member.bank_information_completed? and !devise_controller? and !update_member_path?
