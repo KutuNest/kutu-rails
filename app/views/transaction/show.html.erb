@@ -90,7 +90,7 @@
                 <div class="col-12">
                   <div class="details btn-group mr-2" role="group" aria-label="First group">
                     <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-danger btn-detail">Send money</a>
-                    <%- unless @transaction.receiver_ack? %>
+                    <%- unless @transaction.receiver_confirmed? %>
                     <a href="<%= settle_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Confirm settlement</a>
                     <%- end %>
                     <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Dispute transaction</a>                    
