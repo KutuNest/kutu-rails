@@ -45,4 +45,33 @@ class MemberController < ApplicationController
     end
   end
 
+  def add_group
+    @group = Groupement.new
+  end
+
+  def save_group
+    group_params = params.require(:group).permit(:activated_on_create, :initial_accounts, :maximum_accounts, :accounts_added_on_success, :title)
+    @groupement = Groupement.new(group_params)
+    if @groupement.save
+      redirect_to :back, notice: "Group #{@groupement.title} has been saved"
+    else
+      redirect_to :back, notice: "Error: #{@groupement.errors.to_a.first}"
+    end
+  end
+
+  def add_super_user
+    @member = Member.new
+  end
+
+  def save_super_user
+    member_params = params.require(:member).permit(:title, :amount, :position, :feeders_count, :timeout)
+    @member = Member.new(member_params)
+    @member.super_user = true
+    if @member.save
+      redirect_to :back, notice: "Super user #{@member.title} has been saved"
+    else
+      redirect_to :back, notice: "Error: #{@member.errors.to_a.first}"
+    end        
+  end
+
 end

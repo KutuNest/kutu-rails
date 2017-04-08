@@ -23,17 +23,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <%- for t in @transaction_history do %>
-                          <tr>
-                            <td><%= t.completed_date ||= "N/A" %></td>
-                            <td><%= t.eater.member.full_name %></td>
-                            <td><%= t.eater.member.bank.try(:title).to_s + " " + t.eater.member.account_number.to_s %></td>
-                            <td><%= t.eater.member.account_holder_name %></td>
-                            <td><label class="label label-success"><%= number_to_currency t.value %></label></td>
-                            <td><%= t.eater.member.phone_number %></td>
-                            <td><a class="btn btn-default btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
-                          </tr>
-                          <%- end %>
+                          <%= render 'dashboard/items/transaction' %>
                         </tbody>
                       </table>
                     </div>

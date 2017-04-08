@@ -1,0 +1,25 @@
+<div class="container padding-top-90">
+  <div class="row">
+    <div class="col-md-12">
+
+        <%= render 'layouts/notice' %>
+        <h2 class="color-secondary font-bold">Add Super User</h2>
+        
+        <%= form_for(@member, url: save_super_user_path) do |f| %>
+          <%= render 'member/member_account', f: f %>
+          <br/>
+          <%= render 'member/form', f: f %>
+
+          <div class="actions">
+            <%= f.submit "Add Super User", class: 'btn btn-primary' %>
+          </div>                
+
+        <% end %>
+        <br/>
+
+    </div>
+  </div>
+  <hr/>
+</div>
+
+<%- page_title 'Add Super User' %>

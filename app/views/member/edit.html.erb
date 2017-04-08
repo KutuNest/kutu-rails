@@ -1,25 +1,25 @@
-      <div class="container padding-top-90">
-        <div class="row">
-          <div class="col-md-12">
+<div class="container padding-top-90">
+  <div class="row">
+    <div class="col-md-12">
 
-              <%= render 'layouts/notice' %>
-              <h2 class="color-secondary font-bold">Edit Member</h2>
+        <%= render 'layouts/notice' %>
+        <h2 class="color-secondary font-bold">Edit Member</h2>
 
-              <%= form_for(@member, url: update_member_path(@member), html: { method: :post }) do |f| %>
+        <%= form_for(@member, url: update_member_path(@member), html: { method: :post }) do |f| %>
 
-                  <%= render 'member/form', f: f %>
+            <%= render 'member/form', f: f %>
 
-                 <div class="actions">
-                    <%= f.submit "Update Profile", class: 'btn btn-primary' %>
-                  </div>                
-                  
-              <% end %>
+           <div class="actions">
+              <%= f.submit "Update Profile", class: 'btn btn-primary' %>
+            </div>                
+            
+        <% end %>
 
-              <br/>
+        <br/>
 
-          </div>
-        </div>
-        <hr/>
-      </div>
+    </div>
+  </div>
+  <hr/>
+</div>
 
 <%- page_title 'Edit Member' %>

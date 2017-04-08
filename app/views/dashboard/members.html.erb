@@ -1,3 +1,24 @@
-<%= render "dashboard/members" %>
+<div class="container paddingBottom-10">
+	<h1 class="title block">Manage Member</h1>
 
-<%- page_title 'Members' %>
+	<div class="table-responsive">
+	  <table class="table table-hover table-dash ">
+	    <thead>
+	      <tr>
+	        <th>Group</th>
+	        <th>Member</th>
+	        <th>Bank</th>
+	        <th>Accounts</th>
+	        <th>Total Sent</th>
+	        <th>Total Received</th>
+	        <th>Action</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <%= render 'dashboard/items/member' %>
+	    </tbody>
+	  </table>
+	</div>
+</div>
+
+<%- page_title 'Manage Members' %>

@@ -9,9 +9,9 @@
       <div class="container paddingTop-20 paddingBottom-10">
         <div class="row no-gutters marginTop-10">
           <%- if current_member.accounts.any? %>
-            <%= render 'dashboard/current_transaction' if @current_transaction.present? %>
+            <%= render 'dashboard/current' if @current_transaction.present? %>
           <%- else %>
-            <%= render 'dashboard/no_accounts' %>
+            <%= render 'dashboard/empty' %>
           <%- end %>
 
           <%- if current_member.accounts.any? %>
