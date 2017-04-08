@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
   def index
+    @current_account = nil
+
     if current_member.super_admin?
       @groupements = Groupement.includes(:pools => :accounts).all
       @members = Member.all
@@ -9,6 +11,13 @@ class DashboardController < ApplicationController
       @current_transaction = current_member.current_transaction
       @transaction_history = current_member.transaction_history      
       @current_transaction = current_member.transactions.first if @current_transaction.nil?
+
+      if params[:acc].present?
+        @current_account = current_member.accounts.where(name: params[:acc]).first
+      else
+        @current_account = current_member.accounts.first
+      end
+
     end
   end
 

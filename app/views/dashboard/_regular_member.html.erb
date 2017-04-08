@@ -1,77 +1,8 @@
     <section class="content-section dashboard-public margin-top-50">
       <div class="container paddingBottom-10">
         <%= render 'layouts/notice' %>
-        <%- if current_member.accounts.any? %>
-        <div class="row flex cards marginTop-10">
-            <div class="col-xs-12 col-md-6 col-lg-3">
-              <div class="row flex tiles-container tiles-border h-full">
-                <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles green h-full content-center">
-                    <i class="fa fa-chevron-circle-down"></i>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
-                  <h3 class="text-uppercase text-bold"><%= number_to_currency(current_member.summary[:money_received]) %></h3>
-                  <small class="text-uppercase">Total Money</small><br/>
-                  <small class="text-uppercase">Received</small>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-xs-12 col-md-6 col-lg-3">
-              <div class="row flex tiles-container tiles-border h-full">
-                <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles green h-full content-center">
-                    <i class="fa fa-chevron-circle-up"></i>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
-                  <h3 class="text-uppercase text-bold">
-                    <%= number_to_currency(current_member.summary[:money_sent]) %>
-                  </h3>
-                  <small class="text-uppercase">Total Money</small><br/>
-                  <small class="text-uppercase">Sent</small>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-xs-12 col-md-6 col-lg-3">
-              <div class="row flex tiles-container tiles-border h-full">
-                <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles green h-full content-center">
-                    <i class="fa fa-exchange"></i>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
-                  <h3 class="text-uppercase text-bold">
-                    <%= current_member.summary[:total_transaction] %>
-                    <small>&nbsp; TRX's</small>
-                  </h3>
-                  <small class="text-uppercase"><%= current_member.summary[:pending_transaction] %> PENDING</small><br/>
-                  <small class="text-uppercase"><%= current_member.summary[:failed_transaction] %> FAILED</small>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-xs-12 col-md-6 col-lg-3">
-              <div class="row flex tiles-container tiles-border h-full">
-                <div class="col-md-4 col-xs-5 no-padding h-full">
-                  <div class="tiles green h-full content-center">
-                    <i class="fa fa-user"></i>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
-                  <h3 class="text-uppercase text-bold">
-                    <%= current_member.summary[:total_accounts] %>
-                    <small>&nbsp; Accounts</small>
-                  </h3>
-                  <small class="text-uppercase"><%= current_member.summary[:active_accounts] %> ACTIVE</small><br/>
-                  <small class="text-uppercase"><%= current_member.summary[:inactive_accounts] %> INACTIVE</small>
-                </div>
-              </div>
-            </div>
-
-        </div>
+        <%- if current_member.accounts.any? and @current_account.present? %>
+          <%= render 'dashboard/summary' %>
         <%- end %>
       </div>
 

@@ -24,7 +24,6 @@ class Account < ApplicationRecord
   scope :eater, -> {where(action_available: false)}
 
   validates :pool_id, presence: true
-  #validates :groupement_id, presence: true
   validates :member_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :member_id}
 
@@ -41,6 +40,15 @@ class Account < ApplicationRecord
     self.pool = pool
     self.groupement = pool.groupement if pool.present?
     generate_account_id
+  end
+
+  def summary
+    {
+      total_sent: self.a_transactions.where(feeder_id: self.id).sum{|a| a.value },
+      total_received: self.a_transactions.where(eater_id: self.id).sum{|a| a.value },
+      total_transaction: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).count,
+      total_failed: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).where(failed: true).count
+    }
   end
 
 private

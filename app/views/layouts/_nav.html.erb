@@ -2,33 +2,22 @@
   <%- if member_signed_in? %>
     <div class="dropdown header hidden-sm-down">
       <a class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user"></i> Accounts
+        <i class="fa fa-user"></i> 
+        <%- if @current_account.present? %>
+          <%= @current_account.name %>
+        <%- else %>
+          Accounts
+        <%- end %>
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <%- for a in current_member.accounts do %>
-        <a href="<%= switch_account_path(a.id) %>" class="dropdown-item">
+        <a href="<%= dashboard_path(acc: a.name) %>" class="dropdown-item">
           <i class="fa fa-chevron-right"></i>&nbsp; <%= a.name %>
         </a>
         <%- end %>
         <a href="<%= add_account_path %>" class="dropdown-item">
           <i class="fa fa-plus"></i>&nbsp; Add Account
         </a>
-
-        <!--
-        <%- unless current_member.regular_member? %>
-        <a href="<%= transactions_path %>" class="dropdown-item">
-          <i class="fa fa-exchange"></i>&nbsp; Transactions
-        </a>
-        <a href="<%= members_path %>" class="dropdown-item">
-          <i class="fa fa-users"></i>&nbsp; Members
-        </a>
-          <%- if current_member.super_admin? %>
-          <a href="<%= groups_path %>" class="dropdown-item">
-            <i class="fa fa-clone"></i>&nbsp; Groupements
-          </a>
-          <%- end %>
-        <%- end %>
-        -->
         <a href="<%= edit_member_registration_path %>" class="dropdown-item">
           <i class="fa fa-gear"></i>&nbsp; Account Setting
         </a>
