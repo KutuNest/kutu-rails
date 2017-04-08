@@ -80,7 +80,7 @@ private
   end
 
   def generate_account_id
-    accounts = self.member.accounts.map{|a| a.name.to_i }.sort
+    accounts = self.member.accounts.map{|a| a.name.to_s.split("_").last.to_i }.sort
     if accounts.any?
       self.name = self.member.username + "_#{accounts.last + 1}"
     else

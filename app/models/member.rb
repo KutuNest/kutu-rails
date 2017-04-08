@@ -80,6 +80,8 @@ class Member < ApplicationRecord
     pool = Pool.first
     a = self.accounts.new
     a.auto_populate(pool)
+    a.valid?
+    pp a.errors
     if a.save
       a
     else
