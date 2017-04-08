@@ -8,59 +8,14 @@
 
       <div class="container paddingTop-20 paddingBottom-10">
         <div class="row no-gutters marginTop-10">
-
-
-        <%- if current_member.accounts.any? %>
-          <%= render 'dashboard/current_transaction' %>
-        <%- else %>
-          <%= render 'dashboard/no_accounts' %>
-        <%- end %>
+          <%- if current_member.accounts.any? %>
+            <%= render 'dashboard/current_transaction' if @current_transaction.present? %>
+          <%- else %>
+            <%= render 'dashboard/no_accounts' %>
+          <%- end %>
 
           <%- if current_member.accounts.any? %>
-          <div class="col-12">
-            <dl class="accordion">
-              <dt href="#accordion2" aria-expanded="true" aria-controls="accordion2" class="dark-grey js-accordionTrigger">
-                <span class="icon-square  text-white">
-                  <i class="fa fa-check"></i>
-                </span>
-                  <a href="" class="is-expanded text-white">COMPLETED TRANSACTIONS</a>
-              </dt>
-              <dd class="accordion-content accordionItem is-expanded" id="accordion2" aria-hidden="false">
-                <div class="row no-gutters">
-                  <div class="col-12 col-lg-12">
-                    <div class="table-responsive">
-                      <table class="table table-hover table-dash ">
-                        <thead class="">
-                          <tr>
-                            <th class="text-black">Completed Date</th>
-                            <th class="text-black">Name</th>
-                            <th class="text-black">Bank Account</th>
-                            <th class="text-black">Account Name</th>
-                            <th class="text-black">Amount</th>
-                            <th class="text-black">Phone Number</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <%- for t in @transaction_history do %>
-                          <tr>
-                            <td><%= t.completed_date ||= "N/A" %></td>
-                            <td><%= t.eater.member.full_name %></td>
-                            <td><%= t.eater.member.bank.try(:title).to_s + " " + t.eater.member.account_number.to_s %></td>
-                            <td><%= t.eater.member.account_holder_name %></td>
-                            <td><label class="label label-success"><%= number_to_currency t.value %></label></td>
-                            <td><%= t.eater.member.phone_number %></td>
-                            <td><a class="btn btn-default btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
-                          </tr>
-                          <%- end %>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </dd>
-            </dl>
-          </div>
+            <%= render 'dashboard/history' if @transaction_history.any? %>
           <%- end %>
         </div>
       </div>

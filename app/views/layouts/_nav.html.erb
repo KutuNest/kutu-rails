@@ -2,7 +2,7 @@
   <%- if member_signed_in? %>
     <div class="dropdown header hidden-sm-down">
       <a class="btn btn-default-clear font-bold btn-font-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user"></i> 
+        <i class="fa fa-user"></i>
         <%- if @current_account.present? %>
           <%= @current_account.name %>
         <%- else %>

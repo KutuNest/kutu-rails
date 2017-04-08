@@ -10,8 +10,8 @@
                   <%- if member_signed_in? %>
                     <%- for account in current_member.accounts do %>
                     <li class="">
-                      <a href="<%= switch_account_path(account.id) %>">
-                        <i class="fa fa-chevron-right"></i>
+                      <a href="<%= dashboard_path(acc: account.name) %>">
+                        <i class="fa fa-chevron-right <%= 'fa-chevron-circle-right' if account.name == @current_account.name %>"></i>
                         <%= account.name %>
                       </a>
                     </li>

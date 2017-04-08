@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   get 'groups' => 'dashboard#groups', :as => :groups
 
   get 'account/add' => 'account#add', :as => :add_account
-  get 'account/switch/:id' => 'account#switch', :as => :switch_account
   post 'account/change-pool-order/:id' => 'account#change_pool_order', :as => :change_pool_order
 
   post 'member/increase-accounts-limit/:id' => 'member#increase_accounts_limit', :as => :increase_accounts_limit
