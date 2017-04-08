@@ -1,0 +1,24 @@
+<div class="field">
+  <%= f.label :groupement, "Group #{@pool.errors[:groupement_id].first}" %>
+  <%= f.select :groupement_id, Groupement.all.map{|g| [g.title, g.id] }, class: 'form-control' %><br />
+</div>       
+
+<div class="field">
+  <%= f.label :title, "Title #{@pool.errors[:title].first}" %>
+  <%= f.text_field :title, class: 'form-control' %><br />
+</div>                
+
+<div class="field">
+  <%= f.label :amount, "Amount #{@pool.errors[:amount].first}" %>
+  <%= f.text_field :amount, class: 'form-control' %><br />
+</div>       
+
+<div class="field">
+  <%= f.label :position, "Position #{@pool.errors[:position].first}" %>
+  <%= f.text_field :position, class: 'form-control' %><br />
+</div>       
+
+<div class="field">
+  <%= f.label :timeout, "Timeout #{@pool.errors[:timeout].first}" %>
+  <%= f.text_field :timeout, class: 'form-control' %><br />
+</div>       

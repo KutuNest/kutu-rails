@@ -11,8 +11,8 @@
         <%- end %>
       </ul>
       <div class="tab-content">
-
-        <div class="tab-pane active">
+        <%- group.pools.each_with_index do |p,i| %>
+        <div class="tab-pane <%= 'active' if i == 0 %>" id="tab-pool-<%= "#{p.groupement.id}-#{p.id}" %>">
           <div class="table-responsive">
             <table class="table table-hover table-dash ">
               <thead>
@@ -23,10 +23,9 @@
                 </tr>
               </thead>
               <tbody>
-                <%- group.pools.each_with_index do |p,i| %>
+                
                 <tr>
                   <td>
-                  POOL AMOUNT: <%= p.amount %> <%= link_to "EDIT POOL", "#" %>
                     <%- for a in p.accounts.feeder do %>
                     <div class="flex">
                       <figure class="item-img m-r-10">
@@ -74,20 +73,25 @@
                       </div>
                     <%- end %>
                   </td>                  
-                  <!--
-                  <td>
-                  </td>
-                  <td>
-                    <b></b>
-                  </td>
-                  -->
                 </tr>
-                <%- end %>
+                <tr>
+                  <td>
+                    
+                    Amount <i class="fa fa-money"></i> <%= p.amount %>
+                  </td>
+                  <td></td>
+                  <td>
+                    <i class="fa fa-edit"></i>
+                    <%= link_to "Edit", edit_pool_path(p) %>
+                  </td>
+                </tr>
+                
               </tbody>
             </table>
 
           </div>
         </div>
+        <%- end %>
       </div>
       
     </div>

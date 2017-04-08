@@ -56,20 +56,6 @@ class DashboardController < ApplicationController
     end
   end
 
-  def add_pool
-    @pool = Pool.new
-  end
-
-  def save_pool
-    pool_params = params.require(:pool).permit(:title, :amount, :position, :timeout)
-    @pool = Pool.new(pool_params)
-    if @pool.save
-      redirect_to :back, notice: "Pool #{@pool.title} has been saved"
-    else
-      redirect_to :back, notice: "Error: #{@pool.errors.to_a.first}"
-    end    
-  end
-
   def add_super_user
     @member = Member.new
   end
@@ -85,5 +71,8 @@ class DashboardController < ApplicationController
     end        
   end
 
+  def setting
+    @member = current_member
+  end
 
 end

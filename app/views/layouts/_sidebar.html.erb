@@ -5,23 +5,28 @@
         <div class="aside-contents" id="asideMenu">
             <ul class="list-group">
               <li class="list-group-item dropdown">
+                <%- if !member_signed_in? or (member_signed_in? and !current_member.super_admin?) %>
                 <a href="#" data-toggle="collapse" data-target="#list01" data-parent="#asideMenu"><i class="fa fa-user" aria-hidden="true"></i> Acounts</a>
+                <%- end %>
                 <ul id="list01" class="sublist-item collapse clearfix">
+
                   <%- if member_signed_in? %>
-                    <%- for account in current_member.accounts do %>
-                    <li class="">
-                      <a href="<%= dashboard_path(acc: account.name) %>">
-                        <i class="fa fa-chevron-right <%= 'fa-chevron-circle-right' if account.name == @current_account.name %>"></i>
-                        <%= account.name %>
-                      </a>
-                    </li>
+                    <%- if !current_member.super_admin? %>
+                      <%- for account in current_member.accounts do %>
+                        <li class="">
+                          <a href="<%= dashboard_path(acc: account.name) %>">
+                            <i class="fa fa-chevron-right <%= 'fa-chevron-circle-right' if account.name == @current_account.name %>"></i>
+                            <%= account.name %>
+                          </a>
+                        </li>
+                      <%- end %>
+                      <li class="">
+                        <a href="<%= add_account_path %>">
+                          <i class="fa fa-plus"></i>
+                          Add Account
+                        </a>
+                      </li>  
                     <%- end %>
-                    <li class="">
-                      <a href="<%= add_account_path %>">
-                        <i class="fa fa-plus"></i>
-                        Add Account
-                      </a>
-                    </li>                    
                   <%- else %>
                     <li class="">
                       <a href="<%= new_member_session_path %>">
@@ -29,6 +34,7 @@
                       </a>
                     </li>
                   <%- end %>
+
                 </ul>
               </li>
               <%- if member_signed_in? %>

@@ -4,7 +4,9 @@ class Transaction < ApplicationRecord
 
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
-  belongs_to :member #TODO:
+  belongs_to :member
+
+  default_scope { where("member_id is not null") }
 
   has_many :notifications, dependent: :nullify
 

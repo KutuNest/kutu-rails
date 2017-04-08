@@ -6,7 +6,7 @@ class TransactionController < ApplicationController
   end
 
   def disputes
-    @transactions = Transaction.all
+    @transactions = Transaction.disputed
   end
 
   def dispute
