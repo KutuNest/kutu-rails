@@ -101,3 +101,7 @@ header {
 .width-80 {
   width: 80px;
 }
+
+.max-500 {
+  max-width: 500px;
+}

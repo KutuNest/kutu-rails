@@ -1,10 +1,24 @@
-      <div class="container padding-top-90">
-        <div class="row">
-          <div class="col-md-12">
-
-              <%= render 'layouts/notice' %>
-              <h2 class="color-secondary font-bold">Profile</h2>
-
+      <div class="container container--large padding-top-90">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+              <a href="#ac-tab-1" role="tab" data-toggle="tab">Profile</a>
+            </li>
+            <li>
+              <a href="#ac-tab-2" role="tab" data-toggle="tab">Password</a>
+            </li>
+            <li>
+              <a href="#ac-tab-3" role="tab" data-toggle="tab">Notification</a>
+            </li>
+          </ul>
+          <div class="tools">
+            <a href="javascript:;" class="collapse"></a>
+            <a href="#grid-config" data-toggle="modal" class="config"></a>
+            <a href="javascript:;" class="reload"></a>
+            <a href="javascript:;" class="remove"></a>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active max-500" id="ac-tab-1">
+              <div class="box-inset--side">
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                 <%= devise_error_messages! %>
 
@@ -14,9 +28,10 @@
                   <%= f.submit "Update Profile", class: 'btn btn-primary' %>
                 </div>                
               <% end %>
-
-              <br/><br/><hr/>
-              <h2 class="color-secondary font-bold">Password</h2>
+              </div>
+            </div>
+            <div class="tab-pane max-500" id="ac-tab-2">
+              <div class="box-inset--side">
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                 <%= devise_error_messages! %>
 
@@ -48,10 +63,10 @@
                   <%= f.submit "Change Password", class: 'btn btn-primary' %>
                 </div>
               <% end %>
-
-              <br/><br/><hr/>
-              <h2 class="color-secondary font-bold">Notification</h2>
-              <%#= form_for current_member, url: setting_url do |f| %>
+              </div>
+            </div>
+            <div class="tab-pane max-500" id="ac-tab-3">
+              <div class="box-inset--side">
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                 <%= devise_error_messages! %>
 
@@ -68,10 +83,10 @@
                   <%= f.submit "Save Changes", class: 'btn btn-primary' %>
                 </div>
               <% end %>
-
+              </div>
+            </div>
           </div>
-        </div>
-        <hr/>
       </div>
+
 
 <%- page_title 'Account Setting' %>
