@@ -15,7 +15,7 @@
           <%- end %>
 
           <%- if current_member.accounts.any? %>
-            <%= render 'dashboard/history' if @transaction_history.any? %>
+            <%= render 'dashboard/history' if @transaction_history.present? %>
           <%- end %>
         </div>
       </div>

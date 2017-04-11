@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_current_account
   #before_action :force_complete_registration
 
   def after_sign_in_path_for(resource)
@@ -13,6 +14,16 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  def set_current_account
+    if member_signed_in?
+      if params[:acc].present?
+        @current_account = current_member.accounts.where(name: params[:acc]).first
+      else
+        @current_account = current_member.accounts.first
+      end  
+    end  
+  end
+
   def configure_permitted_parameters
     added_attrs = [:username, :email, :password, :password_confirmation, :remember_me, :referrer_code]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs

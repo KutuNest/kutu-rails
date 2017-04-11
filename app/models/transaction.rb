@@ -22,9 +22,34 @@ class Transaction < ApplicationRecord
   validates :eater_id, :feeder_id, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
+  after_save :handle_after_completed
+
   mount_uploader :sender_receipt, ReceiptUploader
 
 private
+  def handle_after_completed
+    if confirmed?
+      if self.account.has_finished_pool?
+        enter_next_pool!
+      elsif self.account.has_finished_group?
+        kick_his_ass!
+      else
+        create_pool_transaction!
+      end
+    end
+  end
+
+  def enter_next_pool!
+
+  end
+
+  def create_pool_transactions!
+  end
+
+  def kick_his_ass!
+
+  end
+
   def set_defaults
     if self.new_record?
       self.sender_confirmed = false

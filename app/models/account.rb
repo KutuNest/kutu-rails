@@ -44,6 +44,16 @@ class Account < ApplicationRecord
     self.save
   end
 
+  def has_finished_pool?
+    (self.pool.feeders_count  == self.a_transactions.where(pool_id: self.pool_id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, feeder_id: self.id).count) and 
+      self.a_transactions.where(pool_id: self.pool.id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, eater_id: self.id).any?
+  end
+
+  def has_finished_group?
+    # NOTE: Jump to another group isn't allowed
+    has_finished_pool? and self.pool.last_group_pool?
+  end
+
   def auto_populate(pool)
     self.pool = pool
     self.groupement = pool.groupement if pool.present?

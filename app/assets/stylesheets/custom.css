@@ -105,3 +105,8 @@ header {
 .max-500 {
   max-width: 500px;
 }
+
+.nav-tabs li.active {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+}

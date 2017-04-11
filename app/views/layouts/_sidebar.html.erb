@@ -15,7 +15,7 @@
                       <%- for account in current_member.accounts do %>
                         <li class="">
                           <a href="<%= dashboard_path(acc: account.name) %>">
-                            <i class="fa fa-chevron-right <%= 'fa-chevron-circle-right' if account.name == @current_account.name %>"></i>
+                            <i class="fa fa-chevron-right <%= 'fa-chevron-circle-right' if account.name == @current_account.name  rescue "" %>"></i>
                             <%= account.name %>
                           </a>
                         </li>

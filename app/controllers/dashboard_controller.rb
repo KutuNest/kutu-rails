@@ -8,16 +8,11 @@ class DashboardController < ApplicationController
     elsif current_member.group_admin?
       @groupements = [current_member.groupement]
     elsif current_member.regular_member?
-      if params[:acc].present?
-        @current_account = current_member.accounts.where(name: params[:acc]).first
-      else
-        @current_account = current_member.accounts.first
+      if @current_account.present?
+        transactions = @current_account.a_transactions.to_a
+        @current_transaction = transactions.pop
+        @transaction_history = transactions
       end
-
-      transactions = @current_account.a_transactions.to_a
-      @current_transaction = transactions.pop
-      @transaction_history = transactions     
-
     end
   end
 
