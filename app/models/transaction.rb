@@ -5,6 +5,7 @@ class Transaction < ApplicationRecord
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
   belongs_to :member
+  belongs_to :pool
 
   default_scope { where("member_id is not null") }
 
@@ -22,32 +23,13 @@ class Transaction < ApplicationRecord
   validates :eater_id, :feeder_id, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
-  after_save :handle_after_completed
+  after_save :proceed_completed
 
   mount_uploader :sender_receipt, ReceiptUploader
 
 private
-  def handle_after_completed
-    if confirmed?
-      if self.account.has_finished_pool?
-        enter_next_pool!
-      elsif self.account.has_finished_group?
-        kick_his_ass!
-      else
-        create_pool_transaction!
-      end
-    end
-  end
-
-  def enter_next_pool!
-
-  end
-
-  def create_pool_transactions!
-  end
-
-  def kick_his_ass!
-
+  def proceed_completed
+    self.account.proceed_last_transaction! if confirmed?
   end
 
   def set_defaults

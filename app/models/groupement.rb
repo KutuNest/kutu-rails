@@ -6,4 +6,13 @@ class Groupement < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :initial_accounts, :maximum_accounts, :accounts_added_on_success, presence: true, numericality: true
 
+  def first_pool
+    Pool.where(groupement_id: self.id, position: self.pools.minimum(:position)).first
+  end
+
+  class << self
+    def default
+      Groupement.first
+    end
+  end
 end

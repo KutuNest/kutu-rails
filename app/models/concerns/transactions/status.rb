@@ -51,11 +51,11 @@ module Transactions
 			elsif failed?
 				"transaction failed"
 			elsif sender_confirmed?
-			  "receiver confirmation"
+			  "receiver confirmed"
 			elsif receiver_confirmed?
-			  "sender confirmation"
+			  "sender confirmated"
 			else
-			  "admin confirmation"
+			  "admin confirmed"
 			end
 		end
 	end

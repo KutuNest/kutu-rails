@@ -76,13 +76,15 @@
                 </tr>
                 <tr>
                   <td>
-                    
+                    <label class="btn btn-green">
                     Amount <i class="fa fa-money"></i> <%= p.amount %>
+                    </label>
                   </td>
                   <td></td>
                   <td>
-                    <i class="fa fa-edit"></i>
-                    <%= link_to "Edit", edit_pool_path(p) %>
+                    <a href="<%= edit_pool_path(p) %>" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit
+                    </a>
                   </td>
                 </tr>
                 

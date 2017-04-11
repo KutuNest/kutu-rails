@@ -1,10 +1,21 @@
 # Moved columns:
+# Account -> Member
 # - admin_account
 # - group_id
 # - super_user
+# 
+# Transaction (added)
+# - pool_id 
+#
+# To be removed:
+# - member_id
+# 
 
 class Account < ApplicationRecord
   DefaultNumberAssociations = 4
+
+  include Accounts::Flow
+  include Accounts::Populator
 
   belongs_to :member
   belongs_to :groupement
@@ -27,13 +38,8 @@ class Account < ApplicationRecord
   validates :member_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :member_id}
 
-  before_validation :set_defaults
-  after_create :create_default_transaction
-  
   def change_pool_order!(order)
-    # NOTE: change order for other accounts
-    accounts = self.pool.accounts
-    for a in accounts do
+    for a in self.pool.accounts do
       if a >= order.to_i
         a.pool_order = a.pool_order + 1
         a.save
@@ -44,22 +50,6 @@ class Account < ApplicationRecord
     self.save
   end
 
-  def has_finished_pool?
-    (self.pool.feeders_count  == self.a_transactions.where(pool_id: self.pool_id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, feeder_id: self.id).count) and 
-      self.a_transactions.where(pool_id: self.pool.id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, eater_id: self.id).any?
-  end
-
-  def has_finished_group?
-    # NOTE: Jump to another group isn't allowed
-    has_finished_pool? and self.pool.last_group_pool?
-  end
-
-  def auto_populate(pool)
-    self.pool = pool
-    self.groupement = pool.groupement if pool.present?
-    generate_account_id
-  end
-
   def summary
     {
       total_sent: self.a_transactions.where(feeder_id: self.id).sum{|a| a.value },
@@ -67,43 +57,6 @@ class Account < ApplicationRecord
       total_transaction: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).count,
       total_failed: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).where(failed: true).count
     }
-  end
-
-private
-  def create_default_transaction
-    transaction = self.a_transactions.new
-    transaction.member = self.member
-    transaction.timeout = DateTime.now + self.pool.timeout.to_i.seconds
-    transaction.value = self.pool.amount
-
-    #TODO: set correct account match
-    if self.super_user?
-      transaction.eater  = self
-      transaction.feeder = self.pool.accounts.last
-    else
-      transaction.feeder = self
-      transaction.eater  = self.pool.accounts.last
-    end
-    transaction.save
-  end
-
-  def set_defaults
-    if self.new_record?
-      self.kicked_out = false
-
-      self.super_user = false if self.super_user.blank?
-      self.action_available = false if self.action_available.blank?
-      self.number_associations_left = DefaultNumberAssociations if self.number_associations_left.blank?
-    end
-  end
-
-  def generate_account_id
-    accounts = self.member.accounts.map{|a| a.name.to_s.split("_").last.to_i }.sort
-    if accounts.any?
-      self.name = self.member.username + "_#{accounts.last + 1}"
-    else
-      self.name = self.member.username + "_#{0}"
-    end
   end
 
 end
