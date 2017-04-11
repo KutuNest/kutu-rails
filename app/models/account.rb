@@ -31,8 +31,16 @@ class Account < ApplicationRecord
   after_create :create_default_transaction
   
   def change_pool_order!(order)
-    self.pool_order = order
-    #TODO: other account order
+    # NOTE: change order for other accounts
+    accounts = self.pool.accounts
+    for a in accounts do
+      if a >= order.to_i
+        a.pool_order = a.pool_order + 1
+        a.save
+      end
+    end
+
+    self.pool_order = order.to_i
     self.save
   end
 
