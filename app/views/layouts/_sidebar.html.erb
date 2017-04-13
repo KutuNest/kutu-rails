@@ -20,12 +20,18 @@
                           </a>
                         </li>
                       <%- end %>
+
+
+                      <%- if current_member.can_add_account? %>
                       <li class="">
                         <a href="<%= add_account_path %>">
                           <i class="fa fa-plus"></i>
                           Add Account
                         </a>
                       </li>  
+                      <%- end %>
+
+
                     <%- end %>
                   <%- else %>
                     <li class="">

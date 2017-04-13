@@ -73,5 +73,17 @@ module Accounts
       transaction.save
     end
 
+    def create_transaction
+      unless self.super_user?
+        t = self.a_transactions.new
+        t.member = self.member
+        t.timeout = DateTime.now + self.pool.timeout.to_i.seconds
+        t.value = self.pool.amount
+
+        #TODO: eater from pool, that hasn't been sent limit from pool
+        t.eater_id = self.pool.accounts.minimum(:pool_order)
+      end
+    end
+
   end
 end

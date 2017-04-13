@@ -71,7 +71,7 @@ class MemberController < ApplicationController
       redirect_to :back, notice: "Super user #{@member.title} has been saved"
     else
       redirect_to :back, notice: "Error: #{@member.errors.to_a.first}"
-    end        
+    end  
   end
 
 end

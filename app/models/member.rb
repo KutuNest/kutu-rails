@@ -60,6 +60,14 @@ class Member < ApplicationRecord
     }
   end
 
+  def can_add_account?
+    unless self.super_admin?
+      self.accounts_limit > self.accounts.count
+    end
+  end
+
+  #TODO: accounts limit increase on completed
+
 private
   def set_defaults
     self.role = Roles[:regular_member] if self.role.blank?

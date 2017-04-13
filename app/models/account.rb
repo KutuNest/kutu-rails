@@ -27,8 +27,9 @@ class Account < ApplicationRecord
   has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
   has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
 
-  scope :active, -> { where(kicked_out: false) }
-  scope :completed, -> { where(kicked_out: true) }
+  scope :active, -> { where(has_finished: false) }
+  scope :completed, -> { where(has_finished: true) }
+  scope :kicked_out, -> { where(kicked_out: true) }
 
   scope :feeder, -> {where(action_available: true)}
   scope :eater, -> {where(action_available: false)}
