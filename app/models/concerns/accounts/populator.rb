@@ -19,7 +19,7 @@ module Accounts
 
         self.super_user = false if self.super_user.blank?
         self.action_available = false if self.action_available.blank?
-        self.number_associations_left = Account::DefaultNumberAssociations if self.number_associations_left.blank?
+        self.number_associations_left = self.pool.feeders_count - 1 if self.number_associations_left.blank?
       end
     end
 

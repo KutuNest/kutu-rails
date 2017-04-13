@@ -1,6 +1,5 @@
 class AccountController < ApplicationController
   def add
-    pool = Groupement.first.pools.first
     account = current_member.generate_new_account
     if account
       redirect_to dashboard_path, notice: "New account: #{account.name} has been successfully created"

@@ -12,7 +12,6 @@
 # 
 
 class Account < ApplicationRecord
-  DefaultNumberAssociations = 4
 
   include Accounts::Flow
   include Accounts::Populator

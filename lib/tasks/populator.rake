@@ -14,9 +14,9 @@ namespace :db do
         g = Groupement.new
         g. title = "Groupement #{i+1}"
         g.activated_on_create = true
-        g.initial_accounts = 2
+        g.initial_accounts = 1
         g.maximum_accounts = 100
-        g.accounts_added_on_success = 2
+        g.accounts_added_on_success = 0
         
         g.default_member = member
         g.default_member.role = Member::Roles[:group_admin]

@@ -71,6 +71,7 @@ module Accounts
         transaction.eater  = self.pool.accounts.last
       end
       transaction.save
-    end    
+    end
+
   end
 end
