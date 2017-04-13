@@ -7,15 +7,16 @@ module Members
     end
 
     def generate_new_account
-      pool = Pool.first
-      a = self.accounts.new
-      a.auto_populate(pool)
-      a.valid?
-      if a.save
-        a
-      else
-        false
+      if account_quota_available?
+        pool = self.groupement.initial_pool
+        a = self.accounts.new
+        a.auto_populate(pool)
+        a.save
       end
+    end
+
+    def create_account_allowed?
+      self.accounts.count < self.accounts_limit
     end
 
     def generate_referral_code

@@ -15,5 +15,9 @@ class Groupement < ApplicationRecord
     def default
       Groupement.first
     end
+
+    def initial_pool
+      Pool.order(:position).first
+    end
   end
 end
