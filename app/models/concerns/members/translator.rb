@@ -21,5 +21,10 @@ module Members
     def role_name
       Member::Roles.find{|a| a.last == self.role }.first.to_s
     end
+
+    def bank_info_completed?
+      self.account_holder_name.present? and self.account_number.present? and self.bank_id.present?
+    end
+      
   end
 end
