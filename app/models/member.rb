@@ -67,9 +67,22 @@ class Member < ApplicationRecord
     end
   end
 
+  def summary
+    {
+      total_accounts: self.accounts.count,
+      active_accounts: self.accounts.active.count,
+      inactive_accounts: self.accounts.count - self.accounts.active.count,
+      total_transaction: Transaction.where(feeder_id: self.accounts.map(&:id)).count,
+      pending_transaction: Transaction.where(feeder_id: self.accounts.map(&:id)).pending.count,
+      failed_transaction: Transaction.where(feeder_id: self.accounts.map(&:id)).failed.count,
+      money_sent: Transaction.where(feeder_id: self.accounts.map(&:id)).sum(&:value),
+      money_received: Transaction.where(eater_id: self.accounts.map(&:id)).sum(&:value)
+    }
+  end  
+
 private
   def set_default_role
-    self.role = Roles[:regular_member]
+    self.role = Roles[:regular_member] if self.role.blank?
   end
 
 end

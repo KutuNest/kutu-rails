@@ -2,11 +2,19 @@ class TransactionController < ApplicationController
   before_action :authenticate_member!
 
   def list
-    @transactions = Transaction.all
+    if current_member.super_admin?
+      @transactions = Transaction.all
+    elsif current_member.group_admin?
+      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id))
+    end
   end
 
   def disputes
-    @transactions = Transaction.disputed
+    if current_member.super_admin?
+      @transactions = Transaction.disputed
+    elsif current_member.group_admin?
+      @transactions = Transaction.disputed.where(pool_id: current_member.groupement.pools.map(&:id))
+    end    
   end
 
   def dispute

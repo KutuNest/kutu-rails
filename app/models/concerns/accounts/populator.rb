@@ -6,13 +6,13 @@ module Accounts
       before_validation :set_defaults
     end
 
-  private
     def auto_populate(pool)
       self.pool = pool
       self.groupement = pool.groupement if pool.present?
       generate_account_id
     end
 
+  private
     def set_defaults
       if self.new_record?
         self.kicked_out = false

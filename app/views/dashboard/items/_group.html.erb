@@ -35,7 +35,9 @@
                         <a href="#">
                           <strong><%= a.member.account_holder_name %></strong>
                         </a><br>
-                        <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                        <i class="fa fa-credit-card"></i> 
+                        <%= a.member.bank.title %> <br/>
+                        <%= a.member.account_number %>
                       </div>
                     </div>
                     <%- end %>
@@ -53,7 +55,8 @@
                           <a href="#">
                             <strong><%= a.member.account_holder_name %></strong>
                           </a><br>
-                          <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
+                          <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> <br/>
+                          <%= a.member.account_number %>
                         </div>
                       </div>
                     <%- end %>

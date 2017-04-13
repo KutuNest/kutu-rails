@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
     if current_member.super_admin?
       @members = Member.all
     elsif current_member.group_admin?
-      @members = current_member.groupement.pools.map {|p| p.members }.compact
+      @members = current_member.groupement.members
     end
   end  
 

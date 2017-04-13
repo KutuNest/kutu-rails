@@ -14,10 +14,9 @@
         </li>
         <%- end %>
       </ul>
-      Limit: <%= member.accounts_limit.to_i %>. Increase to
       <%= form_tag increase_accounts_limit_path(member) do %>
-        <%= text_field_tag :accounts_limit, "" %>
-        <%= submit_tag "Submit" %>
+        <%= text_field_tag :accounts_limit, member.accounts_limit, class: 'form-control', style: 'width:100px'  %>
+        <%= submit_tag "increase limit", class: 'btn btn-primary', style: 'margin-top:5px;width:100px' %>
       <%- end %>
     </td>
     <td>
