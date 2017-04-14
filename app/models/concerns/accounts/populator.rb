@@ -20,11 +20,12 @@ module Accounts
         self.kicked_out = false
         self.super_user = false if self.super_user.blank?
         self.has_finished = false if self.has_finished.blank?
+        #TODO: make this sure association
         self.number_associations_left = self.pool.feeders_count - 1 if self.number_associations_left.blank?
 
         if self.action_available.blank?
-          self.action_available = false if self.super_user? 
           self.action_available = true
+          self.action_available = false if self.super_user? 
         end
 
       end

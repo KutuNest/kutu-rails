@@ -82,14 +82,9 @@ class MemberController < ApplicationController
     member_params = params.require(:member).permit(:email, :username, :referrer_code, :first_name, :last_name, :phone_number, :bank_id, :account_number, :account_holder_name, :groupement_id, :password, :password_confirmation)
     @member = Member.new(member_params)
     if @member.save
+      @member.generate_new_account(true)
 
-      account = @member.generate_new_account
-      if account
-        account.super_user = true
-        account.save
-      end
-
-      redirect_to :back, notice: "Member#{@member.try(:username)} with super user has been saved"
+      redirect_to :back, notice: "Member #{@member.try(:username)} with super user has been saved"
     else
       render action: 'add_super_user'
     end  

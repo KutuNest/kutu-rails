@@ -1,5 +1,5 @@
 
-<br/><br/><br/><br/>
+<br/><br/>
 <%= render 'layouts/notice' %>
 <%- for group in groupements do %>      
   <div class="container paddingBottom-10">
@@ -14,7 +14,7 @@
           </li>            
         <%- end %>
           <li class="">
-            <a href="#tab-pool-<%= "#{group.id}-completed" %>" role="tab" data-toggle="tab">Completed</a>
+            <a href="#tab-pool-<%= "#{group.id}-completed" %>" role="tab" data-toggle="tab">Finished</a>
           </li>             
       </ul>
       <div class="tab-content">
