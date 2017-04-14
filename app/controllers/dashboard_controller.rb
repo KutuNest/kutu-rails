@@ -4,19 +4,15 @@ class DashboardController < ApplicationController
       @current_account = nil
       @groupements = Groupement.includes(:pools => :accounts).all
       @members = Member.all
-    elsif current_member.group_admin?
-      @groupements = [current_member.groupement].compact
+    else 
+      @groupements = [current_member.groupement].compact if current_member.group_admin?
+
       if @current_account.present?
-        transactions = @current_account.a_transactions.to_a
-        @current_transaction = transactions.pop
-        @transaction_history = transactions
-      end      
-    elsif current_member.regular_member?
-      if @current_account.present?
-        transactions = @current_account.a_transactions.to_a
-        @current_transaction = transactions.pop
-        @transaction_history = transactions
+        @transaction_history = @current_account.a_transactions
+        @current_transaction = @transaction_history.where(feeder_id: @current_account.id).last
+        @transaction_history = @transaction_history.to_a - [@current_transaction]
       end
+
     end
   end
 
