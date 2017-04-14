@@ -38,6 +38,10 @@ class Account < ApplicationRecord
   validates :member_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :member_id}
 
+  def transaction_history
+    Transaction.where("eater_id = ? OR feeder_id = ?", self.id, self.id).order("created_at desc")
+  end
+
   def change_pool_order!(order)
     for a in self.pool.accounts do
       if a >= order.to_i
@@ -52,8 +56,8 @@ class Account < ApplicationRecord
 
   def summary
     {
-      total_sent: self.a_transactions.where(feeder_id: self.id).sum{|a| a.value },
-      total_received: self.a_transactions.where(eater_id: self.id).sum{|a| a.value },
+      total_sent: self.a_transactions.where(feeder_id: self.id, sender_confirmed: true).sum{|a| a.value },
+      total_received: self.a_transactions.where(eater_id: self.id, receiver_confirmed: true).sum{|a| a.value },
       total_transaction: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).count,
       total_failed: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).where(failed: true).count
     }

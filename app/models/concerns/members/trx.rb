@@ -17,12 +17,5 @@ module Members
       end
     end
 
-    def transaction_history(account=nil)
-      account = self.accounts.first if account.nil?
-      if account and account.member_id == self.id
-        Transaction.where(feeder_id: account.id, admin_confirmed: false)
-      end
-    end
-
   end
 end

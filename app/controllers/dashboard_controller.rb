@@ -8,8 +8,8 @@ class DashboardController < ApplicationController
       @groupements = [current_member.groupement].compact if current_member.group_admin?
 
       if @current_account.present?
-        @transaction_history = @current_account.a_transactions
-        @current_transaction = @transaction_history.where(feeder_id: @current_account.id).last
+        @transaction_history = @current_account.transaction_history
+        @current_transaction = @transaction_history.where(feeder_id: @current_account.id).first
         @transaction_history = @transaction_history.to_a - [@current_transaction]
       end
 

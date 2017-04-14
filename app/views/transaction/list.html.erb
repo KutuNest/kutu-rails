@@ -44,7 +44,7 @@
                         <p class="semi-bold">Amount</p>
                         <h3><span class="item-count semi-bold">
                           <span class="label label-success label-lg"><%= number_to_currency transaction.value %></span>
-                          <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %></span>
+                          <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %> left</span>
                         </h3>
                         <span>
                           <i class="fa fa-clock-o"></i>

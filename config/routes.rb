@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   post 'member/:id' => 'member#update', :as => :update_member
   get  'member/:id' => 'member#show', :as => :member
   get  'member/:id/lock' => 'member#lock', :as => :lock_member
-  get  'member/complete' => 'member#complete', :as => :complete_member
+  get  'member/:id/complete' => 'member#complete', :as => :complete_member
   get  'add-super-user' => 'member#add_super_user', :as => :add_super_user
   get  'add-group' => 'member#add_group', :as => :add_group
   get  'edit-group/:id' => 'member#edit_group', :as => :edit_group

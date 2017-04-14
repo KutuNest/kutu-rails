@@ -8,6 +8,11 @@
         <%= form_for(@member, url: update_member_path(@member), html: { method: :post }) do |f| %>
 
           <%= render 'member/form', f: f %>
+
+          <div class="actions">
+            <%= f.submit "Complete", class: 'btn btn-primary' %>
+          </div>   
+
         <% end %>
 
         <br/>
