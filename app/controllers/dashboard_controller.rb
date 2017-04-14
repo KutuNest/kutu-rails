@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
     if current_member.super_admin?
       @members = Member.all
     elsif current_member.group_admin?
-      @members = current_member.groupement.members
+      @members = current_member.groupement.members rescue []
     end
   end  
 
@@ -34,7 +34,11 @@ class DashboardController < ApplicationController
   end
 
   def groups
-    @groupements = Groupement.includes(:pools).all
+    if current_member.super_admin?
+      @groupements = Groupement.includes(:pools).all
+    elsif current_member.group_admin?
+      @groupements = [current_member.groupement].compact
+    end
   end
 
   def setting

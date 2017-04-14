@@ -78,13 +78,19 @@ class MemberController < ApplicationController
   end
 
   def save_super_user
-    member_params = params.require(:member).permit(:title, :amount, :position, :feeders_count, :timeout)
+    member_params = params.require(:member).permit(:email, :username, :referrer_code, :first_name, :last_name, :phone_number, :bank_id, :account_number, :account_holder_name, :groupement_id, :password, :password_confirmation)
     @member = Member.new(member_params)
-    @member.super_user = true
     if @member.save
-      redirect_to :back, notice: "Super user #{@member.title} has been saved"
+
+      account = @member.generate_new_account
+      if account
+        account.super_user = true
+        account.save
+      end
+
+      redirect_to :back, notice: "Member#{@member.try(:username)} with super user has been saved"
     else
-      redirect_to :back, notice: "Error: #{@member.errors.to_a.first}"
+      render action: 'add_super_user'
     end  
   end
 

@@ -8,7 +8,7 @@ module Accounts
 
     def auto_populate(pool)
       self.pool = pool
-      self.pool_order = self.pool.accounts.maximum(:pool_order) + 1
+      self.pool_order = self.pool.accounts.maximum(:pool_order).to_i + 1
       self.groupement = pool.groupement if pool.present?
       self.name = generate_account_id
       self.arrival_date = Date.today

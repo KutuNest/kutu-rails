@@ -5,7 +5,7 @@ class TransactionController < ApplicationController
     if current_member.super_admin?
       @transactions = Transaction.all
     elsif current_member.group_admin?
-      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id))
+      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id)) rescue []
     end
   end
 
@@ -13,7 +13,7 @@ class TransactionController < ApplicationController
     if current_member.super_admin?
       @transactions = Transaction.disputed
     elsif current_member.group_admin?
-      @transactions = Transaction.disputed.where(pool_id: current_member.groupement.pools.map(&:id))
+      @transactions = Transaction.disputed.where(pool_id: current_member.groupement.pools.map(&:id)) rescue []
     end    
   end
 
