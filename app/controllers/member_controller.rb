@@ -50,10 +50,10 @@ class MemberController < ApplicationController
   end
 
   def save_group
-    group_params = params.require(:group).permit(:activated_on_create, :initial_accounts, :maximum_accounts, :accounts_added_on_success, :title)
+    group_params = params.require(:groupement).permit(:activated_on_create, :initial_accounts, :maximum_accounts, :accounts_added_on_success, :title)
     @groupement = Groupement.new(group_params)
     if @groupement.save
-      redirect_to :back, notice: "Group #{@groupement.title} has been saved"
+      redirect_to groups_path, notice: "Group #{@groupement.title} has been saved"
     else
       redirect_to :back, notice: "Error: #{@groupement.errors.to_a.first}"
     end

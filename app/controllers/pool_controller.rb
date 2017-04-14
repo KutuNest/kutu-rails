@@ -10,7 +10,7 @@ class PoolController < ApplicationController
   def save
     @pool = Pool.new(pool_params)
     if @pool.save
-      redirect_to :back, notice: "Pool #{@pool.title} has been saved"
+      redirect_to groups_path, notice: "Pool #{@pool.title} has been saved"
     else
       render action: 'add'
     end    
@@ -27,7 +27,7 @@ class PoolController < ApplicationController
 
   private
   def pool_params
-    params.require(:pool).permit(:title, :amount, :position, :timeout)
+    params.require(:pool).permit(:groupement_id, :title, :feeders_count, :amount, :position, :timeout)
   end
 
 end
