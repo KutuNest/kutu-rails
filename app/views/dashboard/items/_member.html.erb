@@ -1,6 +1,6 @@
 <%- for member in @members do %>
   <tr>
-    <td><%= member.accounts.first.groupement.title %></td>
+    <td><%= member.groupement.title rescue "N/A" %></td>
     <td>
       <strong><a href="#"><%= member.full_name %></a></strong><br>
       <small>Last login : <%= member.last_sign_in_at %></small>

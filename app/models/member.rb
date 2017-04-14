@@ -71,7 +71,7 @@ class Member < ApplicationRecord
 private
   def set_defaults
     self.role = Roles[:regular_member] if self.role.blank?
-    self.groupement = Groupement.default if self.groupement.blank?
+    self.groupement = Groupement.default if self.groupement.blank? and !self.super_admin?
 
     if self.new_record?
       self.sms_notification = true if self.sms_notification.blank?
