@@ -56,8 +56,8 @@ class Account < ApplicationRecord
 
   def summary
     {
-      total_sent: self.a_transactions.where(feeder_id: self.id, sender_confirmed: true).sum{|a| a.value },
-      total_received: self.a_transactions.where(eater_id: self.id, receiver_confirmed: true).sum{|a| a.value },
+      total_sent: Transaction.where(feeder_id: self.id, pool_id: self.pool.id, sender_confirmed: true).sum{|a| a.value },
+      total_received: Transaction.where(eater_id: self.id, pool_id: self.pool.id, sender_confirmed: true).sum{|a| a.value },
       total_transaction: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).count,
       total_failed: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).where(failed: true).count
     }
