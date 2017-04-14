@@ -25,9 +25,10 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    added_attrs = [:username, :email, :password, :password_confirmation, :remember_me, :referrer_code]
-    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
-    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+    sign_up_attrs = [:username, :email, :password, :password_confirmation, :remember_me, :referrer_code]
+    edit_attrs = [:username, :email, :password, :password_confirmation, :first_name, :last_name, :phone_number, :account_holder_name, :account_number, :bank_id, :sms_notification, :email_notification]
+    devise_parameter_sanitizer.permit :sign_up, keys: sign_up_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: edit_attrs
   end
 
   def force_complete_registration
