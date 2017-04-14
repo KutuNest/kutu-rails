@@ -60,7 +60,7 @@ module Accounts
       unless self.super_user?
         t = self.a_transactions.new
         t.member = self.member
-        t.timeout = DateTime.now + self.pool.timeout.to_i.seconds
+        t.timeout = self.pool.timeout.to_i.seconds
         t.pool = self.pool
         t.value = self.pool.amount
 
