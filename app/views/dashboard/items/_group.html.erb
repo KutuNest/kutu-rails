@@ -1,8 +1,8 @@
 
-<br/>
+<br/><br/><br/><br/>
 <%= render 'layouts/notice' %>
 <%- for group in groupements do %>      
-  <div class="container paddingBottom-10 margin-top-50">
+  <div class="container paddingBottom-10">
   
     <h1 class="title block"><%= group.title %></h1>
 
@@ -74,11 +74,13 @@
                     Amount <i class="fa fa-money"></i> <%= p.amount %>
                     </label>
                   </td>
-                  <td></td>
                   <td>
                     <a href="<%= edit_pool_path(p) %>" class="btn btn-primary">
-                    <i class="fa fa-edit"></i> Edit
+                    <i class="fa fa-edit"></i> Edit Pool
                     </a>
+                    <a href="<%= edit_group_path(group) %>" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit Group
+                    </a>                          
                   </td>
                 </tr>
                 

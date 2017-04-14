@@ -10,7 +10,7 @@ class PoolController < ApplicationController
   def save
     @pool = Pool.new(pool_params)
     if @pool.save
-      redirect_to groups_path, notice: "Pool #{@pool.title} has been saved"
+      redirect_to :back, notice: "Pool #{@pool.title} has been saved"
     else
       render action: 'add'
     end    

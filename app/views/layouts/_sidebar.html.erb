@@ -55,18 +55,28 @@
                     <a href="<%= members_path %>"><i class="fa fa-users" aria-hidden="true"></i> Members</a>
                   </li>   
                     <%- if current_member.super_admin? or current_member.group_admin? %>
+
                       <li class="list-group-item">
                         <a href="<%= groups_path %>"><i class="fa fa-clone" aria-hidden="true"></i> Groupements</a>
                       </li> 
-                      <li class="list-group-item">
-                        <a href="<%= add_super_user_path %>"><i class="fa fa-plus" aria-hidden="true"></i> Add Super User</a>
-                      </li>                                               
-                      <li class="list-group-item">
-                        <a href="<%= add_pool_path %>"><i class="fa fa-plus" aria-hidden="true"></i> Add Pool</a>
-                      </li>   
-                      <li class="list-group-item">
-                        <a href="<%= add_group_path %>"><i class="fa fa-plus" aria-hidden="true"></i> Add Groupement</a>
-                      </li>                                                                        
+                    
+                      <li class="list-group-item dropdown">
+                        <a href="#" data-toggle="collapse" data-target="#list02" data-parent="#asideMenu"><i class="fa fa-user" aria-hidden="true"></i> Add More..</a>
+
+                        <ul id="list02" class="sublist-item collapse clearfix">
+                            <li class="list-group-item">
+                              <a href="<%= add_super_user_path %>"><i class="fa fa-plus" aria-hidden="true"></i> Add Super User</a>
+                            </li>                                               
+                            <li class="list-group-item">
+                              <a href="<%= add_pool_path %>"><i class="fa fa-plus" aria-hidden="true"></i> Add Pool</a>
+                            </li>   
+                            <li class="list-group-item">
+                              <a href="<%= add_group_path %>"><i class="fa fa-plus" aria-hidden="true"></i> Add Groupement</a>
+                            </li> 
+                        </ul>
+                      </li>
+
+                                                                       
                     <%- end %>                                           
                 <%- end %>
                 <li class="list-group-item">
