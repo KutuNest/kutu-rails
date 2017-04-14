@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :members, path: '', path_names: {sign_in: '/login', sign_out: '/logout', sign_up: '/signup'}
+  devise_for :members, path: '', path_names: {sign_in: '/login', sign_out: '/logout', sign_up: '/signup'}, controllers: { registrations: 'registrations' }
 
   
   post 'upload-receipt/:id' => 'transaction#upload_receipt', :as => :upload_receipt
@@ -35,8 +35,10 @@ Rails.application.routes.draw do
   get  'member/complete' => 'member#complete', :as => :complete_member
   get  'add-super-user' => 'member#add_super_user', :as => :add_super_user
   get  'add-group' => 'member#add_group', :as => :add_group
-  get  'save-group' => 'member#save_group', :as => :save_group
-  get  'save-super-user' => 'member#save_super_user', :as => :save_super_user
+  get  'edit-group/:id' => 'member#edit_group', :as => :edit_group
+  post  'save-group' => 'member#save_group', :as => :save_group
+  post  'update-group/:id' => 'member#update_group', :as => :update_group
+  post  'save-super-user' => 'member#save_super_user', :as => :save_super_user
 
 
   # Pool
