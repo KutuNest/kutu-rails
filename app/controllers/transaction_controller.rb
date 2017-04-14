@@ -34,7 +34,7 @@ class TransactionController < ApplicationController
   def settle
     #TODO: limit member
     @transaction = Transaction.where(id: params[:id]).first
-    @transaction.receiver_ack = true
+    @transaction.receiver_confirmed = true
     notice = if @transaction.save
       "You've successfully confirmed settlement of the transfer"
     else
@@ -81,10 +81,15 @@ class TransactionController < ApplicationController
   def upload_receipt
     @transaction = Transaction.where(id: params[:id]).first
     @transaction.sender_receipt = params[:receipt]
+    
+    if @transaction.valid?
+      @transaction.sender_confirmed = true
+    end
+
     if @transaction.save
       redirect_to transaction_path(@transaction.id), notice: 'Receipt has already been saved'
     else
-      redirect_to transaction_path(@transaction.id), notice: @transaction.errors.to_a.first
+      redirect_to transaction_path(@transaction.id), notice: "Unable to save receipt #{@transaction.errors.to_a.first}"
     end
   end
 
