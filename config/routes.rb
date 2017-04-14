@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'transactions' => 'transaction#list', :as => :transactions
   get 'disputes' => 'transaction#disputes', :as => :disputes
 
-  get 'transaction-receipt/:id/:basename.:extension' => 'transaction#receipt', :as => :receipt
+  get 'transaction-receipt/:id' => 'transaction#receipt', :as => :receipt
   get 'dispute/:id' => 'transaction#dispute', :as => :dispute
   get 'transaction/:id' => 'transaction#show', :as => :transaction
   get 'transaction/:id/send-money' => 'transaction#send_money', :as => :send_money

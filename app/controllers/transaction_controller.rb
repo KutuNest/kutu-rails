@@ -100,7 +100,7 @@ class TransactionController < ApplicationController
 
   def receipt
     @transaction = Transaction.where(id: params[:id]).first
-    send_file @transaction.sender_receipt.url
+    send_file File.open(@transaction.sender_receipt.file.file)
   end
 
 end

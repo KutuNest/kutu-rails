@@ -109,7 +109,7 @@
                     <%- end %>
 
                     <%- if @transaction.sender_receipt.url.present? %>
-                    <a href="<%= @transaction.sender_receipt.url %>" class="btn btn-secondary btn-detail">Download receipt</a>
+                    <a href="<%= receipt_path @transaction %>" class="btn btn-secondary btn-detail">Download receipt</a>
                     <%- end %>
 
                   </div>
