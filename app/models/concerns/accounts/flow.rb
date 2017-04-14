@@ -3,7 +3,7 @@ module Accounts
     extend ActiveSupport::Concern
 
     included do
-      after_create :create_default_transaction
+      after_create :create_transaction
     end
 
     def proceed_last_transaction!
@@ -32,7 +32,7 @@ module Accounts
     def enter_new_pool!
       self.pool = self.groupement.default.first_pool
       self.number_associations_left -= 1
-      create_default_transaction
+      create_transaction
       self.save      
     end
 
@@ -40,13 +40,13 @@ module Accounts
       next_pool = self.pool.next_pool
       self.pool = next_pool
       self.number_associations_left -= 1
-      create_default_transaction
-      self.save      
+      create_transaction
+      self.save
     end
 
     def create_pool_transactions!
       self.number_associations_left -= 1
-      create_default_transaction
+      create_transaction
       self.save
     end
 
@@ -56,32 +56,20 @@ module Accounts
       self.save
     end
 
-    def create_default_transaction
-      transaction = self.a_transactions.new
-      transaction.member = self.member
-      transaction.timeout = DateTime.now + self.pool.timeout.to_i.seconds
-      transaction.value = self.pool.amount
-
-      #TODO: set correct account match
-      if self.super_user?
-        transaction.eater  = self
-        transaction.feeder = self.pool.accounts.last
-      else
-        transaction.feeder = self
-        transaction.eater  = self.pool.accounts.last
-      end
-      transaction.save
-    end
-
     def create_transaction
       unless self.super_user?
         t = self.a_transactions.new
         t.member = self.member
         t.timeout = DateTime.now + self.pool.timeout.to_i.seconds
+        t.pool = self.pool
         t.value = self.pool.amount
 
         #TODO: eater from pool, that hasn't been sent limit from pool
-        t.eater_id = self.pool.accounts.minimum(:pool_order)
+        t.feeder = self
+        t.eater = self.pool.first_target(self)
+        t.save
+        pp t
+        pp t.errors
       end
     end
 

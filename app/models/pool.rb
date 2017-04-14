@@ -17,8 +17,16 @@ class Pool < ApplicationRecord
     Pool.where(groupement_id: self.groupement_id, position: (self.position + 1)).first
   end
 
-  def first_target
-    self.accounts
+  def first_target(acc)
+    accs = self.accounts.active.where.not(id: acc.id).order(:pool_order)
+    target = nil
+    for a in accs do
+      if a.a_transactions.where(pool_id: self.id).count < self.feeders_count
+        target = a
+        break
+      end
+    end
+    target
   end
 
 end

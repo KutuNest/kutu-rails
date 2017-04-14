@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       else
         @current_account = current_member.accounts.first
       end  
-    end  
+    end
   end
 
   def configure_permitted_parameters

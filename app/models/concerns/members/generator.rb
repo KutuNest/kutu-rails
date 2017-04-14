@@ -11,7 +11,7 @@ module Members
         pool = self.groupement.first_pool
         a = self.accounts.new
         a.auto_populate(pool)
-        a.save
+        a.save ? a : false
       end
     end
 
