@@ -24,9 +24,11 @@ module Members
     end
 
     def generate_referral_code
-      ref_code = SecureRandom.hex(3)
-      ref_code = ref_code + rand(10) if Member.where(referral_code: ref_code).any?
-      self.referral_code = ref_code
+      if self.new_record?
+        ref_code = SecureRandom.hex(3)
+        ref_code = ref_code + rand(10) if Member.where(referral_code: ref_code).any?
+        self.referral_code = ref_code
+      end
     end
   end
 end

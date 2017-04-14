@@ -61,8 +61,13 @@ module Accounts
       self.has_finished = true
       self.number_associations_left = 0
       self.save
+      set_new_accounts_limit
+    end
+
+    def set_new_accounts_limit
       m = self.member
-      # m.accounts_limit = 
+      m.accounts_limit = m.accounts_limit + 8
+      m.save
     end
 
     def create_new_transaction
