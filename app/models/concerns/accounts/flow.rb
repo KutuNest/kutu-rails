@@ -3,61 +3,70 @@ module Accounts
     extend ActiveSupport::Concern
 
     included do
-      after_create :create_transaction
+      after_create :create_new_transaction
     end
 
     def proceed_last_transaction!
-      if self.has_finished_pool?
+      if self.has_finished_group?
+        self.retire!
+      elsif self.has_finished_pool?
         self.enter_next_pool!
-      elsif self.has_finished_group?
-        self.kick_his_ass!
-      else
-        self.create_pool_transaction!
+      elsif self.has_been_sending?
+        self.do_nothing
       end      
     end
 
-    def has_finished_receive?
-      self.a_transactions.where(pool_id: self.pool_id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, eater_id: self.id).count > 0
+    def do_nothing
+      true
+    end
+
+    def has_been_sending?
+      if self.super_user?
+        true
+      else
+        self.pool.p_transactions.where(feeder_id: self.id).count >= 1
+      end
+    end
+
+    def has_been_receiving?
+      self.pool.p_transactions.where(eater_id: self.id).count == self.pool.feeders_count
+    end
+
+    def has_successfully_sent?
+      self.pool.p_transactions.success.where(feeder_id: self.id).count >= 1
+    end
+
+    def has_successfully_received?
+      self.pool.p_transactions.success.where(eater_id: self.id).count == self.pool.feeders_count
     end
 
     def has_finished_pool?
-      (self.pool.feeders_count  == self.a_transactions.where(pool_id: self.pool_id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, feeder_id: self.id).count) and 
-        self.a_transactions.where(pool_id: self.pool.id, admin_confirmed: true, receiver_confirmed: true, sender_confirmed: true, eater_id: self.id).any?
+      has_successfully_sent? and has_successfully_received?
     end
 
     def has_finished_group?
       has_finished_pool? and self.pool.last_group_pool?
     end
 
-    def enter_new_pool!
-      self.pool = self.groupement.default.first_pool
-      self.number_associations_left -= 1
-      create_transaction
-      self.save      
-    end
-
     def enter_next_pool!
-      next_pool = self.pool.next_pool
-      self.pool = next_pool
-      self.number_associations_left -= 1
-      create_transaction
+      self.pool = self.pool.next_pool
+      self.number_associations_left = self.pool.feeders_count
       self.save
+      if !self.super_user?
+        create_transaction
+      end
     end
 
-    def create_pool_transactions!
-      self.number_associations_left -= 1
-      create_transaction
-      self.save
-    end
-
-    def kick_his_ass!
+    def retire!
       self.has_finished = true
       self.number_associations_left = 0
       self.save
+      m = self.member
+      # m.accounts_limit = 
     end
 
-    def create_transaction
-      unless self.super_user?
+    def create_new_transaction
+      if !self.super_user? and self.number_associations_left > 0
         t = self.a_transactions.new
         t.member = self.member
         t.timeout = self.pool.timeout.to_i.seconds
@@ -68,8 +77,6 @@ module Accounts
         t.feeder = self
         t.eater = self.pool.first_target(self)
         t.save
-        pp t
-        pp t.errors
       end
     end
 

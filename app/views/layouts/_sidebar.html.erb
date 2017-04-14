@@ -49,7 +49,14 @@
                     <a href="<%= transactions_path %>"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions</a>
                   </li>     
                   <li class="list-group-item">
-                    <a href="<%= disputes_path %>"><i class="fa fa-random" aria-hidden="true"></i> Disputes <label class="label label-default"><%= Transaction.failed.count %></label></a>
+                    <a href="<%= disputes_path %>"><i class="fa fa-random" aria-hidden="true"></i> Disputes <label class="label label-default">
+                      <%- if current_member.super_admin? %>
+                        <%= Transaction.disputed.count %>
+                      <%- else %>
+                        <%= Transaction.disputed.where(pool_id: current_member.groupement.pools.map(&:id)).count %>
+                      <%- end %>
+                      
+                    </label></a>
                   </li>                                     
                   <li class="list-group-item">
                     <a href="<%= members_path %>"><i class="fa fa-users" aria-hidden="true"></i> Members</a>

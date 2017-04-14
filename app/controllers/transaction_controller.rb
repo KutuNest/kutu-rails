@@ -18,6 +18,10 @@ class TransactionController < ApplicationController
   end
 
   def dispute
+    @transaction = Transaction.where(id: params[:id]).first
+    @transaction.dispute!
+    @transaction.save
+    redirect_to :back, notice: 'Transaction disputed'
   end
 
   def show
@@ -35,6 +39,7 @@ class TransactionController < ApplicationController
     #TODO: limit member
     @transaction = Transaction.where(id: params[:id]).first
     @transaction.receiver_confirmed = true
+    @transaction.admin_confirmed = true
     notice = if @transaction.save
       "You've successfully confirmed settlement of the transfer"
     else

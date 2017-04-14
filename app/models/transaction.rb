@@ -15,7 +15,7 @@ class Transaction < ApplicationRecord
 
   before_validation :set_defaults
 
-  scope :success, -> { where(admin_confirmed: true) }
+  scope :success, -> { where(admin_confirmed: true, sender_confirmed: true, receiver_confirmed: true) }
   scope :pending, -> { where(sender_confirmed: false).or(Transaction.where(receiver_confirmed: false)) }
   scope :failed, -> { where(failed: true) }
   scope :disputed, -> { where(disputed: true) }
@@ -29,7 +29,12 @@ class Transaction < ApplicationRecord
 
 private
   def proceed_completed
-    self.account.proceed_last_transaction! if confirmed?
+    if confirmed?
+      self.eater.proceed_last_transaction! 
+      self.feeder.proceed_last_transaction!
+
+      self.update_columns(completed_date: Date.today)
+    end
   end
 
   def set_defaults

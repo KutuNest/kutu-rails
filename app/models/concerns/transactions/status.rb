@@ -57,7 +57,7 @@ module Transactions
 			elsif sender_confirmed?
 			  "sender confirmed"
 			elsif receiver_confirmed?
-			  "receiver confirmated"
+			  "receiver confirmed"
 			else
 			  "new transaction"
 			end
