@@ -66,8 +66,6 @@ class Member < ApplicationRecord
     end
   end
 
-  #TODO: accounts limit increase on completed
-
 private
   def set_defaults
     self.groupement = Groupement.default if self.groupement.blank? and !self.super_admin?

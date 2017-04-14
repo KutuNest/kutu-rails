@@ -54,6 +54,7 @@ class TransactionController < ApplicationController
       @transaction.admin_confirmed = true
       @transaction.completed_date = Date.today
       @transaction.failed = false
+      @transaction.disputed = false
       if @transaction.save
         redirect_to :back, notice: 'Transaction has been confirmed'
       else
