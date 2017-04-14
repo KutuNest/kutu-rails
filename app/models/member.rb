@@ -62,7 +62,7 @@ class Member < ApplicationRecord
 
   def can_add_account?
     unless self.super_admin?
-      self.accounts_limit > self.accounts.count
+      self.accounts_limit.to_i > self.accounts.count
     end
   end
 

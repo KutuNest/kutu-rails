@@ -1,3 +1,28 @@
 <section class="content-section dashboard-public margin-top-50">
-  <%= render 'dashboard/items/group', groupements: @groupements %>
+  <div class="container paddingBottom-10">
+    <%= render 'layouts/notice' %>
+    <%- if current_member.accounts.any? and @current_account.present? %>
+      <%= render 'dashboard/summary' %>
+    <%- end %>
+  </div>
+
+  <div class="container paddingTop-20 paddingBottom-10">
+    <div class="row no-gutters marginTop-10">
+      <%- if current_member.accounts.any? %>
+        <%= render 'dashboard/current' if @current_transaction.present? %>
+      <%- else %>
+        <%= render 'dashboard/empty' %>
+      <%- end %>
+
+      <%- if current_member.accounts.any? %>
+        <%= render 'dashboard/history' if @transaction_history.present? %>
+      <%- end %>
+    </div>
+  </div>
 </section>
+    
+<!--
+<section class="content-section dashboard-public margin-top-50">
+  <%#= render 'dashboard/items/group', groupements: @groupements %>
+</section>
+-->
