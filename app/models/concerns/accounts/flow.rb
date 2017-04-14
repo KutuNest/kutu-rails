@@ -53,7 +53,7 @@ module Accounts
       self.number_associations_left = self.pool.feeders_count
       self.save
       if !self.super_user?
-        create_transaction
+        create_new_transaction
       end
     end
 
@@ -76,7 +76,11 @@ module Accounts
         #TODO: eater from pool, that hasn't been sent limit from pool
         t.feeder = self
         t.eater = self.pool.first_target(self)
-        t.save
+        if t.save
+          t_eater = t.eater
+          t_eater.number_associations_left = t_eater.number_associations_left.to_i - 1
+          t_eater.save
+        end
       end
     end
 

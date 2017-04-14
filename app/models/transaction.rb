@@ -2,6 +2,8 @@ class Transaction < ApplicationRecord
 
   include Transactions::Status
 
+  DisputeLimit = 3.days
+
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
   belongs_to :member
