@@ -1,12 +1,11 @@
     <section class="content-section dashboard margin-top-50">
-      <br/><br/>
+      <br/>
       <div class="container p-0">
         <div class="row">
           <div class="card col-12 col-sm-8 offset-sm-2">
-          <%= render 'layouts/notice' %>
-            <div class="card-panel bg-white  text-grey box-shadow p-0">
-              <button type="button" class="btn btn-link btn-sm text-grey padding-left-0"><i class="fa fa-chevron-left"></i></button>
-              <a class="text-black" href="<%= dashboard_path %>">Dashboard</a>
+          
+            <div class="card-panel bg-white  text-grey p-0">
+              <%= render 'layouts/notice' %>
             </div>
           </div>
         </div>
@@ -15,7 +14,7 @@
       <div class="container p-0">
         <div class="row">
           <div class="card col-12 col-sm-8 offset-sm-2">
-            <div class="label label-success pull-right p-10 text-center">
+            <div class="label-success pull-right p-10 text-center">
               <span class="pull-left"><%= @transaction.status %></span><br/>
               <span class="font-35"><%= number_to_currency @transaction.value %>&nbsp;<i class="fa fa-chevron-circle-<%= @transaction.eater.member == current_member ? "left" : "right" %> pull-right"></i></span>
             </div>
@@ -87,31 +86,49 @@
               </div>
               <div class="row marginTop-20">
                 <div class="col-12">
-                  <div class="details btn-group mr-2" role="group" aria-label="First group">
+                  <div class="details btn-group mr-2" role="group">
                     <%- if current_member.accounts.include? @transaction.feeder %>
 
                       <%- if !@transaction.sender_confirmed? %>
-                        <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-danger btn-detail">Send money</a>
+                        <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-primary m-r-10">
+                          <i class="fa fa-chevron-circle-right"></i>
+                          Send money
+                        </a>
                       <%- else %>
-                        <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Resend receipt</a>
+                        <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-default m-r-10">
+                          <i class="fa fa-angle-up"></i>
+                          Re-upload receipt
+                        </a>
                       <%- end %>
 
                     <%- else %>
 
                       <%- unless @transaction.receiver_confirmed? %>
-                      <a href="<%= settle_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Confirm settlement</a>
+                      <a href="<%= settle_path(@transaction.id) %>" class="btn btn-primary m-r-10">
+                        <i class="fa fa-check"></i>
+                        Confirm settlement
+                      </a>
                       <%- end %>
 
                     <%- end %>
 
                     <%- if @transaction.confirmed? and @transaction.completed_date < (Date.today + Transaction::DisputeLimit) %>
-                      <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Dispute transaction</a> 
+                      <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-default m-r-10">
+                        <i class="fa fa-random"></i>
+                        Dispute transaction
+                      </a> 
                     <%- end %>
 
                     <%- if @transaction.sender_receipt.url.present? %>
-                    <a href="<%= receipt_path @transaction %>" class="btn btn-secondary btn-detail">Download receipt</a>
+                    <a href="<%= receipt_path @transaction %>" class="btn btn-default m-r-10">
+                      <i class="fa fa-file"></i>
+                      Download receipt
+                    </a>
                     <%- end %>
-
+                    <a class="btn btn-default p-l-20 p-r-20" href="<%= dashboard_path %>">
+                      <i class="fa fa-angle-double-left"></i>
+                      Dashboard
+                    </a>
                   </div>
                 </div>
               </div>

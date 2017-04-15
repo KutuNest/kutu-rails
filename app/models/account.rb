@@ -16,6 +16,8 @@ class Account < ApplicationRecord
   include Accounts::Flow
   include Accounts::Populator
 
+  #TODO: ensure assignment not on kicked out accounts
+
   belongs_to :member
   belongs_to :groupement
   belongs_to :pool
@@ -27,8 +29,8 @@ class Account < ApplicationRecord
   has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
   has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
 
-  scope :active, -> { where(has_finished: false) }
-  scope :completed, -> { where(has_finished: true) }
+  scope :active, -> { where(has_finished: false, kicked_out: false) }
+  scope :completed, -> { where(has_finished: true, kicked_out: false) }
   scope :kicked_out, -> { where(kicked_out: true) }
 
   scope :feeder, -> {where(action_available: true)}
@@ -40,6 +42,13 @@ class Account < ApplicationRecord
 
   def transaction_history
     Transaction.where("eater_id = ? OR feeder_id = ?", self.id, self.id).order("created_at desc")
+  end
+
+  def kick_out!
+    self.kicked_out = true
+    self.number_association_left = 0
+    self.save
+    self.member.lock_access!
   end
 
   def change_pool_order!(order)

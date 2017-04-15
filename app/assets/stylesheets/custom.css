@@ -75,7 +75,7 @@ header {
 }
 
 .width-30pct {
-  width: 30%;
+  width: 32%;
 }
 
 .dark-grey {
@@ -116,7 +116,7 @@ header {
 }
 
 .bgcolor-primary {
-  background-color: #F15152 !important;
+  background-color: #F76F76 !important;
 }
 
 
@@ -124,7 +124,7 @@ header {
 .btn-outline-inverse {
   color: #fff;
   background-color: transparent;
-  border-color: #cdbfe3;
+  border-color: #fff;
   border-top-width: 1px !important;
   border-bottom-width: 1px !important;
   border-right-width: 1px !important;
@@ -186,4 +186,39 @@ header {
 
 .form-control {
   max-width: 400px;
+}
+
+.tiles-border-red {
+  border: 2px solid #F15152;background-color:#fff;
+}
+
+.nav-top-item:hover {
+  color: #fff;
+}
+
+/* Current dashboard */
+.current-divider {
+  border-left: 1px dotted #ccc;
+  padding-left: 10px;
+}
+
+.current-trx-wrapper {
+  border: 2px solid #F15152;
+  background-color: #F76F76;
+}
+
+.menu-logo:hover {
+    -webkit-animation-name: rotateit; 
+    -webkit-animation-duration: 2s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: rotate; 
+    -moz-animation-duration: 2s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotateit {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(180deg);}
 }

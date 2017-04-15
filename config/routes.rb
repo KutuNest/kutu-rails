@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   # Account
   get  'account/add' => 'account#add', :as => :add_account
+  get  'account/:id/kick_out' => 'account#kick_out', :as => :kick_out
   post 'account/change-pool-order/:id' => 'account#change_pool_order', :as => :change_pool_order
 
   # Member

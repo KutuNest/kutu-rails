@@ -24,7 +24,7 @@ class MemberController < ApplicationController
 
     if @member
       @member.unlock_access! if @member.access_locked?
-      @member.lock_access! unless @member.access_locked?
+      @member.lock_access!
 
       redirect_to :back, notice: 'Member lock setting has been changed'
     else
@@ -85,7 +85,7 @@ class MemberController < ApplicationController
     if @member.save
       @member.generate_new_account(true)
 
-      redirect_to :back, notice: "Member #{@member.try(:username)} with super user has been saved"
+      redirect_to dashboard_path, notice: "Member #{@member.try(:username)} with super user has been saved"
     else
       render action: 'add_super_user'
     end  

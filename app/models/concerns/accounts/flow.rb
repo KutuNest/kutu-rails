@@ -24,12 +24,12 @@ module Accounts
       if self.super_user?
         true
       else
-        self.pool.p_transactions.where(eater_id: self.id).count == self.pool.feeders_count
+        self.pool.p_transactions.where(feeder_id: self.id).count >= 1
       end
     end
 
     def has_been_receiving?
-      self.pool.p_transactions.where(feeder_id: self.id).count >= 1
+      self.pool.p_transactions.where(eater_id: self.id).count == self.pool.feeders_count
     end
 
     def has_successfully_sent?

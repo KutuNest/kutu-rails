@@ -29,14 +29,14 @@
         </a>
       </div>
     </div>
-    <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm">
+    <a href="<%= destroy_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm nav-top-item">
       <i class="fa fa-key"></i> Logout
     </a>
   <%- else %>
-    <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm">
+    <a href="<%= new_member_session_path %>" class="btn btn-default-clear font-bold btn-font-sm nav-top-item">
       <i class="fa fa-key"></i> Login
     </a>
-    <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm">
+    <a href="<%= new_member_registration_path %>" class="btn btn-default-clear font-bold btn-font-sm nav-top-item">
       <i class="fa fa-user"></i> Sign up
     </a>
   <%- end %>
