@@ -33,7 +33,11 @@ module Accounts
     end
 
     def has_successfully_sent?
-      self.pool.p_transactions.success.where(feeder_id: self.id).count >= 1
+      if self.super_user?
+        true
+      else
+        self.pool.p_transactions.success.where(feeder_id: self.id).count >= 1
+      end
     end
 
     def has_successfully_received?
