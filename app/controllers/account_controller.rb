@@ -1,10 +1,14 @@
 class AccountController < ApplicationController
   def add
-    account = current_member.generate_new_account
-    if account
-      redirect_to dashboard_path, notice: "New account: #{account.name} has been successfully created"
+    if !current_member.super_admin? and current_member.groupement.accounts.size.zero?
+      redirect_to dashboard_path, notice: "Sorry group and pool setup not finished yet. Please contact admin.."
     else
-      redirect_to dashboard_path, notice: 'Unable to create new account. Please contact admin'
+      account = current_member.generate_new_account
+      if account
+        redirect_to dashboard_path, notice: "New account: #{account.name} has been successfully created"
+      else
+        redirect_to dashboard_path, notice: 'Unable to create new account. Please contact admin'
+      end
     end
   end
 
