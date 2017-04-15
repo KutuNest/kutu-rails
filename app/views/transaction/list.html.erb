@@ -12,13 +12,15 @@
                 <div class="tiles white">
                   <div class="row">
                       <div class="col-md-4 col-sm-4">
-                        <p class="no-margin">SENDER</p>
+                        <p class="no-margin">RECEIVER</p>
                         <h4>
                           <span class="item-count">
                             <i class="fa fa-user"></i>&nbsp;<%= transaction.feeder.member.full_name %>
                           </span> 
                         </h4>
                         <p>
+                          <%= transaction.eater.name %>
+                          <br/>
                           <i class="fa fa-bank"></i>&nbsp;
                           <%= transaction.eater.member.bank.title %> <br/>
                           <%= transaction.eater.member.account_number %> <br/>
@@ -26,13 +28,15 @@
                         </p>
                       </div>
                       <div class="col-md-4">
-                        <p class="semi-bold">RECEIVER</p>
+                        <p class="semi-bold">SENDER</p>
                         <h4>
                           <span class="item-count">
                             <i class="fa fa-user"></i>&nbsp;<%= transaction.eater.member.full_name %>
                           </span>
                         </h4>
                         <p>
+                          <%= transaction.feeder.name %>
+                          <br/>                        
                           <i class="fa fa-bank"></i>&nbsp;
                           <%= transaction.feeder.member.bank.title %> <br/>
                           <%= transaction.feeder.member.account_number %> <br/>
@@ -44,7 +48,7 @@
                         <p class="semi-bold">Amount</p>
                         <h3><span class="item-count semi-bold">
                           <span class="label label-success label-lg"><%= number_to_currency transaction.value %></span>
-                          <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %></span>
+                          <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %> left</span>
                         </h3>
                         <span>
                           <i class="fa fa-clock-o"></i>

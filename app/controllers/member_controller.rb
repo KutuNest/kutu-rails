@@ -1,4 +1,6 @@
 class MemberController < ApplicationController
+  before_action :authenticate_member!
+
   def edit
     @member = Member.where(id: params[:id]).first
   end
@@ -11,7 +13,7 @@ class MemberController < ApplicationController
     member_params = params.require(:member).permit(:first_name, :last_name, :phone_number, :bank_id, :account_number, :account_holder_name)
     @member = Member.where(id: params[:id]).first
     if @member.present? and @member.update(member_params)
-      redirect_to edit_member_path(@member), notice: 'Member changes has been saved'
+      redirect_to dashboard_path(@member), notice: 'Member changes has been saved'
     else
       render action: 'edit'
     end
@@ -50,10 +52,24 @@ class MemberController < ApplicationController
   end
 
   def save_group
-    group_params = params.require(:group).permit(:activated_on_create, :initial_accounts, :maximum_accounts, :accounts_added_on_success, :title)
+    group_params = params.require(:groupement).permit(:activated_on_create, :initial_accounts, :maximum_accounts, :accounts_added_on_success, :title)
     @groupement = Groupement.new(group_params)
     if @groupement.save
-      redirect_to :back, notice: "Group #{@groupement.title} has been saved"
+      redirect_to groups_path, notice: "Group #{@groupement.title} has been saved"
+    else
+      redirect_to :back, notice: "Error: #{@groupement.errors.to_a.first}"
+    end
+  end
+
+  def edit_group
+    @group = Groupement.find(params[:id])
+  end
+
+  def update_group
+    group_params = params.require(:groupement).permit(:activated_on_create, :initial_accounts, :maximum_accounts, :accounts_added_on_success, :title)
+    @groupement = Groupement.find(params[:id])
+    if @groupement.update(group_params)
+      redirect_to groups_path, notice: "Group #{@groupement.title} has been saved"
     else
       redirect_to :back, notice: "Error: #{@groupement.errors.to_a.first}"
     end
@@ -64,14 +80,15 @@ class MemberController < ApplicationController
   end
 
   def save_super_user
-    member_params = params.require(:member).permit(:title, :amount, :position, :feeders_count, :timeout)
+    member_params = params.require(:member).permit(:email, :username, :referrer_code, :first_name, :last_name, :phone_number, :bank_id, :account_number, :account_holder_name, :groupement_id, :password, :password_confirmation)
     @member = Member.new(member_params)
-    @member.super_user = true
     if @member.save
-      redirect_to :back, notice: "Super user #{@member.title} has been saved"
+      @member.generate_new_account(true)
+
+      redirect_to :back, notice: "Member #{@member.try(:username)} with super user has been saved"
     else
-      redirect_to :back, notice: "Error: #{@member.errors.to_a.first}"
-    end        
+      render action: 'add_super_user'
+    end  
   end
 
 end

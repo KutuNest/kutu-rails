@@ -6,21 +6,49 @@
               </div>
               <div class="tiles" style="border: 2px solid #F15152;background-color:#fff">
                 <div class="tiles-body">
-                  <h3 class="text-black"> <span class="semi-bold"><%= distance_of_time_in_words(DateTime.now, (DateTime.now + @current_transaction.timeout.seconds)) %> </span> to send <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span> </h3>
+                  <h3 class="text-black"> 
+                    <%- if !@current_transaction.sender_confirmed? %>
+                      <span class="semi-bold">
+                        <%= distance_of_time_in_words(DateTime.now, (DateTime.now + @current_transaction.timeout.seconds)) %> 
+                      </span> 
+                      to send <%= @current_transaction.eater.name %>
+                      <span class="semi-bold">
+                      <%= number_to_currency @current_transaction.value %>
+                      </span>
+                    <%- elsif !@current_transaction.receiver_confirmed? %>
+                      <span class="semi-bold">
+                        <%= distance_of_time_in_words(DateTime.now, (DateTime.now + @current_transaction.timeout.seconds)) %> 
+                      </span> 
+                      for <%= @current_transaction.eater.name %> to confirm 
+                      <span class="semi-bold">
+                      <%= number_to_currency @current_transaction.value %>
+                      </span>                    
+                    <%- end %>
+                  </h3>
+
                   <div class="overlayer bottom-right fullwidth">
                     <div class="overlayer-wrapper">
                       <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
-                        <div class="pull-right"> 
-                          <a href="<%= transaction_path(@current_transaction) %>" class="btn btn-default"> 
-                            <i class="fa fa-search-plus "></i>
-                            show detail 
-                          </a>
-                          <span class="text-black">&nbsp; or &nbsp;</span>
-                          <a href="<%= send_money_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg"> 
-                            send money now 
-                            <i class="fa fa-chevron-circle-right "></i>
-                          </a> 
-                        </div>
+                        <%- if !@current_transaction.sender_confirmed? %>
+                          <div class="pull-right"> 
+                            <a href="<%= transaction_path(@current_transaction) %>" class="btn btn-default"> 
+                              <i class="fa fa-search-plus "></i>
+                              show detail 
+                            </a>
+                            <span class="text-black">&nbsp; or &nbsp;</span>
+                            <a href="<%= send_money_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg"> 
+                              send money now 
+                              <i class="fa fa-chevron-circle-right "></i>
+                            </a> 
+                          </div>
+                        <%- else %>
+                          <div class="pull-right"> 
+                            <a href="<%= transaction_path(@current_transaction) %>" class="btn btn-default"> 
+                              <i class="fa fa-search-plus "></i>
+                              show detail 
+                            </a>
+                          </div>                        
+                        <%- end %>
                         <div class="clearfix"></div>
                       </div>
                     </div>

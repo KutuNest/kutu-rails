@@ -1,11 +1,12 @@
 <%- for t in @transaction_history do %>
+<%- target = t.eater.member == current_member ? t.feeder : t.eater %>
 <tr>
+  <td><small><%= t.status.upcase %></small></td>
   <td><%= t.completed_date ||= "N/A" %></td>
-  <td><%= t.eater.member.full_name %></td>
-  <td><%= t.eater.member.bank.try(:title).to_s + " " + t.eater.member.account_number.to_s %></td>
-  <td><%= t.eater.member.account_holder_name %></td>
-  <td><label class="label label-success"><%= number_to_currency t.value %></label></td>
-  <td><%= t.eater.member.phone_number %></td>
+  <td><%= target.name %></td>
+  <td><%= target.member.bank.try(:title).to_s + " " + target.member.account_number.to_s %></td>
+  <td><%= target.member.account_holder_name %></td>
+  <td><label class="label label-success"><%= number_to_currency t.value %>&nbsp;<i class="fa fa-chevron-circle-left"></label></td>
   <td><a class="btn btn-default btn-sm" href="<%= transaction_path(t) %>"><i class="fa fa-search-plus "></i> show</a></td>
 </tr>
 <%- end %>

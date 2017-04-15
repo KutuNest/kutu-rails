@@ -1,5 +1,6 @@
 class Pool < ApplicationRecord
   belongs_to :groupement
+
   has_many :p_transactions, class_name: 'Transaction', foreign_key: 'pool_id'
   has_many :accounts, dependent: :nullify
 
@@ -14,6 +15,18 @@ class Pool < ApplicationRecord
 
   def next_pool
     Pool.where(groupement_id: self.groupement_id, position: (self.position + 1)).first
+  end
+
+  def first_target(acc)
+    accs = self.accounts.active.where.not(id: acc.id).order(:pool_order)
+    target = nil
+    for a in accs do
+      if a.a_transactions.where(pool_id: self.id).count < self.feeders_count
+        target = a
+        break
+      end
+    end
+    target
   end
 
 end

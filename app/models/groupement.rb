@@ -3,6 +3,7 @@ class Groupement < ApplicationRecord
 
   has_many :pools, dependent: :nullify
   has_many :members, dependent: :nullify
+  has_many :accounts, dependent: :nullify
 
   validates :title, presence: true, uniqueness: true
   validates :initial_accounts, :maximum_accounts, :accounts_added_on_success, presence: true, numericality: true

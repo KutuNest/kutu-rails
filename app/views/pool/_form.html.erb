@@ -1,6 +1,6 @@
 <div class="field">
-  <%= f.label :groupement, "Group #{@pool.errors[:groupement_id].first}" %>
-  <%= f.select :groupement_id, Groupement.all.map{|g| [g.title, g.id] }, class: 'form-control' %><br />
+  <%= f.label :groupement_id, "Group #{@pool.errors[:groupement_id].first}" %>
+  <%= f.select :groupement_id, Groupement.all.map{|g| [g.title, g.id] }, include_blank: 'Select Groupement', class: 'form-control' %><br /><br />
 </div>       
 
 <div class="field">
@@ -11,7 +11,12 @@
 <div class="field">
   <%= f.label :amount, "Amount #{@pool.errors[:amount].first}" %>
   <%= f.text_field :amount, class: 'form-control' %><br />
-</div>       
+</div>  
+
+<div class="field">
+  <%= f.label :feeders_count, "Feeders count #{@pool.errors[:feeders_count].first}" %>
+  <%= f.text_field :feeders_count, class: 'form-control' %><br />
+</div>  
 
 <div class="field">
   <%= f.label :position, "Position #{@pool.errors[:position].first}" %>

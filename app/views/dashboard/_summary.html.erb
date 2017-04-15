@@ -7,7 +7,7 @@
                   </div>
                 </div>
                 <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
-                  <h3 class="text-uppercase text-bold"><%= number_to_currency(@current_account.summary[:money_received].to_f) %></h3>
+                  <h3 class="text-uppercase text-bold"><%= number_to_currency(@current_account.summary[:total_received].to_f) %></h3>
                   <small class="text-uppercase">Total Money</small><br/>
                   <small class="text-uppercase">Received</small>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-8 col-xs-7 tiles white p-10 text-center">
                   <h3 class="text-uppercase text-bold">
-                    <%= number_to_currency(@current_account.summary[:money_sent].to_f) %>
+                    <%= number_to_currency(@current_account.summary[:total_sent].to_f) %>
                   </h3>
                   <small class="text-uppercase">Total Money</small><br/>
                   <small class="text-uppercase">Sent</small>
@@ -60,7 +60,7 @@
                     <%= current_member.summary[:total_accounts] %>
                     <small>&nbsp; Accounts</small>
                   </h3>
-                  <small class="text-uppercase">YOUR <br/>ACCOUNTS</small>
+                  <small class="text-uppercase">TOTAL <br/>ACCOUNT</small>
                 </div>
               </div>
             </div>

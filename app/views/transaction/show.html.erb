@@ -3,6 +3,7 @@
       <div class="container p-0">
         <div class="row">
           <div class="card col-12 col-sm-8 offset-sm-2">
+          <%= render 'layouts/notice' %>
             <div class="card-panel bg-white  text-grey box-shadow p-0">
               <button type="button" class="btn btn-link btn-sm text-grey padding-left-0"><i class="fa fa-chevron-left"></i></button>
               <a class="text-black" href="<%= dashboard_path %>">Dashboard</a>
@@ -10,15 +11,13 @@
           </div>
         </div>
       </div>
-
-    <%= render 'layouts/notice' %>
-
+      <%- target = @transaction.eater.member == current_member ? @transaction.feeder : @transaction.eater %>
       <div class="container p-0">
         <div class="row">
           <div class="card col-12 col-sm-8 offset-sm-2">
             <div class="label label-success pull-right p-10 text-center">
-              <span class="pull-right"><%= @transaction.status %></span><br/>
-              <span class="font-35"><%= number_to_currency @transaction.value %></span>
+              <span class="pull-left"><%= @transaction.status %></span><br/>
+              <span class="font-35"><%= number_to_currency @transaction.value %>&nbsp;<i class="fa fa-chevron-circle-<%= @transaction.eater.member == current_member ? "left" : "right" %> pull-right"></i></span>
             </div>
           </div>
         </div>
@@ -37,7 +36,7 @@
                     <div class="container-fluid no-gutters padding-0">
                       <div class="row no-gutters">
                       <div class="col-5">Name</div>
-                      <div class="col-7"><label class="details-text"><%= @transaction.eater.member.try(:full_name) %> </label></div>
+                      <div class="col-7"><label class="details-text"><%= target.member.try(:full_name) %> </label></div>
                       </div>
                     </div>
                   </li>
@@ -45,7 +44,7 @@
                     <div class="container-fluid no-gutters padding-0">
                       <div class="row no-gutters">
                       <div class="col-5">Bank Name</div>
-                      <div class="col-7 text-uppercase"><label class="details-text"><%= @transaction.eater.member.bank.title %></label></div>
+                      <div class="col-7 text-uppercase"><label class="details-text"><%= target.member.bank.title %></label></div>
                       </div>
                     </div>
                   </li>
@@ -53,7 +52,7 @@
                     <div class="container-fluid no-gutters padding-0">
                       <div class="row no-gutters">
                       <div class="col-5">Account Number</div>
-                      <div class="col-7 text-uppercase"><label class="details-text"><%= @transaction.eater.member.account_number %></label></div>
+                      <div class="col-7 text-uppercase"><label class="details-text"><%= target.member.account_number %></label></div>
                       </div>
                     </div>
                   </li>
@@ -71,7 +70,7 @@
                       <div class="container-fluid no-gutters padding-0">
                         <div class="row no-gutters">
                         <div class="col-5">Phone Number</div>
-                        <div class="col-7"><label class="details-text"><%= @transaction.eater.member.phone_number %> </label></div>
+                        <div class="col-7"><label class="details-text"><%= target.member.phone_number %> </label></div>
                         </div>
                       </div>
                     </li>
@@ -79,7 +78,7 @@
                       <div class="container-fluid no-gutters padding-0">
                         <div class="row no-gutters">
                         <div class="col-5">Email</div>
-                        <div class="col-7"><label class="details-text"><%= @transaction.eater.member.email %></label></div>
+                        <div class="col-7"><label class="details-text"><%= target.member.email %></label></div>
                         </div>
                       </div>
                     </li>
@@ -89,12 +88,30 @@
               <div class="row marginTop-20">
                 <div class="col-12">
                   <div class="details btn-group mr-2" role="group" aria-label="First group">
-                    <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-danger btn-detail">Send money</a>
-                    <%- unless @transaction.receiver_confirmed? %>
-                    <a href="<%= settle_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Confirm settlement</a>
+                    <%- if current_member.accounts.include? @transaction.feeder %>
+
+                      <%- if !@transaction.sender_confirmed? %>
+                        <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-danger btn-detail">Send money</a>
+                      <%- else %>
+                        <a href="<%= send_money_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Resend receipt</a>
+                      <%- end %>
+
+                    <%- else %>
+
+                      <%- unless @transaction.receiver_confirmed? %>
+                      <a href="<%= settle_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Confirm settlement</a>
+                      <%- end %>
+
                     <%- end %>
-                    <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Dispute transaction</a>                    
-                    <a href="<%= @transaction.sender_receipt.url %>" class="btn btn-secondary btn-detail">Sender receipt</a>
+
+                    <%- if @transaction.confirmed? and @transaction.completed_date < (Date.today + Transaction::DisputeLimit) %>
+                      <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-secondary btn-detail">Dispute transaction</a> 
+                    <%- end %>
+
+                    <%- if @transaction.sender_receipt.url.present? %>
+                    <a href="<%= receipt_path @transaction %>" class="btn btn-secondary btn-detail">Download receipt</a>
+                    <%- end %>
+
                   </div>
                 </div>
               </div>

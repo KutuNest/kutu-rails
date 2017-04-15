@@ -14,7 +14,7 @@ class Member < ApplicationRecord
 
   belongs_to :country, required: false
   belongs_to :bank, required: false
-  belongs_to :groupement
+  belongs_to :groupement, required: false
 
   # TODO: change to belongs_to, default_member_id changed to role (group admin), remove it later
   has_one :admin_groupement, class_name: 'Groupement', foreign_key: 'default_member_id'
@@ -60,19 +60,25 @@ class Member < ApplicationRecord
     }
   end
 
+  def can_add_account?
+    unless self.super_admin?
+      self.accounts_limit.to_i > self.accounts.count
+    end
+  end
+
 private
   def set_defaults
-    self.role = Roles[:regular_member] if self.role.blank?
-    self.groupement = Groupement.default if self.groupement.blank?
+    self.groupement = Groupement.default if self.groupement.blank? and !self.super_admin?
 
     if self.new_record?
+      self.role = Roles[:regular_member] if self.role.blank?
       self.sms_notification = true if self.sms_notification.blank?
       self.email_notification = true if self.email_notification.blank?
     end  
   end
 
   def set_accounts_limit
-    self.accounts_limit = self.groupement.initial_accounts.to_i if self.accounts_limit.blank?
+    self.accounts_limit = self.groupement.initial_accounts.to_i if self.accounts_limit.blank? and !self.super_admin?
   end
 
 end

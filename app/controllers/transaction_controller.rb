@@ -5,7 +5,7 @@ class TransactionController < ApplicationController
     if current_member.super_admin?
       @transactions = Transaction.all
     elsif current_member.group_admin?
-      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id))
+      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id)) rescue []
     end
   end
 
@@ -13,11 +13,15 @@ class TransactionController < ApplicationController
     if current_member.super_admin?
       @transactions = Transaction.disputed
     elsif current_member.group_admin?
-      @transactions = Transaction.disputed.where(pool_id: current_member.groupement.pools.map(&:id))
+      @transactions = Transaction.disputed.where(pool_id: current_member.groupement.pools.map(&:id)) rescue []
     end    
   end
 
   def dispute
+    @transaction = Transaction.where(id: params[:id]).first
+    @transaction.dispute!
+    @transaction.save
+    redirect_to :back, notice: 'Transaction disputed'
   end
 
   def show
@@ -34,7 +38,8 @@ class TransactionController < ApplicationController
   def settle
     #TODO: limit member
     @transaction = Transaction.where(id: params[:id]).first
-    @transaction.receiver_ack = true
+    @transaction.receiver_confirmed = true
+    @transaction.admin_confirmed = true
     notice = if @transaction.save
       "You've successfully confirmed settlement of the transfer"
     else
@@ -49,6 +54,7 @@ class TransactionController < ApplicationController
       @transaction.admin_confirmed = true
       @transaction.completed_date = Date.today
       @transaction.failed = false
+      @transaction.disputed = false
       if @transaction.save
         redirect_to :back, notice: 'Transaction has been confirmed'
       else
@@ -81,16 +87,21 @@ class TransactionController < ApplicationController
   def upload_receipt
     @transaction = Transaction.where(id: params[:id]).first
     @transaction.sender_receipt = params[:receipt]
+    
+    if @transaction.valid?
+      @transaction.sender_confirmed = true
+    end
+
     if @transaction.save
       redirect_to transaction_path(@transaction.id), notice: 'Receipt has already been saved'
     else
-      redirect_to transaction_path(@transaction.id), notice: @transaction.errors.to_a.first
+      redirect_to transaction_path(@transaction.id), notice: "Unable to save receipt #{@transaction.errors.to_a.first}"
     end
   end
 
   def receipt
     @transaction = Transaction.where(id: params[:id]).first
-    send_file @transaction.sender_receipt.url
+    send_file File.open(@transaction.sender_receipt.file.file)
   end
 
 end

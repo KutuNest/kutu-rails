@@ -1,4 +1,6 @@
 class PoolController < ApplicationController
+  before_action :authenticate_member!
+
   def edit
     @pool = Pool.find(params[:id])
   end
@@ -27,7 +29,7 @@ class PoolController < ApplicationController
 
   private
   def pool_params
-    params.require(:pool).permit(:title, :amount, :position, :timeout)
+    params.require(:pool).permit(:groupement_id, :title, :feeders_count, :amount, :position, :timeout)
   end
 
 end

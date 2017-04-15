@@ -1,18 +1,20 @@
 class DashboardController < ApplicationController
-  def index
-    @current_account = nil
+  before_action :authenticate_member!
 
+  def index
     if current_member.super_admin?
+      @current_account = nil
       @groupements = Groupement.includes(:pools => :accounts).all
       @members = Member.all
-    elsif current_member.group_admin?
-      @groupements = [current_member.groupement]
-    elsif current_member.regular_member?
+    else 
+      @groupements = [current_member.groupement].compact if current_member.group_admin?
+
       if @current_account.present?
-        transactions = @current_account.a_transactions.to_a
-        @current_transaction = transactions.pop
-        @transaction_history = transactions
+        @transaction_history = @current_account.transaction_history
+        @current_transaction = @transaction_history.pending.first
+        @transaction_history = @transaction_history.to_a - [@current_transaction]
       end
+
     end
   end
 
@@ -23,9 +25,9 @@ class DashboardController < ApplicationController
 
   def members
     if current_member.super_admin?
-      @members = Member.all
+      @members = Member.where.not(role: Member::Roles[:super_admin])
     elsif current_member.group_admin?
-      @members = current_member.groupement.members
+      @members = current_member.groupement.members rescue []
     end
   end  
 
@@ -34,7 +36,11 @@ class DashboardController < ApplicationController
   end
 
   def groups
-    @groupements = Groupement.includes(:pools).all
+    if current_member.super_admin?
+      @groupements = Groupement.includes(:pools).all
+    elsif current_member.group_admin?
+      @groupements = [current_member.groupement].compact
+    end
   end
 
   def setting

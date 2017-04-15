@@ -6,6 +6,10 @@ module Transactions
 			(sender_confirmed? and receiver_confirmed?) and admin_confirmed?
 		end
 
+		def new_transaction?
+			! confirmed?
+		end
+
 		def timeout_datetime
 			(self.created_at + self.timeout.seconds).to_datetime
 		end
@@ -51,11 +55,11 @@ module Transactions
 			elsif failed?
 				"transaction failed"
 			elsif sender_confirmed?
-			  "receiver confirmed"
+			  "sender confirmed"
 			elsif receiver_confirmed?
-			  "sender confirmated"
+			  "receiver confirmed"
 			else
-			  "admin confirmed"
+			  "new transaction"
 			end
 		end
 	end

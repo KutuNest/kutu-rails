@@ -1,5 +1,9 @@
+
+<br/><br/>
+<%= render 'layouts/notice' %>
 <%- for group in groupements do %>      
   <div class="container paddingBottom-10">
+  
     <h1 class="title block"><%= group.title %></h1>
 
     <div class="tabbable tabs-left">
@@ -9,6 +13,9 @@
             <a href="#tab-pool-<%= "#{group.id}-#{p.id}" %>" role="tab" data-toggle="tab"><%= p.title %></a>
           </li>            
         <%- end %>
+          <li class="">
+            <a href="#tab-pool-<%= "#{group.id}-completed" %>" role="tab" data-toggle="tab">Finished</a>
+          </li>             
       </ul>
       <div class="tab-content">
         <%- group.pools.each_with_index do |p,i| %>
@@ -19,13 +26,12 @@
                 <tr>
                   <th>Sending</th>
                   <th>Receiving</th>
-                  <th>Completed</th>
                 </tr>
               </thead>
               <tbody>
                 
                 <tr>
-                  <td>
+                  <td style="width: 50%">
                     <%- for a in p.accounts.feeder do %>
                     <div class="flex">
                       <figure class="item-img m-r-10">
@@ -33,16 +39,16 @@
                       </figure>
                       <div class="item-desc">
                         <a href="#">
-                          <strong><%= a.member.account_holder_name %></strong>
+                          <strong><%= a.member.try(:account_holder_name) %></strong>
                         </a><br>
                         <i class="fa fa-credit-card"></i> 
-                        <%= a.member.bank.title %> <br/>
-                        <%= a.member.account_number %>
+                        <%= a.member.bank.try(:title )if a.member.present? %> <br/>
+                        <%= a.member.try(:account_number) %>
                       </div>
                     </div>
                     <%- end %>
                   </td>
-                  <td>
+                  <td style="width: 50%">
                     <%- for a in p.accounts.eater.order(:pool_order) do %>
                       <div class="flex">
                       <%= form_tag change_pool_order_path(a) do %>
@@ -60,22 +66,7 @@
                         </div>
                       </div>
                     <%- end %>
-                  </td>
-                  <td>
-                    <%- for a in p.accounts.completed do %>
-                      <div class="flex">                   
-                        <figure class="item-img m-r-10">
-                          <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
-                        </figure>
-                        <div class="item-desc">
-                          <a href="#">
-                            <strong><%= a.member.account_holder_name %></strong>
-                          </a><br>
-                          <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> | <%= a.member.account_number %>
-                        </div>
-                      </div>
-                    <%- end %>
-                  </td>                  
+                  </td>               
                 </tr>
                 <tr>
                   <td>
@@ -83,11 +74,13 @@
                     Amount <i class="fa fa-money"></i> <%= p.amount %>
                     </label>
                   </td>
-                  <td></td>
                   <td>
                     <a href="<%= edit_pool_path(p) %>" class="btn btn-primary">
-                    <i class="fa fa-edit"></i> Edit
+                    <i class="fa fa-edit"></i> Edit Pool
                     </a>
+                    <a href="<%= edit_group_path(group) %>" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit Group
+                    </a>                          
                   </td>
                 </tr>
                 
