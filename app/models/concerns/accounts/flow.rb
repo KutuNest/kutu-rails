@@ -35,13 +35,13 @@ module Accounts
     def has_successfully_sent?
       if self.super_user?
         true
-      else      
-        self.pool.p_transactions.success.where(eater_id: self.id).count == self.pool.feeders_count
+      else
+        self.pool.p_transactions.success.where(feeder_id: self.id).count >= 1
       end
     end
 
     def has_successfully_received?
-      self.pool.p_transactions.success.where(feeder_id: self.id).count >= 1
+      self.pool.p_transactions.success.where(eater_id: self.id).count == self.pool.feeders_count
     end
 
     def has_finished_pool?
