@@ -1,6 +1,5 @@
 .strong-logo {
   font-size: 30px;
-  font-weight: bold;
 }
 
 .user-comment-wrapper .profile-wrapper {
@@ -221,4 +220,8 @@ header {
 @-webkit-keyframes rotateit {
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(180deg);}
+}
+
+.spacer-90 {
+  margin-top: 90px;
 }

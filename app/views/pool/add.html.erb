@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
         <%= render 'layouts/notice' %>
-        <h2 class="color-secondary font-bold">Add Pool</h2>
+        <h1 class="title block">Add Pool</h1>
         
         <%= form_for(@pool, url: save_pool_path) do |f| %>
           <%= render 'pool/form', f: f %>

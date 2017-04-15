@@ -1,16 +1,19 @@
-          <%- counter_part = @current_transaction.eater.member == current_member ? @current_transaction.feeder : @current_transaction.eater %>
 
           <div class="col-md-12 m-b-10">
             <div class="widget-item ">
               <div class="tiles current-trx-wrapper">
-                <%= render 'dashboard/receiver', counter_part: counter_part %>
+                <%- if current_member == @current_transaction.feeder.member %>
+                  <%= render 'dashboard/sender' %>
+                <%- else %>
+                  <%= render 'dashboard/receiver' %>
+                <%- end %>
               </div>
               <div class="tiles white border-envelope">
                 <div class="tiles-body">
                   <div class="row">
 
                     <div class="width-30pct">
-                      <div class="preview-wrapper font-12 padding-top-5">Transaction timeout at</div>
+                      <div class="preview-wrapper font-12 padding-top-5">Transaction Timeout</div>
                       <p class="text-black">
                         <i class="fa fa-clock-o m-r-3"></i>
                         <span>
@@ -21,22 +24,22 @@
                     </div>
 
                     <div class="width-30pct current-divider">
-                      <div class="preview-wrapper font-12 padding-top-5">Transfer to</div>
+                      <div class="preview-wrapper font-12 padding-top-5">Bank Account</div>
                       <p class="text-black">
                         <i class="fa fa-bank m-r-3"></i>
                         <span>
-                          <%= counter_part.member.bank.title %>
+                          <%= @current_transaction.counter_part(current_member).member.bank.title %>
                         </span> <br/>
-                        <%= counter_part.member.account_number %> <br/>
-                        <%= counter_part.member.account_holder_name %>
+                        <%= @current_transaction.counter_part(current_member).member.account_number %> <br/>
+                        <%= @current_transaction.counter_part(current_member).member.account_holder_name %>
                       </p>
                     </div>
 
                     <div class="width-30pct current-divider">
-                      <div class="preview-wrapper font-12 padding-top-5">Contact to</div>
+                      <div class="preview-wrapper font-12 padding-top-5">Contact Info</div>
                       <p class="text-black">
                         <i class="fa fa-phone m-r-3"></i>
-                        <span><%= counter_part.member.phone_number %></span> <br/>
+                        <span><%= @current_transaction.counter_part(current_member).member.phone_number %></span> <br/>
                       </p>
                     </div>
 

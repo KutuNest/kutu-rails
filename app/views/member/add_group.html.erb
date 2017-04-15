@@ -3,7 +3,7 @@
     <div class="col-md-12">
 
         <%= render 'layouts/notice' %>
-        <h2 class="color-secondary font-bold">Add Group</h2>
+        <h1 class="title block">Add Group</h1>
         
         <%= form_for(@group, url: save_group_path) do |f| %>
           <%= render 'member/form_group', f: f %>

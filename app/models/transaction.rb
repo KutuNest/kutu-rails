@@ -31,6 +31,10 @@ class Transaction < ApplicationRecord
 
   mount_uploader :sender_receipt, ReceiptUploader
 
+  def counter_part(m)
+    self.eater.member == m ? self.feeder : self.eater
+  end
+
 private
   def proceed_completed
     if confirmed?
