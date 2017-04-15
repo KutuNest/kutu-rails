@@ -1,4 +1,6 @@
 class PoolController < ApplicationController
+  before_action :authenticate_member!
+
   def edit
     @pool = Pool.find(params[:id])
   end

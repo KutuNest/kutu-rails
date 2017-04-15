@@ -1,4 +1,6 @@
 class AccountController < ApplicationController
+  before_action :authenticate_member!
+
   def add
     if !current_member.super_admin? and current_member.groupement.accounts.size.zero?
       redirect_to dashboard_path, notice: "Sorry group and pool setup not finished yet. Please contact admin.."

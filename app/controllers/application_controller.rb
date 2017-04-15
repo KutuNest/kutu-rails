@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :set_current_account
   before_action :force_complete_registration
 
+  before_action :protect_staging
+
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || dashboard_path
   end
@@ -14,6 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  def protect_staging
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "play" && password == "kutu"
+    end  
+  end
+
   def set_current_account
     if member_signed_in?
       if params[:acc].present?

@@ -14,7 +14,7 @@ class Member < ApplicationRecord
 
   belongs_to :country, required: false
   belongs_to :bank, required: false
-  belongs_to :groupement
+  belongs_to :groupement, required: false
 
   # TODO: change to belongs_to, default_member_id changed to role (group admin), remove it later
   has_one :admin_groupement, class_name: 'Groupement', foreign_key: 'default_member_id'
@@ -78,7 +78,7 @@ private
   end
 
   def set_accounts_limit
-    self.accounts_limit = self.groupement.initial_accounts.to_i if self.accounts_limit.blank?
+    self.accounts_limit = self.groupement.initial_accounts.to_i if self.accounts_limit.blank? and !self.super_admin?
   end
 
 end

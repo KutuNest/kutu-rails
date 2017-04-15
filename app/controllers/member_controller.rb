@@ -1,4 +1,6 @@
 class MemberController < ApplicationController
+  before_action :authenticate_member!
+
   def edit
     @member = Member.where(id: params[:id]).first
   end

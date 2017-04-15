@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_member!
+
   def index
     if current_member.super_admin?
       @current_account = nil
