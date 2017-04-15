@@ -126,7 +126,9 @@ header {
 
 
 /* Set the fixed height of the footer here */
-#push,
+#push {
+  height: 60px;
+}
 #footer {
   height: 60px;
 }
@@ -143,4 +145,8 @@ header {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+
+.form-control {
+  max-width: 400px;
 }
