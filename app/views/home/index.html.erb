@@ -1,11 +1,11 @@
-    <section class="jumbotron text-left">
+    <section class="jumbotron text-left bgcolor-primary">
       <div class="container">
          <div class="row">
             <div class="text-center width-100pct">
             <%= render 'layouts/notice' %>
             </div>
-            <div class="col-12 col-sm-6 col-md-6">
-                <div class="marginBottom-20">
+            <!-- <div class="col-12 col-sm-6 col-md-6">
+              <div class="marginBottom-20">
                   <div class="owl-carousel owl-theme">
                     <div class="item">
                       <img class="featurette-image img-fluid mx-auto" src="https://www.socilen.com/wp-content/uploads/2016/02/CS4LHFZWEAAmNBP-400x250.jpg" alt="thumb">
@@ -18,16 +18,21 @@
                     </div>
                   </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 pd-left-30">
+            </div> -->
+            <!-- <div class="col-12 col-sm-6 col-md-6 pd-left-30"> -->
+            <div class="width-100pct">
                 <div class="hero-content">
-                    <div class="heading-hero">
-                        <h2 class="jumbotron-heading">Splash title</h2>
+                    <div class="heading-hero text-center">
+
+                        <img class="media-object center-block logoicon-outline" src="<%= asset_url 'logo-01.png' %>" alt="..." height="100px"> 
+                      <br/><br/>
+                        <h1 class="jumbotron-heading text-center" style="color:white"><b>PlayKutu<b></h1>
                     </div>
-                    <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda pariatur sed voluptate suscipit nihil debitis ducimus molestias tempore ut.
+                    <br/>
+                    <p class="text-center" style="color:white">The world's largest member-to-member donation network
                     </p>
-                    <div class="text-left marginTop-30">
-                      <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
+                    <div class="text-center marginTop-30">
+                      <a href="<%= new_member_registration_path %>" class="btn btn-outline-inverse text-uppercase btn-lg">Sign up</a>
                     </div>
                 </div>
             </div>

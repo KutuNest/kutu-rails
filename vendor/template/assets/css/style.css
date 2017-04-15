@@ -67,7 +67,7 @@ img {
 .card {
   float: left;
   /*width: 33.333%;*/
-  
+
   margin-bottom: 1rem;
   border: 0;
 }
@@ -238,7 +238,7 @@ footer p {
     margin-right: 10px;
   }
 
-  .menu-logo { 
+  .menu-logo {
     margin: 0.9rem 0;
   }
 }
@@ -256,7 +256,7 @@ footer p {
 .btn-default-clear:focus, .btn-default-clear.focus {
   -webkit-box-shadow: none;
           box-shadow: none;
-} 
+}
 
 .btn-default-clear:hover {
   color: #fff;
@@ -267,7 +267,7 @@ footer p {
 @media (max-width: 575px) {
   .aside.in {
       width: 85%;
-       min-width: 85%; 
+       min-width: 85%;
   }
 }
 
@@ -409,13 +409,13 @@ footer p {
   margin-top: 20px;
 }
 .featurette p {
-  display: block;  
+  display: block;
   width: 85%;
 }
 
 @media (max-width: 575px) {
   .featurette p {
-    display: block;  
+    display: block;
     width: 100%;
   }
 }
@@ -445,6 +445,9 @@ h5 {
   color: #F15152 !important;
 }
 
+.bgcolor-primary {
+  background-color: #F15152 !important;
+}
 
 .btn-default-light {
   color: #fff;
@@ -579,7 +582,7 @@ h5 {
 
 .list-group-item.dropdown i{
   margin-left: -1.5rem;
-} 
+}
 .list-group-item:first-child {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -657,15 +660,15 @@ h5 {
 }
 
 .form-control:-moz-placeholder { /* Firefox 18- */
-    color: #8a8a8a;  
+    color: #8a8a8a;
 }
 
 .form-control::-moz-placeholder {  /* Firefox 19+ */
-    color: #8a8a8a;  
+    color: #8a8a8a;
 }
 
-.form-control:-ms-input-placeholder {  
-    color: #8a8a8a;  
+.form-control:-ms-input-placeholder {
+    color: #8a8a8a;
 }
 
 .card-content {
@@ -744,7 +747,7 @@ h5 {
   padding: 0!important;
 }
 
-@media (max-width: 575px) { 
+@media (max-width: 575px) {
   .text-left-xs {
     text-align: left!important;
   }
@@ -1749,7 +1752,7 @@ form .form-group .input-error {
 
 .col-card {
   flex: 1; /* additionally, equal width */
-  
+
   padding: 1em;
 }
 
