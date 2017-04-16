@@ -31,10 +31,10 @@
                 
                 <tr>
                   <td>
-                    <%- for a in p.accounts.order(pool_order: :desc) do %>
+                    <%- for a in p.accounts.order(pool_order: :asc) do %>
                       <div class="flex group-item-separator">
                       <%= form_tag change_pool_order_path(a) do %>
-                        <%= select_tag :pool_order, options_for_select((0..p.accounts.eater.count).to_a, a.pool_order), class: 'form-control', onchange: 'this.form.submit()' %>
+                        <%= select_tag :pool_order, options_for_select((0..p.accounts.maximum(:pool_order)).to_a, a.pool_order), class: 'form-control', onchange: 'this.form.submit()' %>
                       <%- end %>                         
                         <figure class="item-img m-r-10">
                           <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
