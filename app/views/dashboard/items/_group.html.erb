@@ -1,8 +1,10 @@
 
 <div class="spacer-90"></div>
+
+<div class="container paddingBottom-10">
 <%= render 'layouts/notice' %>
 <%- for group in groupements do %>      
-  <div class="container paddingBottom-10">
+  
   
     <h1 class="title block"><%= group.title %></h1>
 
@@ -92,5 +94,6 @@
       </div>
       
     </div>
-  </div>
+  
 <%- end %>
+</div>
