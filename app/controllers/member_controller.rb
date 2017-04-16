@@ -38,12 +38,12 @@ class MemberController < ApplicationController
 
   def increase_accounts_limit
     @member = Member.where(id: params[:id]).first
-    if @member
-      @member.accounts_limit = params[:accounts_limit]
+    if @member.present? and @member.accounts_limit < params[:accounts_limit].to_i
+      @member.accounts_limit = params[:accounts_limit].to_i
       @member.save
       redirect_to :back, notice: "Account limit for #{@member.username} is now #{@member.accounts_limit}"
     else
-      redirect_to :back, notice: "Failed to increase account limit"
+      redirect_to :back, notice: "Failed to increase account limit. Probably must greater than previous limit."
     end
   end
 
