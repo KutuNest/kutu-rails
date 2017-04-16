@@ -1,15 +1,16 @@
 <%- for member in @members do %>
   <tr>
-    <td><%= member.groupement.title rescue "N/A" %></td>
     <td>
       <strong><a href="#"><%= member.full_name %></a></strong><br>
-      <small>Last login : <%= member.last_sign_in_at %></small>
+      <small>Last login : <%= member.last_sign_in_at %></small><br/>
+      <%= member.groupement.title rescue "N/A" %>
     </td>
     <td><%= member.bank.title %><br/> <%= member.account_number %></td>
     <td>
-      <ul class="">
+      <ul class="" style="list-style-type: none;padding-left: 0px">
         <%- for account in member.accounts do %>                    
-        <li>
+        <li style="margin-left: 0px;padding-bottom: 5px;">
+          <i class="fa fa-user"></i>
           <a href="#"><%= account.name %></a>
         </li>
         <%- end %>
