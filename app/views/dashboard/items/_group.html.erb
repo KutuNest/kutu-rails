@@ -32,7 +32,7 @@
                 <tr>
                   <td>
                     <%- for a in p.accounts.order(pool_order: :desc) do %>
-                      <div class="flex" style="border-bottom: 1px dashed #ccc;margin-bottom: 20px;padding-bottom: 10px">
+                      <div class="flex group-item-separator">
                       <%= form_tag change_pool_order_path(a) do %>
                         <%= select_tag :pool_order, options_for_select((0..p.accounts.eater.count).to_a, a.pool_order), class: 'form-control', onchange: 'this.form.submit()' %>
                       <%- end %>                         
@@ -46,11 +46,11 @@
                           <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> <br/>
                           <%= a.member.account_number %> <br/>
 
-                          <label class="label label-primary label-lg">
+                          <label class="label label-success label-lg">
                             <i class="fa fa-chevron-circle-up"></i>
                             <%= p.p_transactions.where(feeder_id: a.id).count %>
                           </label>
-                          <label class="label label-primary label-lg m-l-10">
+                          <label class="label label-success label-lg m-l-10">
                             <i class="fa fa-chevron-circle-down"></i>
                             <%= p.p_transactions.where(eater_id: a.id).count %>
                           </label>

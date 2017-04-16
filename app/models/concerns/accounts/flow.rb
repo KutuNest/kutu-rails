@@ -7,6 +7,8 @@ module Accounts
     end
 
     def proceed_last_transaction!
+      self.bottomize_pool_order!
+      
       if self.has_finished_group?
         self.retire!
       elsif self.has_finished_pool?
@@ -18,6 +20,10 @@ module Accounts
 
     def do_nothing
       true
+    end
+
+    def bottomize_pool_order!
+      self.pool_order = self.pool.accounts.maximum(:pool_order) + 1
     end
 
     def has_been_sending?
