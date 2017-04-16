@@ -59,6 +59,7 @@
               </div>
             </div>
             <div class="container paddingBottom-10">
+              <%- unless @transaction.confirmed? %>
               <div class="sub-heading paddingLeft-15 paddingRight-15">
                 <h4 class="text-bold">Contact Details</h4>
               </div>
@@ -84,6 +85,7 @@
                   </ul>
                 </div>
               </div>
+              <%- end %>
               <div class="row marginTop-20">
                 <div class="col-12">
                   <div class="details btn-group mr-2" role="group">
