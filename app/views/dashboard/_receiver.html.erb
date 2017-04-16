@@ -21,13 +21,6 @@
                             <a href="<%= transaction_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
                               Confirm
                             </a>
-                            <%- if !@current_transaction.sender_confirmed? %>
-                            <span class="text-white">&nbsp; or &nbsp;</span>
-                            <a href="<%= send_money_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
-                              send money now
-                              <i class="fa fa-chevron-circle-right "></i>
-                            </a> 
-                            <%- end %>
                           </div>                      
                         
                         <div class="clearfix"></div>
