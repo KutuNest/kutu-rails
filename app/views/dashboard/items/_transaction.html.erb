@@ -4,7 +4,7 @@
   <!--
   <td></td>
   -->
-  <td><label class="label label-success"><%= number_to_currency t.value %>&nbsp;<i class="fa fa-chevron-circle-<%= target.member == current_member ? 'left' : 'right' %>"></label></td>
+  <td><label class="label label-success"><%= number_to_currency t.value %>&nbsp;<i class="fa fa-chevron-circle-<%= t.eater.member == current_member ? 'left' : 'right' %>"></label></td>
   <td>
   	<span class="font-bold"><%= target.name %></span><br/>
   	<%= target.member.full_name %>
