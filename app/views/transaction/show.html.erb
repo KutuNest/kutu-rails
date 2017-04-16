@@ -103,7 +103,7 @@
 
                     <%- else %>
 
-                      <%- unless @transaction.receiver_confirmed? %>
+                      <%- if !@transaction.receiver_confirmed? and @transaction.sender_confirmed? %>
                       <a href="<%= settle_path(@transaction.id) %>" class="btn btn-primary m-r-10">
                         <i class="fa fa-check"></i>
                         Confirm settlement
