@@ -4,96 +4,89 @@
 <div class="container paddingBottom-10">
 <%= render 'layouts/notice' %>
 <%- for group in groupements do %>      
-  
-  
-    <h1 class="title block"><%= group.title %></h1>
+  <h1 class="title block"><%= group.title %></h1>
 
-    <div class="tabbable tabs-left">
-      <ul class="nav nav-tabs" role="tablist">
-        <%- group.pools.each_with_index do |p,i| %>
-          <li class="<%= 'active' if i.zero? %>">
-            <a href="#tab-pool-<%= "#{group.id}-#{p.id}" %>" role="tab" data-toggle="tab"><%= p.title %></a>
-          </li>            
-        <%- end %>
-        <li class="">
-          <a href="#tab-pool-<%= "#{group.id}-completed" %>" role="tab" data-toggle="tab">Finished</a>
-        </li>             
-      </ul>
-      <div class="tab-content">
-        <%- group.pools.each_with_index do |p,i| %>
-        <div class="tab-pane <%= 'active' if i == 0 %>" id="tab-pool-<%= "#{p.groupement.id}-#{p.id}" %>">
-          <div class="table-responsive">
-            <table class="table table-hover table-dash ">
-              <thead>
-                <tr>
-                  <th>Receive Order</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                <tr>
-                  <td>
-                    <%- for a in p.accounts.order(pool_order: :asc) do %>
-                      <div class="flex group-item-separator">
-                      <%= form_tag change_pool_order_path(a) do %>
-                        <%= select_tag :pool_order, options_for_select((0..p.accounts.maximum(:pool_order)).to_a, a.pool_order), class: 'form-control', onchange: 'this.form.submit()' %>
-                      <%- end %>                         
-                        <figure class="item-img m-r-10">
-                          <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
-                        </figure>
-                        <div class="item-desc">
-                          <a href="#">
-                            <strong><%= a.member.account_holder_name %> (<%= a.name %>)</strong>
-                          </a><br>
-                          <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> <br/>
-                          <%= a.member.account_number %> <br/>
+  <div class="tabbable tabs-left">
+    <ul class="nav nav-tabs" role="tablist">
+      <%- group.pools.each_with_index do |p,i| %>
+        <li class="<%= 'active' if i.zero? %>">
+          <a href="#tab-pool-<%= "#{group.id}-#{p.id}" %>" role="tab" data-toggle="tab"><%= p.title %></a>
+        </li>            
+      <%- end %>
+      <li class="">
+        <a href="#tab-pool-<%= "#{group.id}-completed" %>" role="tab" data-toggle="tab">Finished</a>
+      </li>             
+    </ul>
+    <div class="tab-content">
+      <%- group.pools.each_with_index do |p,i| %>
+      <div class="tab-pane <%= 'active' if i == 0 %>" id="tab-pool-<%= "#{p.groupement.id}-#{p.id}" %>">
+        <div class="table-responsive">
+          <table class="table table-hover table-dash ">
+            <thead>
+              <tr>
+                <th>Receive Order</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <%- for a in p.accounts.order(pool_order: :asc) do %>
+                    <div class="flex group-item-separator">
+                    <%= form_tag change_pool_order_path(a) do %>
+                      <%= select_tag :pool_order, options_for_select((0..p.accounts.maximum(:pool_order)).to_a, a.pool_order), class: 'form-control', onchange: 'this.form.submit()' %>
+                    <%- end %>                         
+                      <figure class="item-img m-r-10">
+                        <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
+                      </figure>
+                      <div class="item-desc">
+                        <a href="#">
+                          <strong><%= a.member.account_holder_name %> (<%= a.name %>)</strong>
+                        </a><br>
+                        <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> <br/>
+                        <%= a.member.account_number %> <br/>
 
-                          <label class="label label-success label-lg">
-                            <i class="fa fa-chevron-circle-up"></i>
-                            <%= p.p_transactions.where(feeder_id: a.id).count %>
-                          </label>
-                          <label class="label label-success label-lg m-l-10">
-                            <i class="fa fa-chevron-circle-down"></i>
-                            <%= p.p_transactions.where(eater_id: a.id).count %>
-                          </label>
-                        </div>
+                        <label class="label label-success label-lg">
+                          <i class="fa fa-chevron-circle-up"></i>
+                          <%= p.p_transactions.where(feeder_id: a.id).count %>
+                        </label>
+                        <label class="label label-success label-lg m-l-10">
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <%= p.p_transactions.where(eater_id: a.id).count %>
+                        </label>
                       </div>
-                      <div class="flex pull-right">
-                        
-                      </div>
-                    <%- end %>
-                  </td>               
-                </tr>
-                <tr>
-                  <td>
-                    <label class="btn btn-green">
+                    </div>
+                    <div class="flex pull-right">
+                      
+                    </div>
+                  <%- end %>
+                </td>               
+              </tr>
+              <tr>
+                <td>
+                  <label class="btn btn-green">
                     Amount <i class="fa fa-money"></i> <%= p.amount %>
-                    </label>
-
-                    <a href="<%= edit_pool_path(p) %>" class="btn btn-primary">
+                  </label>
+                  <a href="<%= edit_pool_path(p) %>" class="btn btn-primary">
                     <i class="fa fa-edit"></i> Edit Pool
-                    </a>
-                    <a href="<%= edit_group_path(group) %>" class="btn btn-primary">
+                  </a>
+                  <a href="<%= edit_group_path(group) %>" class="btn btn-primary">
                     <i class="fa fa-edit"></i> Edit Group
-                    </a>                       
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
+                  </a>                       
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-          </div>
         </div>
-        <%- end %>
-        <div class="tab-pane" id="tab-pool-<%= "#{group.id}-completed" %>">
-          <div class="table-responsive">
-
-          </div>
-        </div>
-
       </div>
-      
+      <%- end %>
+      <div class="tab-pane" id="tab-pool-<%= "#{group.id}-completed" %>">
+        <div class="table-responsive">
+
+        </div>
+      </div>
     </div>
+  </div>
   
 <%- end %>
 </div>

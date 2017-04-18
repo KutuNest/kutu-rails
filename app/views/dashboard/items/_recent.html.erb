@@ -1,0 +1,43 @@
+<div class="col-md-12 m-b-10">
+  <dl class="accordion">
+    <dt href="#accordion2" aria-expanded="true" aria-controls="accordion2" class="dark-grey js-accordionTrigger">
+      <span class="icon-square  text-white">
+        <i class="fa fa-exchange"></i>
+      </span>
+        <a href="" class="is-expanded text-white">RECENT TRANSACTIONS</a>
+    </dt>
+    <dd class="accordion-content accordionItem is-expanded" id="accordion2" aria-hidden="false">
+    <%- for t in @transaction_history do %>
+    <%- target = t.eater.member == current_member ? t.feeder : t.eater %>
+    <div class="col-md-12 trx-recent-item p-t-10 p-b-10">
+      <div class="flex box-border box-inset--small">
+          <div class="width-70pt trx-recent-bank">
+            <a class="m-b-10" href="">
+              <i class="fa fa-user"></i>
+              <strong>
+                <%= target.member.full_name %>
+              </strong>
+              (<%= target.name %>)
+            </a>
+            <br/>
+            <i class="fa fa-bank"></i> <%= target.member.bank.try(:title).to_s %><br/>
+            <%= target.member.account_holder_name %> <br/>
+            <%= target.member.account_number.to_s %><br/>
+          </div>
+          
+          <div class="pull-right text-right width-30pt p-t-10">
+            <a class="label label-success" href="#" style="display: inline">
+              <i class="fa fa-<%= t.eater.member == current_member ? 'plus' : 'minus' %>"></i>
+              <%= number_to_currency t.value %>
+            </a><br/>
+
+            <a class="label label-default" href="#" style="display: inline"><%= t.status.upcase %></a><br/>
+            <small><%= t.completed_date ||= "N/A" %></small><br/>
+          </div>
+        </div>
+    </div>
+    <%- end %>
+  </div>
+  </dd>
+  </dl>
+</div>

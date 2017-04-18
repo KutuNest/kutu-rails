@@ -18,14 +18,14 @@
         <li style="margin-left: 0px;padding-bottom: 5px;">
           <i class="fa fa-user"></i>
           <a href="#"><%= account.name %></a>
-                          <label class="label label-success label-lg">
-                            <i class="fa fa-chevron-circle-up"></i>
-                            <%= number_to_currency account.summary[:total_sent] %>
-                          </label>
-                          <label class="label label-success label-lg m-l-10">
-                            <i class="fa fa-chevron-circle-down"></i>
-                            <%= number_to_currency account.summary[:total_received] %>
-                          </label>          
+          <label class="label label-success label-lg">
+            <i class="fa fa-chevron-circle-up"></i>
+            <%= number_to_currency account.summary[:total_sent] %>
+          </label>
+          <label class="label label-success label-lg m-l-10">
+            <i class="fa fa-chevron-circle-down"></i>
+            <%= number_to_currency account.summary[:total_received] %>
+          </label>          
         </li>
         <%- end %>
       </ul>

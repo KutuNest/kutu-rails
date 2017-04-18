@@ -229,3 +229,30 @@ header {
 .group-item-separator {
   border-bottom: 1px dashed #ccc;margin-bottom: 20px;padding-bottom: 10px;
 }
+
+.width-100pt {
+  width: 100%;
+}
+
+.width-70pt {
+  width: 60%;
+}
+
+.width-30pt {
+  width: 40%;
+}
+
+.trx-recent-item {
+  border-bottom: 1px dashed #ccc;
+}
+.trx-recent-item:hover {
+  background-color: #F76F76;
+}
+
+.trx-recent-bank:hover {
+  color: #fff;
+}
+
+.non-block {
+  display: inline;
+}
