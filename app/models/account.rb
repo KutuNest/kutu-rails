@@ -53,7 +53,7 @@ class Account < ApplicationRecord
 
   def change_pool_order!(order)
     for a in self.pool.accounts do
-      if a >= order.to_i
+      if a.pool_order.to_i >= order.to_i
         a.pool_order = a.pool_order + 1
         a.save
       end
