@@ -26,12 +26,12 @@
           </div>
           
           <div class="pull-right text-right width-30pt p-t-10">
-            <a class="label label-success" href="#" style="display: inline">
+            <a class="label label-success" href="<%= transaction_path(t.id) %>" style="display: inline">
               <i class="fa fa-<%= t.eater.member == current_member ? 'plus' : 'minus' %>"></i>
               <%= number_to_currency t.value %>
             </a><br/>
 
-            <a class="label label-default" href="#" style="display: inline"><%= t.status.upcase %></a><br/>
+            <a class="label label-default" href="<%= transaction_path(t.id) %>" style="display: inline"><%= t.status.upcase %></a><br/>
             <small><%= t.completed_date ||= "N/A" %></small><br/>
           </div>
         </div>
