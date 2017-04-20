@@ -21,7 +21,7 @@ class Pool < ApplicationRecord
     accs = self.accounts.active.where.not(id: acc.id).order(:pool_order)
     target = nil
     for a in accs do
-      if a.a_transactions.where(pool_id: self.id).count < self.feeders_count
+      if Transaction.where(pool_id: self.id, eater_id: a.id).count < self.feeders_count
         target = a
         break
       end

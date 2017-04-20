@@ -3,7 +3,7 @@
           <div class="col-md-12">
             <%= render 'layouts/notice' %>
 
-            <h2 class="color-secondary font-bold">Disputes</h2>
+              <h1 class="title block">Disputes</h1>
 
               <%- for transaction in @transactions do %>
               <hr/>
@@ -69,7 +69,18 @@
                           <a href="<%= transaction.sender_receipt.url %>" class="btn btn-white"><i class="fa fa-file"></i>&nbsp;show receipt</a>
                           <a href="<%= confirm_path(transaction) %>" class="btn btn-white"><i class="fa fa-check"></i>&nbsp;confirm payment</a>
                           <a href="<%= reject_path(transaction) %>" class="btn btn-white"><i class="fa fa-times"></i>&nbsp;reject payment</a>
-                          <a href="<%= reject_path(transaction) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick account</a>                          
+			  <%- unless transaction.eater.kicked_out? %>
+                          <a href="<%= kick_out_path(transaction.eater) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick eater</a>    
+		          <%- else %>
+
+				  <label class="label label-default">RECEIVER KICKED OUT</label>
+		          <%- end %>
+
+			  <%- unless transaction.feeder.kicked_out? %>
+                          <a href="<%= kick_out_path(transaction.feeder) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick feeder</a>                                              
+			  <%- else %>
+				  <label class="label label-default">SENDER KICKED OUT</label>
+		          <%- end %>
                         </td>                        
                       </tr>
 

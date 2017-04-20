@@ -1,28 +1,42 @@
 <%- for member in @members do %>
   <tr>
-    <td><%= member.groupement.title rescue "N/A" %></td>
     <td>
       <strong><a href="#"><%= member.full_name %></a></strong><br>
-      <small>Last login : <%= member.last_sign_in_at %></small>
+      <small>Last login : <%= member.last_sign_in_at %></small><br/>
+      <%= member.groupement.title rescue "N/A" %>
     </td>
-    <td><%= member.bank.title %><br/> <%= member.account_number %></td>
     <td>
-      <ul class="">
+      <%= member.bank.title %><br/> 
+      <%= member.account_number %> <br/>
+      <%= member.account_holder_name %> <br/>
+      <span class="label label-success"><i class="fa fa-chevron-circle-up"></i><%= number_to_currency member.summary[:money_sent] %></span>
+      <span class="label label-success"><i class="fa fa-chevron-circle-down"></i><%= number_to_currency member.summary[:money_received] %></span>      
+    </td>
+    <td>
+      <ul class="" style="list-style-type: none;padding-left: 0px">
         <%- for account in member.accounts do %>                    
-        <li>
+        <li style="margin-left: 0px;padding-bottom: 5px;">
+          <i class="fa fa-user"></i>
           <a href="#"><%= account.name %></a>
+          <label class="label label-success label-lg">
+            <i class="fa fa-chevron-circle-up"></i>
+            <%= number_to_currency account.summary[:total_sent] %>
+          </label>
+          <label class="label label-success label-lg m-l-10">
+            <i class="fa fa-chevron-circle-down"></i>
+            <%= number_to_currency account.summary[:total_received] %>
+          </label>          
         </li>
         <%- end %>
       </ul>
+
+    </td>
+    <td>
       <%= form_tag increase_accounts_limit_path(member) do %>
         <%= text_field_tag :accounts_limit, member.accounts_limit, class: 'form-control', style: 'width:100px'  %>
         <%= submit_tag "increase limit", class: 'btn btn-primary', style: 'margin-top:5px;width:100px' %>
       <%- end %>
     </td>
-    <td>
-      <span class="label label-success"><%= number_to_currency member.summary[:money_sent] %></span>
-    </td>
-    <td><span class="label label-success"><%= number_to_currency member.summary[:money_received] %></span></td>
     <td>
       <a href="<%= member_path(member) %>" class="btn btn-white width-80">
         <i class="fa fa-expand"></i>

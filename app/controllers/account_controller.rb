@@ -22,4 +22,15 @@ class AccountController < ApplicationController
   		redirect_to :back, notice: 'An error occured on changing pool order'
   	end
   end
+
+  def kick_out
+    account = Account.where(id: params[:id]).first
+    if account.present?
+      account.kick_out!
+      redirect_to :back, notice: "Account #{account.name} has been kicked out"
+    else
+      redirect_to :back, notice: 'An error occured on kicking account'
+    end
+  end
+
 end

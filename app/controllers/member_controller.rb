@@ -24,7 +24,7 @@ class MemberController < ApplicationController
 
     if @member
       @member.unlock_access! if @member.access_locked?
-      @member.lock_access! unless @member.access_locked?
+      @member.lock_access!
 
       redirect_to :back, notice: 'Member lock setting has been changed'
     else
@@ -38,12 +38,12 @@ class MemberController < ApplicationController
 
   def increase_accounts_limit
     @member = Member.where(id: params[:id]).first
-    if @member
-      @member.accounts_limit = params[:accounts_limit]
+    if @member.present? and @member.accounts_limit < params[:accounts_limit].to_i
+      @member.accounts_limit = params[:accounts_limit].to_i
       @member.save
       redirect_to :back, notice: "Account limit for #{@member.username} is now #{@member.accounts_limit}"
     else
-      redirect_to :back, notice: "Failed to increase account limit"
+      redirect_to :back, notice: "Failed to increase account limit. Probably must greater than previous limit."
     end
   end
 
@@ -85,7 +85,7 @@ class MemberController < ApplicationController
     if @member.save
       @member.generate_new_account(true)
 
-      redirect_to :back, notice: "Member #{@member.try(:username)} with super user has been saved"
+      redirect_to dashboard_path, notice: "Member #{@member.try(:username)} with super user has been saved"
     else
       render action: 'add_super_user'
     end  

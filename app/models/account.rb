@@ -16,6 +16,8 @@ class Account < ApplicationRecord
   include Accounts::Flow
   include Accounts::Populator
 
+  #TODO: ensure assignment not on kicked out accounts
+
   belongs_to :member
   belongs_to :groupement
   belongs_to :pool
@@ -27,8 +29,8 @@ class Account < ApplicationRecord
   has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
   has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
 
-  scope :active, -> { where(has_finished: false) }
-  scope :completed, -> { where(has_finished: true) }
+  scope :active, -> { where(has_finished: false, kicked_out: false) }
+  scope :completed, -> { where(has_finished: true, kicked_out: false) }
   scope :kicked_out, -> { where(kicked_out: true) }
 
   scope :feeder, -> {where(action_available: true)}
@@ -42,12 +44,21 @@ class Account < ApplicationRecord
     Transaction.where("eater_id = ? OR feeder_id = ?", self.id, self.id).order("created_at desc")
   end
 
+  def kick_out!
+    self.kicked_out = true
+    self.number_associations_left = 0
+    self.save
+    self.member.lock_access!
+  end
+
   def change_pool_order!(order)
     for a in self.pool.accounts do
-      if a >= order.to_i
+      if a.pool_order.to_i >= order.to_i
+        a.pool_order = a.pool_order.to_i+1
+      elsif a.pool_order.to_i < order.to_i
         a.pool_order = a.pool_order + 1
-        a.save
       end
+      a.save
     end
 
     self.pool_order = order.to_i
@@ -56,8 +67,8 @@ class Account < ApplicationRecord
 
   def summary
     {
-      total_sent: Transaction.where(feeder_id: self.id, pool_id: self.pool.id, sender_confirmed: true).sum{|a| a.value },
-      total_received: Transaction.where(eater_id: self.id, pool_id: self.pool.id, sender_confirmed: true).sum{|a| a.value },
+      total_sent: Transaction.where(feeder_id: self.id, sender_confirmed: true).sum{|a| a.value },
+      total_received: Transaction.where(eater_id: self.id, sender_confirmed: true).sum{|a| a.value },
       total_transaction: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).count,
       total_failed: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).where(failed: true).count
     }

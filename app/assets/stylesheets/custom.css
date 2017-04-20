@@ -1,6 +1,5 @@
 .strong-logo {
   font-size: 30px;
-  font-weight: bold;
 }
 
 .user-comment-wrapper .profile-wrapper {
@@ -75,7 +74,7 @@ header {
 }
 
 .width-30pct {
-  width: 30%;
+  width: 32%;
 }
 
 .dark-grey {
@@ -123,7 +122,7 @@ header {
 
 
 .bgcolor-primary {
-  background-color: #F15152 !important;
+  background-color: #F76F76 !important;
 }
 .bg-hero-img {
   background-image: url('https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg');
@@ -140,7 +139,7 @@ https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg
 .btn-outline-inverse {
   color: #fff;
   background-color: transparent;
-  border-color: #cdbfe3;
+  border-color: #fff;
   border-top-width: 1px !important;
   border-bottom-width: 1px !important;
   border-right-width: 1px !important;
@@ -204,6 +203,7 @@ https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg
   max-width: 400px;
 }
 
+
 /*Testimonial Slider Start*/
 
 @brand-color: #b20000;
@@ -253,3 +253,73 @@ https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg
 
 
 /*Testimonial Slider End*/
+
+.tiles-border-red {
+  border: 2px solid #F15152;background-color:#fff;
+}
+
+.nav-top-item:hover {
+  color: #fff;
+}
+
+/* Current dashboard */
+.current-divider {
+  border-left: 1px dotted #ccc;
+  padding-left: 10px;
+}
+
+.current-trx-wrapper {
+  border: 2px solid #F15152;
+  background-color: #F76F76;
+}
+
+.menu-logo:hover {
+    -webkit-animation-name: rotateit;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotateit {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(180deg);}
+}
+
+.spacer-90 {
+  margin-top: 90px;
+}
+
+.group-item-separator {
+  border-bottom: 1px dashed #ccc;margin-bottom: 20px;padding-bottom: 10px;
+}
+
+.width-100pt {
+  width: 100%;
+}
+
+.width-70pt {
+  width: 60%;
+}
+
+.width-30pt {
+  width: 40%;
+}
+
+.trx-recent-item {
+  border-bottom: 1px dashed #ccc;
+}
+.trx-recent-item:hover {
+  background-color: #F76F76;
+}
+
+.trx-recent-bank:hover {
+  color: #fff;
+}
+
+.non-block {
+  display: inline;
+}

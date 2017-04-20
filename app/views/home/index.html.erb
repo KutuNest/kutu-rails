@@ -1,4 +1,4 @@
-    <section class="jumbotron text-left bgcolor-primary">
+    <section class="jumbotron text-left bgcolor-primary bggradient bg-hero-img">
       <div class="container">
          <div class="row">
             <div class="text-center width-100pct">
@@ -24,7 +24,7 @@
                 <div class="hero-content">
                     <div class="heading-hero text-center">
 
-                        <img class="media-object center-block logoicon-outline" src="<%= asset_url 'logo-01.png' %>" alt="..." height="100px"> 
+                        <img class="media-object center-block logoicon-outline" src="<%= asset_url 'logo-01.png' %>" alt="..." height="100px">
                       <br/><br/>
                         <h1 class="jumbotron-heading text-center" style="color:white"><b>PlayKutu<b></h1>
                     </div>
@@ -32,7 +32,7 @@
                     <p class="text-center" style="color:white">The world's largest member-to-member donation network
                     </p>
                     <div class="text-center marginTop-30">
-                      <a href="<%= new_member_registration_path %>" class="btn btn-outline-inverse text-uppercase btn-lg">Sign up</a>
+                      <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
                     </div>
                 </div>
             </div>
@@ -44,15 +44,22 @@
       <div class="container">
         <div class="row featurette">
             <div class="col-12 col-md-7 col-sm-7">
-                <h2 class="featurette-heading text-uppercase">Pay-it-forward <span class="color-secondary font-bold">
-                    It'll blow your mind.</span>
+                <h2 class="featurette-heading text-uppercase">Start a business with just RM1,000 <span class="color-secondary font-bold">or fund a dream vacation</span> or a buy a sportscar?
+
                 </h2>
                 <div class="featurette-content">
                     <p class="lead text-justify">
-                        Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
-                        commodo.
+
+                        Sounds impossible? Not really. PlayKutu is designed to <b>make all that possible in a short period of time</b> with minimal investment risk.
+                        This is not an investment as we do not collect any funds from members.
+                        <br/>
+                         PlayKutu utilizes a traditional <b>crowd sourcing methods that has been practiced for decades</b>. Read about it to learn how this simple program can make it all happen for you and your family.
+
+                        Register an account now and promptly achieve your dreams.
                     </p>
+                    <div class="text-justify marginTop-30">
+                      <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-md-5 col-sm-5">
@@ -65,9 +72,9 @@
 
     <section class="content-section">
       <div class="container">
-        <!--<div class="heading-title">
+        <div class="heading-title">
           <h2> Heading Lorem</h2>
-        </div>-->
+        </div>
         <div class="row">
           <div class="card col-12 col-sm-6 col-md-6 col-lg-3">
             <!-- <img src="//placehold.it/300x200" alt="Card image cap"> -->
@@ -128,3 +135,77 @@
       </div>
 
     </section>
+
+    <section class="content-section">
+        <div class="container">
+                <div id="tcb-testimonial-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#tcb-testimonial-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#tcb-testimonial-carousel" data-slide-to="1"></li>
+                        <li data-target="#tcb-testimonial-carousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                   <figure class="clearfix">
+                                       <div class="col-md-2 col-sm-2 col-xs-12"><img class="img-responsive media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/mantia/128.jpg"> </div>
+                                       <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <figcaption class="caption">
+                                                <p class="text-brand lead no-margin">I can't wait to test this out.</p>
+                                                <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>
+                                                <blockquote class="no-margin">
+                                                    <p>Someone Famous</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small> </blockquote>
+                                            </figcaption>
+                                       </div>
+                                   </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                   <figure class="clearfix">
+                                       <div class="col-md-2 col-sm-2 col-xs-12"><img class="img-responsive media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"> </div>
+                                       <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <figcaption class="caption">
+                                                <p class="text-brand lead no-margin">I can't wait to test this out.</p>
+                                                <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>
+                                                <blockquote class="no-margin">
+                                                    <p>Someone Famous</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small> </blockquote>
+                                            </figcaption>
+                                       </div>
+                                   </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                   <figure class="clearfix">
+                                       <div class="col-md-2 col-sm-2 col-xs-12"><img class="img-responsive media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg"> </div>
+                                       <div class="col-md-10 col-sm-10 col-xs-12">
+                                            <figcaption class="caption">
+                                                <p class="text-brand lead no-margin">I can't wait to test this out.</p>
+                                                <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>
+                                                <blockquote class="no-margin">
+                                                    <p>Someone Famous</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small> </blockquote>
+                                            </figcaption>
+                                       </div>
+                                   </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#tcb-testimonial-carousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
+                    <a class="right carousel-control" href="#tcb-testimonial-carousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+                </div>
+          <br />
+          <a class="btn btn-primary" href="http://thecodeblock.com/create-a-quote-testimonial-slider-using-bootstrap-carousel"><i class="fa fa-arrow-left"></i> Back to Article</a>
+
+            </div>
+
+        </section>

@@ -2,8 +2,7 @@
         <div class="row">
           <div class="col-md-12">
             <%= render 'layouts/notice' %>
-
-            <h2 class="color-secondary font-bold">Transactions</h2>
+            <h1 class="title block">Transactions</h1>
 
               <%- for transaction in @transactions do %>
               <hr/>
@@ -11,32 +10,28 @@
               <div class="col-md-12">
                 <div class="tiles white">
                   <div class="row">
-                      <div class="col-md-4 col-sm-4">
+                      <div class="col-md-4 col-sm-4 p-t-10" style="background-color: #F76F76">
                         <p class="no-margin">RECEIVER</p>
                         <h4>
-                          <span class="item-count">
-                            <i class="fa fa-user"></i>&nbsp;<%= transaction.feeder.member.full_name %>
+                          <span class="item-count text-white">
+                            <i class="fa fa-user"></i>&nbsp;<%= transaction.eater.name %> (<%= transaction.eater.member.full_name %>)
                           </span> 
                         </h4>
-                        <p>
-                          <%= transaction.eater.name %>
-                          <br/>
+                        <p class="text-white">
                           <i class="fa fa-bank"></i>&nbsp;
                           <%= transaction.eater.member.bank.title %> <br/>
                           <%= transaction.eater.member.account_number %> <br/>
                           <%= transaction.eater.member.account_holder_name %>
                         </p>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 p-t-10">
                         <p class="semi-bold">SENDER</p>
                         <h4>
                           <span class="item-count">
-                            <i class="fa fa-user"></i>&nbsp;<%= transaction.eater.member.full_name %>
+                            <i class="fa fa-user"></i>&nbsp;<%= transaction.feeder.name %> (<%= transaction.feeder.member.full_name %>)
                           </span>
                         </h4>
-                        <p>
-                          <%= transaction.feeder.name %>
-                          <br/>                        
+                        <p>       
                           <i class="fa fa-bank"></i>&nbsp;
                           <%= transaction.feeder.member.bank.title %> <br/>
                           <%= transaction.feeder.member.account_number %> <br/>
@@ -44,8 +39,8 @@
                         </p>
                       </div>
 
-                      <div class="col-md-4">
-                        <p class="semi-bold">Amount</p>
+                      <div class="col-md-4 p-t-10">
+                        <p class="semi-bold">AMOUNT</p>
                         <h3><span class="item-count semi-bold">
                           <span class="label label-success label-lg"><%= number_to_currency transaction.value %></span>
                           <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %> left</span>
@@ -57,8 +52,7 @@
 
                       <div class="clearfix"></div>
                   </div>
-                  <h5 class="semi-bold m-t-30 m-l-30"></h5>
-                  <table class="table no-more-tables m-t-20 m-l-20 m-b-30">
+                  <table class="table no-more-tables m-l-20">
                     <thead style="display:none">
                       <tr>
                         <th style="width:45%"></th>

@@ -3,7 +3,8 @@
     <div class="col-md-12">
 
         <%= render 'layouts/notice' %>
-        <h2 class="color-secondary font-bold">Complete Bank Information</h2>
+
+        <h1 class="title block">Complete Bank Information</h1>
 
         <%= form_for(@member, url: update_member_path(@member), html: { method: :post }) do |f| %>
 

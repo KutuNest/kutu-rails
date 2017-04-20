@@ -10,12 +10,13 @@
         <div class="row no-gutters marginTop-10">
           <%- if current_member.accounts.any? %>
             <%= render 'dashboard/current' if @current_transaction.present? %>
+            <%= render 'dashboard/waiting' if @current_transaction.blank? %>
           <%- else %>
             <%= render 'dashboard/empty' %>
           <%- end %>
 
           <%- if current_member.accounts.any? %>
-            <%= render 'dashboard/history' if @transaction_history.present? %>
+            <%= render 'dashboard/items/recent' if @transaction_history.present? %>
           <%- end %>
         </div>
       </div>

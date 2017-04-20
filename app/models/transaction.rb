@@ -4,6 +4,8 @@ class Transaction < ApplicationRecord
 
   DisputeLimit = 3.days
 
+  #TODO: remove member_id here
+
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
   belongs_to :member
@@ -28,6 +30,10 @@ class Transaction < ApplicationRecord
   after_save :proceed_completed
 
   mount_uploader :sender_receipt, ReceiptUploader
+
+  def counter_part(m)
+    self.eater.member == m ? self.feeder : self.eater
+  end
 
 private
   def proceed_completed

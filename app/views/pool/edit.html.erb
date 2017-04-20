@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
         <%= render 'layouts/notice' %>
-        <h2 class="color-secondary font-bold">Edit Pool</h2>
+        <h1 class="title block">Edit Pool</h1>
         
         <%= form_for(@pool, url: update_pool_path, method: :post) do |f| %>
           <%= render 'pool/form', f: f %>
