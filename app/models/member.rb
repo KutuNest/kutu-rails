@@ -28,7 +28,7 @@ class Member < ApplicationRecord
 
   # Include default devise modules. Others available are:
   #  :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :lockable, :confirmable, 
+  devise :database_authenticatable, :registerable, :lockable, #:confirmable, 
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :account_holder_name, :bank_name, presence: true

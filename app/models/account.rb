@@ -46,7 +46,7 @@ class Account < ApplicationRecord
 
   def kick_out!
     self.kicked_out = true
-    self.number_association_left = 0
+    self.number_associations_left = 0
     self.save
     self.member.lock_access!
   end
