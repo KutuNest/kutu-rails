@@ -43,12 +43,12 @@
     <section class="content-section">
       <div class="container">
         <div class="row featurette">
-            <div class="col-12 col-md-7 col-sm-7">
+            <div class="col-md-8">
                 <h2 class="featurette-heading text-uppercase">Start a business with just RM1,000 <span class="color-secondary font-bold">or fund a dream vacation</span> or a buy a sportscar?
 
                 </h2>
                 <div class="featurette-content">
-                    <p class="lead text-justify">
+                    <p class="lead text-left">
 
                         Sounds impossible? Not really. PlayKutu is designed to <b>make all that possible in a short period of time</b> with minimal investment risk.
                         This is not an investment as we do not collect any funds from members.
@@ -57,155 +57,154 @@
 
                         Register an account now and promptly achieve your dreams.
                     </p>
-                    <div class="text-justify marginTop-30">
-                      <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
-                    </div>
                 </div>
             </div>
-            <div class="col-12 col-md-5 col-sm-5">
-                <img class="featurette-image img-fluid mx-auto" src="//placehold.it/400x300" alt="Generic placeholder image">
+            <div class="col-md-4">
+                <img class="featurette-image img-fluid mx-auto" src="<%= asset_url 'growth.svg' %>" alt="Growth in groups">
             </div>
         </div>
       </div>
     </section>
     <hr class="hr-padd">
 
+  <section class="jumbotron text-left bgcolor-secondary padding-top-30 padding-bottom-30">
+    <div class="width-100pct">
+        <div class="hero-content">
+          <div class="heading-hero text-center">
+
+            <div class="text-center">
+              <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+
     <section class="content-section">
       <div class="container">
-        <div class="heading-title">
-          <h2> Heading Lorem</h2>
+        <div class="heading-title text-center">
+          <h2 style="margin-bottom:20px;">What makes Playkutu so great?</h2>
         </div>
         <div class="row">
-          <div class="card col-12 col-sm-6 col-md-6 col-lg-3">
-            <!-- <img src="//placehold.it/300x200" alt="Card image cap"> -->
-            <i class="fa fa-money fa-5x fa-spin color-primary" aria-hidden="true"></i>
+          <div class="card col-12 col-sm-6 col-md-6 col-lg-3 text-center">
+            <div class="card-content">
+                <i class="fa fa-money fa-4x color-secondary" aria-hidden="true"></i>
+                <p></p>
+                <h5 class="title color-secondary">100% Cash</h5>
 
-            <div class="card-content">
-              <a href="javascript::">
-
-                <h5 class="title color-primary">Lorem Ipsum Dollor Heading </h5>
-              </a>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text">We take no fees, no charges. Everything is direct between members.</p>
             </div>
           </div>
-          <div class="card col-12 col-sm-6 col-md-6 col-lg-3">
-            <!-- <img src="//placehold.it/300x200" alt="Card image cap"> -->
-            <span class="fa-stack fa-lg fa-2x">
-              <i class="fa fa-university fa-stack-1x"></i>
-              <i class="fa fa-ban fa-stack-2x text-danger"></i>
-            </span>
+          <div class="card col-12 col-sm-6 col-md-6 col-lg-3 text-center">
             <div class="card-content">
-              <a href="javascript::">
-                <h5 class="title color-primary">Lorem Ipsum Dollor Heading </h5>
-              </a>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <span class="fa-stack fa-lg fa-2x">
+                <i class="fa fa-university fa-stack-1x"></i>
+                <i class="fa fa-ban fa-stack-2x color-secondary"></i>
+              </span>
+                <p></p>
+                <h5 class="title color-secondary">No middleman</h5>
+              <p class="card-text">We don't collect payments or route them through any party. 100% transparency!</p>
             </div>
           </div>
-          <div class="card col-12 col-sm-6 col-md-6 col-lg-3">
-            <img src="//placehold.it/300x200" alt="Card image cap">
+          <div class="card col-12 col-sm-6 col-md-6 col-lg-3 text-center">
             <div class="card-content">
-              <a href="javascript::">
-                <h5 class="title color-primary">Lorem Ipsum Dollor Heading </h5>
-              </a>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <i class="fa fa-users fa-4x color-secondary" aria-hidden="true"></i>
+                <p></p>
+                <h5 class="title color-secondary">A huge community </h5>
+              <p class="card-text">Play along with a huge community of users who are as eager to pay-it-forward as you.</p>
             </div>
           </div>
-          <div class="card col-12 col-sm-6 col-md-6 col-lg-3">
-            <img src="//placehold.it/300x200" alt="Card image cap">
+          <div class="card col-12 col-sm-6 col-md-6 col-lg-3 text-center">
             <div class="card-content">
-              <a href="javascript::">
-                <h5 class="title color-primary">Lorem Ipsum Dollor Heading </h5>
-              </a>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <i class="fa fa-mobile fa-4x color-secondary" aria-hidden="true"></i>
+                <p></p>
+                <h5 class="title color-secondary">Instant notifications</h5>
+              <p class="card-text">Receive SMS and email notifications everytime you send or receive donations from the community.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <form class="form-signin" action="<%= new_member_registration_path %>">
-               <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
-               <button class="btn btn-lg btn-primary btn-block marginTop-20" type="submit">Sign up</button>
-            </form>
-          </div>
-        </div>
-        <hr/>
-      </div>
 
     </section>
 
-    <section class="content-section">
-        <div class="container">
-                <div id="tcb-testimonial-carousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#tcb-testimonial-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#tcb-testimonial-carousel" data-slide-to="1"></li>
-                        <li data-target="#tcb-testimonial-carousel" data-slide-to="2"></li>
-                    </ol>
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                   <figure class="clearfix">
-                                       <div class="col-md-2 col-sm-2 col-xs-12"><img class="img-responsive media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/mantia/128.jpg"> </div>
-                                       <div class="col-md-10 col-sm-10 col-xs-12">
-                                            <figcaption class="caption">
-                                                <p class="text-brand lead no-margin">I can't wait to test this out.</p>
-                                                <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>
-                                                <blockquote class="no-margin">
-                                                    <p>Someone Famous</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small> </blockquote>
-                                            </figcaption>
-                                       </div>
-                                   </figure>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                   <figure class="clearfix">
-                                       <div class="col-md-2 col-sm-2 col-xs-12"><img class="img-responsive media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"> </div>
-                                       <div class="col-md-10 col-sm-10 col-xs-12">
-                                            <figcaption class="caption">
-                                                <p class="text-brand lead no-margin">I can't wait to test this out.</p>
-                                                <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>
-                                                <blockquote class="no-margin">
-                                                    <p>Someone Famous</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small> </blockquote>
-                                            </figcaption>
-                                       </div>
-                                   </figure>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                   <figure class="clearfix">
-                                       <div class="col-md-2 col-sm-2 col-xs-12"><img class="img-responsive media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg"> </div>
-                                       <div class="col-md-10 col-sm-10 col-xs-12">
-                                            <figcaption class="caption">
-                                                <p class="text-brand lead no-margin">I can't wait to test this out.</p>
-                                                <p><span class="glyphicon glyphicon-thumbs-up"></span> This is a testimonial window. Feedback of user can be displayed here.</p>
-                                                <blockquote class="no-margin">
-                                                    <p>Someone Famous</p> <small><cite title="Source Title"><i class="glyphicon glyphicon-globe"></i> www.example1.com</cite></small> </blockquote>
-                                            </figcaption>
-                                       </div>
-                                   </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#tcb-testimonial-carousel" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
-                    <a class="right carousel-control" href="#tcb-testimonial-carousel" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
-                </div>
-          <br />
-          <a class="btn btn-primary" href="http://thecodeblock.com/create-a-quote-testimonial-slider-using-bootstrap-carousel"><i class="fa fa-arrow-left"></i> Back to Article</a>
+<section id="carousel">
+  <div class="heading-title text-center">
+    <h2 style="margin-bottom:20px;">Testimonials</h2>
+  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+                <div class="quote"><i class="fa fa-quote-left fa-4x"></i><br/></div>
+				<div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
+				  <!-- Carousel indicators -->
+                  <ol class="carousel-indicators">
+        				    <li data-target="#fade-quote-carousel" data-slide-to="0" class="active"></li>
+        				    <li data-target="#fade-quote-carousel" data-slide-to="1"></li>
+        				    <li data-target="#fade-quote-carousel" data-slide-to="2"></li>
+                    <!-- <li data-target="#fade-quote-carousel" data-slide-to="3"></li>
+                    <li data-target="#fade-quote-carousel" data-slide-to="4"></li>
+                    <li data-target="#fade-quote-carousel" data-slide-to="5"></li> -->
+	                </ol>
+				  <!-- Carousel items -->
+				  <div class="carousel-inner">
+				    <div class="item">
+                        <div class="profile-circle" style="background-color: rgba(0,0,0,.2);"><img class="profile-circle" src="<%= asset_url 'jessong.png' %>"><br/></div>
+				    	<blockquote>
+				    		<p>I tried this program as it only cost me RM1,000. I just follow the instruction given in my login page. A few days after that I get RM4,000. I continued with the program and after 7 weeks, I already collected RM43,000.</p>
+                <small> - Ms. Ong, Student, Kuala Lumpur </small>
+				    	</blockquote>
+				    </div>
+				    <div class="item">
+                        <div class="profile-circle" style="background-color: rgba(0,0,0,.2);"><img class="profile-circle" src="<%= asset_url 'shahida.png' %>"><br/></div>
+				    	<blockquote>
+				    		<p>Benda ni macam main kutu tapi lagi cepat. Saya baru join awal bulan ini dan dah dapat RM17,000.</p>
+                <small> - Pn. Shahida, Pengusaha Kafe, Seremban</small>
+				    	</blockquote>
+				    </div>
+				    <div class="active item">
+                          <div class="profile-circle" style="background-color: rgba(0,0,0,.2);"><img class="profile-circle" src="<%= asset_url 'paneerselvam.png' %>"><br/></div>
+				    	<blockquote>
+				    		<p>I was skeptical about this program but my son gave me RM1,000 and ask me to register an account. Well…its happy news whenever I received notification from the admin. Its money, money and more money.</p>
+                <small> - Mr Paneerselvam, Retiree, Penang</small>
+				    	</blockquote>
+				    </div>
+                    <!-- <div class="item">
+                        <div class="profile-circle" style="background-color: rgba(77,5,51,.2);"></div>
+    			    	<blockquote>
+				    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
+				    	</blockquote>
+				    </div>
+                    <div class="item">
+                        <div class="profile-circle" style="background-color: rgba(77,5,51,.2);"></div>
+    			    	<blockquote>
+				    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
+				    	</blockquote>
+				    </div>
+                    <div class="item">
+                        <div class="profile-circle" style="background-color: rgba(77,5,51,.2);"></div>
+    			    	<blockquote>
+				    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, veritatis nulla eum laudantium totam tempore optio doloremque laboriosam quas, quos eaque molestias odio aut eius animi. Impedit temporibus nisi accusamus.</p>
+				    	</blockquote>
+				    </div> -->
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-            </div>
+<section class="jumbotron text-left bgcolor-secondary padding-top-30 padding-bottom-30">
+  <div class="width-100pct">
+      <div class="hero-content">
+        <div class="heading-hero text-center">
 
-        </section>
+          <div class="text-center">
+            <a href="<%= new_member_registration_path %>" class="btn btn-primary text-uppercase btn-lg">Sign up</a>
+            <a href="<%= support_path %>" class="btn btn-secondary text-uppercase btn-lg">Find out more</a>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
