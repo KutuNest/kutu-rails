@@ -124,6 +124,11 @@ header {
 .bgcolor-primary {
   background-color: #F76F76 !important;
 }
+
+.bgcolor-secondary {
+  background-color: #0aa699 !important;
+}
+
 .bg-hero-img {
   background-image: url('https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg');
   background-position: bottom center;
@@ -204,55 +209,6 @@ https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg
 }
 
 
-/*Testimonial Slider Start*/
-
-@brand-color: #b20000;
-#tcb-testimonial-carousel {
-    a{
-        color: @brand-color;
-    }
-    .text-brand{
-        color: @brand-color;
-    }
-    margin-top: 30px;
-    .carousel-indicators .active {
-        background: @brand-color;
-    }
-    .no-margin{
-        margin: 0;
-    }
-    .carousel-indicators li {
-        border: 1px solid #ccc;
-    }
-    .carousel-control {
-        color: @brand-color;
-        width: 5%;
-    }
-    .carousel-control:hover,
-    .carousel-control:focus {
-        color: @brand-color;
-    }
-    .carousel-control.left,
-    .carousel-control.right {
-        background-image: none;
-    }
-    .item{
-        padding: 15px 40px;
-        background: #f8f8f8;
-    }
-    .media-object {
-        margin: auto;
-    }
-    @media screen and (max-width: 768px) {
-        .media-object {
-            margin-bottom: 15px;
-        }
-    }
-}
-
-
-
-/*Testimonial Slider End*/
 
 .tiles-border-red {
   border: 2px solid #F15152;background-color:#fff;
@@ -323,3 +279,69 @@ https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg
 .non-block {
   display: inline;
 }
+
+
+/*Testimonal carousel*/
+/*-------------------------------*/
+/*      Code snippet by          */
+/*      @maridlcrmn              */
+/*-------------------------------*/
+
+
+section {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.quote {
+    color: rgba(0,0,0,.1);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/*-------------------------------*/
+/*    Carousel Fade Transition   */
+/*-------------------------------*/
+
+#fade-quote-carousel.carousel {
+  padding-bottom: 20px;
+}
+#fade-quote-carousel.carousel .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+      -ms-transition-property: opacity;
+          transition-property: opacity;
+}
+#fade-quote-carousel.carousel .carousel-inner .active {
+  opacity: 1;
+  -webkit-transition-property: opacity;
+      -ms-transition-property: opacity;
+          transition-property: opacity;
+}
+#fade-quote-carousel.carousel .carousel-indicators {
+  bottom: 10px;
+}
+#fade-quote-carousel.carousel .carousel-indicators > li {
+  background-color: #0aa699;
+  border: none;
+}
+#fade-quote-carousel blockquote {
+    text-align: center;
+    border: none;
+}
+#fade-quote-carousel .profile-circle {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 100px;
+}
+.carousel-indicators{
+  margin-left: 20%;
+
+}
+/*Testimonal carousel End*/
+
+.card-content .title {
+    margin: 10px 0 10px 0;
+    text-decoration: none;
+  }
