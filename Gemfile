@@ -58,6 +58,7 @@ gem 'rmagick'
 gem 'carrierwave'
 gem 'twilio-ruby'
 gem 'config'
+gem 'phony_rails'
 
 group :production do
   gem 'pg'
