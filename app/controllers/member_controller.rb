@@ -6,6 +6,8 @@ class MemberController < ApplicationController
       @member = Member.where(id: params[:id]).first
     elsif current_member.group_admin?
       @member = current_member.groupement.members.where(id: params[:id]).first
+    elsif current_member.regular_member?
+      @member = current_member
     end
   end
 
