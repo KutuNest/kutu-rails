@@ -83,4 +83,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.time_zone = "Kuala Lumpur"
+  config.active_record.default_timezone = :local
+
+  config.action_mailer.smtp_settings = {
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :port => 587,
+    :user_name => "AKIAJ6PWY2W2UAJFETWQ",
+    :password => "AtAZNrAZKub7wRi9QD0NTDUHnJpO2PCXUNiEXqahrwWn",
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
 end
