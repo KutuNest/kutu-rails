@@ -1,0 +1,3 @@
+4nsigj7dxngatp5fb4bj7nmt666izmjj._domainkey.playkutu.com	CNAME	4nsigj7dxngatp5fb4bj7nmt666izmjj.dkim.amazonses.com
+kormkw2ynwyh6ilmtjzgzmshbt2itvab._domainkey.playkutu.com	CNAME	kormkw2ynwyh6ilmtjzgzmshbt2itvab.dkim.amazonses.com
+wmoeawgilmzz7jae6mto547b3ioyvr6n._domainkey.playkutu.com	CNAME	wmoeawgilmzz7jae6mto547b3ioyvr6n.dkim.amazonses.com
