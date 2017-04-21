@@ -1,12 +1,19 @@
+<%- if current_member.super_user? %>
 <div class="field">
   <%= f.label :groupement_id, "Group #{@pool.errors[:groupement_id].first}" %>
   <%= f.select :groupement_id, Groupement.all.map{|g| [g.title, g.id] }, include_blank: 'Select Groupement', class: 'form-control' %><br /><br />
-</div>       
+</div>
+<%- elsif current_member.group_admin? %>
+<div class="field">
+  <%= f.label :groupement_id, "Group #{@pool.errors[:groupement_id].first}" %>
+  <%= f.select :groupement_id, Groupement.where(id: current_member.groupement_id).map{|g| [g.title, g.id] }, include_blank: 'Select Groupement', class: 'form-control' %><br /><br />
+</div>
+<%- end %>
 
 <div class="field">
   <%= f.label :title, "Title #{@pool.errors[:title].first}" %>
   <%= f.text_field :title, class: 'form-control' %><br />
-</div>                
+</div>
 
 <div class="field">
   <%= f.label :amount, "Amount #{@pool.errors[:amount].first}" %>

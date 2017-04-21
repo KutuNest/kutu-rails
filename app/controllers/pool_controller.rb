@@ -2,29 +2,46 @@ class PoolController < ApplicationController
   before_action :authenticate_member!
 
   def edit
-    @pool = Pool.find(params[:id])
+    if current_member.super_admin?
+      @pool = Pool.where(id: params[:id]).first
+    elsif current_member.group_admin?
+      @pool = current_member.groupement.pools.where(id: params[:id]).first
+    end
   end
 
   def add
-    @pool = Pool.new
+    if current_member.super_admin? or current_member.group_admin?
+      @pool = Pool.new
+    end
   end
 
   def save
-    @pool = Pool.new(pool_params)
-    if @pool.save
-      redirect_to :back, notice: "Pool #{@pool.title} has been saved"
-    else
-      render action: 'add'
-    end    
+    if current_member.super_admin? or current_member.group_admin?
+      @pool = Pool.new(pool_params)
+      @pool.groupement = current_member.groupement if current_member.group_admin?
+      if @pool.save
+        redirect_to :back, notice: "Pool #{@pool.title} has been saved"
+      else
+        render action: 'add'
+      end
+    end
   end
 
   def update
-    @pool = Pool.find(params[:id])
-    if @pool.update(pool_params)
-      redirect_to :back, notice: "Pool #{@pool.title} has been saved"
-    else
-      render action: 'edit'
-    end    
+    if current_member.super_admin? or current_member.group_admin?
+      @pool = Pool.where(id: params[:id]).first
+
+      if current_member.group_admin?
+        update_pool_params.delete(:groupement_id)
+        @pool.groupement   = current_member.groupement 
+      end
+
+      if @pool.update(update_pool_params)
+        redirect_to :back, notice: "Pool #{@pool.title} has been saved"
+      else
+        render action: 'edit'
+      end    
+    end
   end 
 
   private

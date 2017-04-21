@@ -19,89 +19,108 @@ class TransactionController < ApplicationController
 
   def dispute
     @transaction = Transaction.where(id: params[:id]).first
-    @transaction.dispute!
-    @transaction.save
-    redirect_to :back, notice: 'Transaction disputed'
+
+    if @transaction.present? and (@transaction.eater.member == current_member or @transaction.feeder.member == current_member)
+      @transaction.dispute!
+      @transaction.save
+      redirect_to transaction_path(@transaction), notice: 'Transaction has been disputed'
+    else
+      redirect_to transaction_path(@transaction), notice: "Unable to dispute transaction: #{@transaction.errors.to_a.first}"
+    end
   end
 
   def show
     if current_member.regular_member?
-      account_ids = current_member.accounts.map(&:id)
-      @transaction = Transaction.where(id: account_ids).where(id: params[:id]).first
+      @transaction = Transaction.by_member(current_member).where(id: params[:id]).first
     else
       @transaction = Transaction.where(id: params[:id]).first
     end
-    #TODO: 
-    @transaction = Transaction.where(id: params[:id]).first
   end
 
   def settle
-    #TODO: limit member
-    @transaction = Transaction.where(id: params[:id]).first
+    if current_member.regular_member?
+      @transaction = Transaction.by_member(current_member).where(id: params[:id]).first
+    else
+      @transaction = Transaction.where(id: params[:id]).first
+    end
+
     @transaction.receiver_confirmed = true
-    @transaction.admin_confirmed = true
+    @transaction.admin_confirmed    = true
+
     notice = if @transaction.save
       "You've successfully confirmed settlement of the transfer"
     else
-      "Unable to confirm settlement"
+      "Unable to confirm settlement: #{@transaction.errors.to_a.first}"
     end
     redirect_to transaction_path(@transaction), notice: notice
   end
 
   def confirm
-    @transaction = Transaction.where(id: params[:id]).first
-    if @transaction
-      @transaction.admin_confirmed = true
-      @transaction.completed_date = Date.today
-      @transaction.failed = false
-      @transaction.disputed = false
-      if @transaction.save
-        redirect_to :back, notice: 'Transaction has been confirmed'
+    unless current_member.regular_member?
+      @transaction = Transaction.where(id: params[:id]).first
+      if @transaction.present?
+        @transaction.admin_confirmed    = true
+        @transaction.sender_confirmed   = true
+        @transaction.receiver_confirmed = true
+        @transaction.completed_date     = Date.today
+        @transaction.failed   = false
+        @transaction.disputed = false
+        if @transaction.save
+          redirect_to transaction_path(@transaction), notice: 'Transaction has been confirmed'
+        else
+          redirect_to transaction_path(@transaction), notice: "Unable to confirm transaction: #{@transaction.errors.to_a.first}"
+        end
       else
-        redirect_to :back, notice: 'Unable to perform action'
+        redirect_to transaction_path(@transaction), notice: "Transaction not found or not authorized"
       end
-    else
-      redirect_to :back, notice: 'Unable to perform action'
     end
   end
 
   def reject
-    @transaction = Transaction.where(id: params[:id]).first
-    if @transaction
-      @transaction.admin_confirmed = false
-      @transaction.failed = false
-      if @transaction.save
-        redirect_to :back, notice: 'Transaction has been rejected'
+    unless current_member.regular_member?
+      @transaction = Transaction.where(id: params[:id]).first
+      if @transaction.present?
+        @transaction.admin_confirmed = false
+        @transaction.failed          = true
+        if @transaction.save
+          redirect_to transaction_path(@transaction), notice: 'Transaction has been rejected'
+        else
+          redirect_to transaction_path(@transaction), notice: "Unable to confirm transaction: #{@transaction.errors.to_a.first}"
+        end
       else
-        redirect_to :back, notice: 'Unable to perform action'
+        redirect_to transaction_path(@transaction), notice: "Transaction not found or not authorized"
       end
-    else
-      redirect_to :back, notice: 'Unable to perform action'
-    end    
+    end
   end
 
   def send_money
-    @transaction = Transaction.where(id: params[:id]).first
+    @transaction = Transaction.by_member(current_member).where(id: params[:id]).first
   end
 
   def upload_receipt
-    @transaction = Transaction.where(id: params[:id]).first
-    @transaction.sender_receipt = params[:receipt]
-    
-    if @transaction.valid?
-      @transaction.sender_confirmed = true
-    end
+    if current_member.regular_member?
+      @transaction = Transaction.by_member(current_member).where(id: params[:id]).first 
+      @transaction.sender_receipt = params[:receipt]
+      
+      if @transaction.valid? and params[:receipt].present?
+        @transaction.sender_confirmed = true
+      end
 
-    if @transaction.save
-      redirect_to transaction_path(@transaction.id), notice: 'Receipt has already been saved'
-    else
-      redirect_to transaction_path(@transaction.id), notice: "Unable to save receipt #{@transaction.errors.to_a.first}"
+      if @transaction.save
+        redirect_to transaction_path(@transaction.id), notice: 'Receipt has already been saved'
+      else
+        redirect_to transaction_path(@transaction.id), notice: "Unable to save receipt: #{@transaction.errors.to_a.first}"
+      end
     end
   end
 
   def receipt
-    @transaction = Transaction.where(id: params[:id]).first
-    send_file File.open(@transaction.sender_receipt.file.file)
+    if current_member.regular_member?
+      @transaction = Transaction.by_member(current_member).where(id: params[:id]).first
+    else
+      @transaction = Transaction.where(id: params[:id]).first
+    end
+    send_file File.open(@transaction.sender_receipt.file.file) if @transaction.present? and @transaction.sender_receipt.file.present?
   end
 
 end

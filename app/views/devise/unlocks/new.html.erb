@@ -2,7 +2,7 @@
         <div class="row">
           <div class="col-md-12">
             <%= render 'layouts/notice' %>
-            <h2 class="color-secondary font-bold">Unlock Account</h2>
+            <h1 class="title block">Unlock Account</h1>
 
             <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
               <%= devise_error_messages! %>
@@ -24,4 +24,4 @@
         <hr/>
       </div>
 
-<%- page_title 'Unlock account' %>
+<%- page_title 'Unlock Account' %>

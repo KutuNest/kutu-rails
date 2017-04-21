@@ -15,21 +15,31 @@ class AccountController < ApplicationController
   end
 
   def change_pool_order
-  	account = Account.where(id: params[:id]).first
+    if current_member.super_admin?
+    	account = Account.where(id: params[:id]).first
+    elsif current_member.group_admin?
+      account = current_member.groupement.accounts.where(id: params[:id]).first
+    end
+
   	if account.present? and account.change_pool_order!(params[:pool_order])
-  		redirect_to :back, notice: 'Account order has been updated'
+  		redirect_to groups_path, notice: 'Account order has been updated'
   	else
-  		redirect_to :back, notice: 'An error occured on changing pool order'
+  		redirect_to groups_path, notice: "Failed to change pool order: #{account.errors.to_a.first}"
   	end
   end
 
   def kick_out
-    account = Account.where(id: params[:id]).first
+    if current_member.super_admin?
+      account = Account.where(id: params[:id]).first
+    elsif current_member.group_admin?
+      account = current_member.groupement.accounts.where(id: params[:id]).first
+    end    
+
     if account.present?
       account.kick_out!
-      redirect_to :back, notice: "Account #{account.name} has been kicked out"
+      redirect_to disputes_path, notice: "Account #{account.name} has been kicked out"
     else
-      redirect_to :back, notice: 'An error occured on kicking account'
+      redirect_to disputes_path, notice: "Failed to kick account: #{account.errors.to_a.first}"
     end
   end
 

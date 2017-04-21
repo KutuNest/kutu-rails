@@ -35,11 +35,13 @@ Rails.application.routes.draw do
   get  'member/:id/lock' => 'member#lock', :as => :lock_member
   get  'member/:id/complete' => 'member#complete', :as => :complete_member
   get  'add-super-user' => 'member#add_super_user', :as => :add_super_user
+  get  'add-group-admin' => 'member#add_group_admin', :as => :add_group_admin
   get  'add-group' => 'member#add_group', :as => :add_group
   get  'edit-group/:id' => 'member#edit_group', :as => :edit_group
   post  'save-group' => 'member#save_group', :as => :save_group
   post  'update-group/:id' => 'member#update_group', :as => :update_group
   post  'save-super-user' => 'member#save_super_user', :as => :save_super_user
+  post  'save-group-admin' => 'member#save_group_admin', :as => :save_group_admin
 
 
   # Pool

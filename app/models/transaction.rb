@@ -35,6 +35,13 @@ class Transaction < ApplicationRecord
     self.eater.member == m ? self.feeder : self.eater
   end
 
+  class << self
+    def by_member(m)
+      account_ids = m.accounts.map(&:id)
+      self.where(eater_id: account_ids).or(self.where(feeder_id: account_ids))
+    end
+  end
+
 private
   def proceed_completed
     if confirmed?
