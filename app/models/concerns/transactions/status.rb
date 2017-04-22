@@ -15,7 +15,7 @@ module Transactions
 		end
 
 		def timed_out?
-		 	timeout_datetime < DateTime.now
+		 	timeout_datetime < Date.current.in_time_zone
 		end
 
 		def confirm!
