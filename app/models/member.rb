@@ -34,6 +34,7 @@ class Member < ApplicationRecord
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   validates :username, presence: true, uniqueness: true
+  validate :referrer_code_match
   validates :phone_number, allow_blank: true, format: {with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/i}
   phony_normalize :phone_number, default_country_code: 'MY'
   
@@ -58,6 +59,14 @@ class Member < ApplicationRecord
   def can_add_account?
     unless self.super_admin?
       self.accounts_limit.to_i > self.accounts.count
+    end
+  end
+
+  def referrer_code_match
+    if self.referrer_code.blank?
+      errors.add :referrer_code, "should not be blank"
+    elsif Member.where(referral_code: self.referrer_code).any?
+      errors.add :referrer_code, "doesn't belongs to anyone"
     end
   end
 
