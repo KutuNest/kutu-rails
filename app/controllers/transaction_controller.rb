@@ -100,14 +100,12 @@ class TransactionController < ApplicationController
   def upload_receipt
     if current_member.regular_member? or current_member.group_admin?
       @transaction = Transaction.by_member(current_member).where(id: params[:id]).first 
-      @transaction.sender_receipt = params[:receipt]
       
-      if @transaction.valid? and params[:receipt].present?
-        @transaction.sender_confirmed = true
-      end
+      @transaction.sender_receipt = params[:receipt]
+      @transaction.sender_confirmed = true
 
       if @transaction.save
-        redirect_to transaction_path(@transaction.id), notice: 'Receipt has already been saved'
+        redirect_to transaction_path(@transaction.id), notice: "You have confirmed sending money to receiver"
       else
         redirect_to transaction_path(@transaction.id), notice: "Unable to save receipt: #{@transaction.errors.to_a.first}"
       end
