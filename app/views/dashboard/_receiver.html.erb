@@ -2,10 +2,10 @@
   <h3 class="text-white m-b-30"> 
     <%- if !@current_transaction.sender_confirmed? %>
       <span id="countdown" class="semi-bold"></span> 
-        <%= @current_transaction.feeder.name %> to send 
+        for <%= @current_transaction.feeder.name %> to send 
       <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span>
     <%- else %>
-      <span class="semi-bold"><%= timeout_wording(@current_transaction) %></span> 
+      <span id="countdown" class="semi-bold"></span> 
          for you to confirm 
       <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span>               
     <%- end %>
@@ -15,8 +15,15 @@
   <div class="overlayer bottom-right fullwidth">
     <div class="overlayer-wrapper">
       <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
-        
-          <div class="pull-right"> 
+          
+          <%- if @current_transaction.timed_out? %>
+          <div class="pull-right">
+            <a href="<%= transaction_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
+            Dispute Transaction
+            </a>
+          </div>            
+          <%- else %>  
+          <div class="pull-right">
             <a href="<%= transaction_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
               <%- if @current_transaction.sender_confirmed? %>
                 Confirm
@@ -24,7 +31,8 @@
                 More..
               <%- end %>
             </a>
-          </div>                      
+          </div>  
+          <%- end %>                    
         
         <div class="clearfix"></div>
       </div>

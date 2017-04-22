@@ -83,7 +83,6 @@ module Accounts
     def create_new_transaction
       if !self.super_user? and self.number_associations_left > 0
         t = self.a_transactions.new
-        t.member = self.member
         t.timeout = self.pool.timeout.to_i.seconds
         t.pool = self.pool
         t.value = self.pool.amount

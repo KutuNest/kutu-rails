@@ -6,7 +6,7 @@
         to send <%= @current_transaction.eater.name %>
       <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span>
     <%- else %>
-      <span class="semi-bold"><%= timeout_wording(@current_transaction) %></span> 
+      <span id="countdown" class="text-bold"></span> 
         for <%= @current_transaction.eater.name %> to confirm 
       <span class="semi-bold"><%= number_to_currency @current_transaction.value %></span>              
     <%- end %>
@@ -16,6 +16,11 @@
     <div class="overlayer-wrapper">
       <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
         
+          <%- if @current_transaction.timed_out? %>
+          <div class="pull-right"> 
+            <span class="text-white"></span>
+          </div>       
+          <%- else %>     
           <div class="pull-right"> 
             <a href="<%= transaction_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
               More..
@@ -27,7 +32,8 @@
               <i class="fa fa-chevron-circle-right "></i>
             </a> 
             <%- end %>
-          </div>                      
+          </div>                  
+          <%- end %>            
         
         <div class="clearfix"></div>
       </div>

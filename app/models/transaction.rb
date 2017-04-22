@@ -4,14 +4,9 @@ class Transaction < ApplicationRecord
 
   DisputeLimit = 3.days
 
-  #TODO: remove member_id here
-
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
-  belongs_to :member
   belongs_to :pool
-
-  default_scope { where("member_id is not null") }
 
   has_many :notifications, dependent: :nullify
 

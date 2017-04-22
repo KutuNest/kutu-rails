@@ -1,7 +1,5 @@
 class Member < ApplicationRecord
 
-  # Complete all pools within group -> accounts_limit increased to 8
-
   include Members::Translator
   include Members::Generator
   include Members::Trx
@@ -16,11 +14,7 @@ class Member < ApplicationRecord
   belongs_to :bank, required: false
   belongs_to :groupement, required: false
 
-  # TODO: change to belongs_to, default_member_id changed to role (group admin), remove it later
-  has_one :admin_groupement, class_name: 'Groupement', foreign_key: 'default_member_id'
-
   has_many :accounts, dependent: :nullify
-  has_many :transactions, dependent: :nullify
 
   scope :super_admin, -> {where(role: Roles[:super_admin])}
   scope :group_admin, -> {where(role: Roles[:group_admin])}
@@ -28,7 +22,7 @@ class Member < ApplicationRecord
 
   # Include default devise modules. Others available are:
   #  :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :lockable, :confirmable, 
+  devise :database_authenticatable, :registerable, :lockable, #:confirmable, 
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :account_holder_name, :bank_name, presence: true

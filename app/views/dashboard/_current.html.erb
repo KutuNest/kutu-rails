@@ -8,6 +8,7 @@
                   <%= render 'dashboard/receiver' %>
                 <%- end %>
               </div>
+              <%- if !@current_transaction.timed_out? %>
               <div class="tiles white border-envelope">
                 <div class="tiles-body">
                   <div class="row">
@@ -46,5 +47,16 @@
                   </div>
                 </div>
               </div>
+              <%- else %>
+              <div class="tiles white border-envelope">
+                <div class="tiles-body">
+                  <div class="row">
+                    <div class="">
+                      <div class="preview-wrapper p-t-5 p-l-20">Both sender and receiver accounts will not be able to send/receive until this transaction resolved. You urgently need to contact admin for resolution.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+              <%- end %>
             </div>
           </div>
