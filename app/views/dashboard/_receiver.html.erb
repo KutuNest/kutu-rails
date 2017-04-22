@@ -18,7 +18,7 @@
           
           <%- if @current_transaction.timed_out? %>
           <div class="pull-right">
-            <a href="<%= transaction_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
+            <a href="<%= dispute_path(@current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
             Dispute Transaction
             </a>
           </div>            
