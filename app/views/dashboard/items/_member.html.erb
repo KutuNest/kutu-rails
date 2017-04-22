@@ -2,7 +2,7 @@
   <tr>
     <td>
       <strong><a href="#"><%= member.full_name %></a></strong><br>
-      <small>Last login : <%= member.last_sign_in_at.to_s(:short) %></small><br/>
+      <small>Last login : <%= member.last_sign_in_at(:short) rescue "N/A" %></small><br/>
       <%= member.email rescue "N/A" %><br/>
       <%= member.groupement.title rescue "N/A" %><br/>
     </td>

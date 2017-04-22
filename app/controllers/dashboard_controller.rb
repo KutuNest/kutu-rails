@@ -18,7 +18,7 @@ class DashboardController < ApplicationController
 
   def members
     if current_member.super_admin?
-      @members = Member.where.not(role: Member::Roles[:super_admin])
+      @members = Member.all #where.not(role: Member::Roles[:super_admin])
     elsif current_member.group_admin?
       @members = current_member.groupement.members rescue []
     end
