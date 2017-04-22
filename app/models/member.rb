@@ -70,6 +70,15 @@ class Member < ApplicationRecord
     end
   end
 
+  def notify_limit_changed
+    Notification.create(
+      transaction_id: nil,
+      account_id: nil,
+      notification_event: Notification::Events[:limit_changed], 
+      receiver_email: self.member.email, 
+      receiver_mobile_number: self.member.phone_number)    
+  end
+  
 private
   def set_defaults
     self.groupement = Groupement.default if self.groupement.blank? and !self.super_admin?
