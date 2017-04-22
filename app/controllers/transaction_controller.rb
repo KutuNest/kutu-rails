@@ -98,7 +98,7 @@ class TransactionController < ApplicationController
   end
 
   def upload_receipt
-    if current_member.regular_member?
+    if current_member.regular_member? or current_member.group_admin?
       @transaction = Transaction.by_member(current_member).where(id: params[:id]).first 
       @transaction.sender_receipt = params[:receipt]
       
