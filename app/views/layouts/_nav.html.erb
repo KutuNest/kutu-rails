@@ -9,7 +9,7 @@
           Accounts
         <%- end %>
       </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <div class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenu2">
         <%- for a in current_member.accounts do %>
           <%- unless (@current_account.present? and a == @current_account) %>
             <a href="<%= dashboard_path(acc: a.name) %>" class="dropdown-item">

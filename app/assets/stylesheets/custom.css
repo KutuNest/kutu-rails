@@ -351,3 +351,10 @@ section {
   font-size: 16px;
   margin-bottom: 5px;
 }
+
+.scrollable-menu {
+height: auto;
+max-height: 400px;
+overflow-x: hidden;
+}
+
