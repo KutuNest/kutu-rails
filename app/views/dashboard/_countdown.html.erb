@@ -10,7 +10,7 @@
 	var days, hours, minutes, seconds;
 	var countdown = document.getElementById('countdown');
 	setInterval(function () {
-	    var current_date = <%= DateTime.now.strftime('%Q') %>;
+	    var current_date = <%= Time.zone.now.to_datetime.strftime('%Q') %>;
 	    var seconds_left = (target_date - current_date) / 1000;
 	 
 
