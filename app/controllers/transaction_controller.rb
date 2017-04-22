@@ -44,15 +44,17 @@ class TransactionController < ApplicationController
       @transaction = Transaction.where(id: params[:id]).first
     end
 
-    @transaction.receiver_confirmed = true
-    @transaction.admin_confirmed    = true
+    unless @transaction.disputed?
+      @transaction.receiver_confirmed = true
+      @transaction.admin_confirmed    = true
 
-    notice = if @transaction.save
-      "You've successfully confirmed settlement of the transfer"
-    else
-      "Unable to confirm settlement: #{@transaction.errors.to_a.first}"
+      notice = if @transaction.save
+        "You've successfully confirmed settlement of the transfer"
+      else
+        "Unable to confirm settlement: #{@transaction.errors.to_a.first}"
+      end
+      redirect_to transaction_path(@transaction), notice: notice
     end
-    redirect_to transaction_path(@transaction), notice: notice
   end
 
   def confirm
