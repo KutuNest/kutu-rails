@@ -1,7 +1,5 @@
 class Member < ApplicationRecord
 
-  # Complete all pools within group -> accounts_limit increased to 8
-
   include Members::Translator
   include Members::Generator
   include Members::Trx
@@ -16,11 +14,7 @@ class Member < ApplicationRecord
   belongs_to :bank, required: false
   belongs_to :groupement, required: false
 
-  # TODO: change to belongs_to, default_member_id changed to role (group admin), remove it later
-  has_one :admin_groupement, class_name: 'Groupement', foreign_key: 'default_member_id'
-
   has_many :accounts, dependent: :nullify
-  has_many :transactions, dependent: :nullify
 
   scope :super_admin, -> {where(role: Roles[:super_admin])}
   scope :group_admin, -> {where(role: Roles[:group_admin])}
@@ -40,7 +34,9 @@ class Member < ApplicationRecord
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   validates :username, presence: true, uniqueness: true
+  validate :referrer_code_match
   validates :phone_number, allow_blank: true, format: {with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/i}
+  phony_normalize :phone_number, default_country_code: 'MY'
   
   validates :role, presence: true, inclusion: {in: Roles.values}
 
@@ -66,6 +62,23 @@ class Member < ApplicationRecord
     end
   end
 
+  def referrer_code_match
+    if self.referrer_code.blank?
+      errors.add :referrer_code, "should not be blank"
+    elsif Member.where(referral_code: self.referrer_code).any?
+      errors.add :referrer_code, "doesn't belongs to anyone"
+    end
+  end
+
+  def notify_limit_changed
+    Notification.create(
+      transaction_id: nil,
+      account_id: nil,
+      notification_event: Notification::Events[:limit_changed], 
+      receiver_email: self.member.email, 
+      receiver_mobile_number: self.member.phone_number)    
+  end
+  
 private
   def set_defaults
     self.groupement = Groupement.default if self.groupement.blank? and !self.super_admin?

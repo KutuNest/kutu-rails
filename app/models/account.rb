@@ -49,6 +49,7 @@ class Account < ApplicationRecord
     self.number_associations_left = 0
     self.save
     self.member.lock_access!
+    notify_has_finished
   end
 
   def change_pool_order!(order)
@@ -72,6 +73,15 @@ class Account < ApplicationRecord
       total_transaction: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).count,
       total_failed: Transaction.where(eater_id: self.id).or(Transaction.where(feeder_id: self.id)).where(failed: true).count
     }
+  end
+
+  def notify_has_finished
+    Notification.create(
+      transaction_id: nil,
+      account_id: self.id,
+      notification_event: Notification::Events[:has_finished], 
+      receiver_email: self.member.email, 
+      receiver_mobile_number: self.member.phone_number)
   end
 
 end

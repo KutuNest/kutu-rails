@@ -2,11 +2,12 @@
   <tr>
     <td>
       <strong><a href="#"><%= member.full_name %></a></strong><br>
-      <small>Last login : <%= member.last_sign_in_at %></small><br/>
-      <%= member.groupement.title rescue "N/A" %>
+      <small>Last login : <%= member.last_sign_in_at(:short) rescue "N/A" %></small><br/>
+      <%= member.email rescue "N/A" %><br/>
+      <%= member.groupement.title rescue "N/A" %><br/>
     </td>
     <td>
-      <%= member.bank.title %><br/> 
+      <%= member.bank.try(:title) %><br/> 
       <%= member.account_number %> <br/>
       <%= member.account_holder_name %> <br/>
       <span class="label label-success"><i class="fa fa-chevron-circle-up"></i><%= number_to_currency member.summary[:money_sent] %></span>

@@ -139,7 +139,7 @@ header {
   background-repeat: no-repeat;
   background-size: cover;
 }
-https://d2u32rzy9n32nt.cloudfront.net/images/views/shared/hero-consolidation.jpg
+
 /* Inverted outline button (white on dark) */
 .btn-outline-inverse {
   color: #fff;
@@ -345,3 +345,16 @@ section {
     margin: 10px 0 10px 0;
     text-decoration: none;
   }
+
+
+.font-xlarge {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.scrollable-menu {
+height: auto;
+max-height: 400px;
+overflow-x: hidden;
+}
+

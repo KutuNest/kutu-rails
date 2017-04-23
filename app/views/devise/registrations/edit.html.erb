@@ -11,6 +11,9 @@
             <li>
               <a href="#ac-tab-3" role="tab" data-toggle="tab">Notification</a>
             </li>
+            <li>
+              <a href="#ac-tab-4" role="tab" data-toggle="tab">Referal Code</a>
+            </li>            
           </ul>
           <div class="tools">
             <a href="javascript:;" class="collapse"></a>
@@ -28,6 +31,10 @@
                 
                <div class="actions">
                   <%= f.submit "Update Profile", class: 'btn btn-primary' %>
+                  <a class="btn btn-default p-l-20 p-r-20" href="<%= dashboard_path %>">
+                    <i class="fa fa-angle-double-left"></i>
+                    Dashboard
+                  </a>                   
                 </div>                
               <% end %>
               </div>
@@ -63,6 +70,10 @@
 
                 <div class="actions">
                   <%= f.submit "Change Password", class: 'btn btn-primary' %>
+                  <a class="btn btn-default p-l-20 p-r-20" href="<%= dashboard_path %>">
+                    <i class="fa fa-angle-double-left"></i>
+                    Dashboard
+                  </a>                   
                 </div>
               <% end %>
               </div>
@@ -83,10 +94,22 @@
 
                 <div class="actions">
                   <%= f.submit "Save Changes", class: 'btn btn-primary' %>
+                  <a class="btn btn-default p-l-20 p-r-20" href="<%= dashboard_path %>">
+                    <i class="fa fa-angle-double-left"></i>
+                    Dashboard
+                  </a>                  
                 </div>
               <% end %>
               </div>
             </div>
+            <div class="tab-pane max-500" id="ac-tab-4">
+              <div class="box-inset--side">
+              <p>
+                Your referral code: <br/>
+                <strong><%= resource.referral_code %></strong>
+              </p>
+              </div>
+            </div>            
           </div>
       </div>
 

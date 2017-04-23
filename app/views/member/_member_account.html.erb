@@ -1,15 +1,15 @@
 <div class="field">
-  <%= f.label :email %>
+  <%= f.label :email %><%= custom_error_message @member, :email %>
   <%= f.email_field :email, autofocus: true, class: 'form-control' %><br />
 </div>
 
 <div class="field">
-  <%= f.label :username %>
+  <%= f.label :username %><%= custom_error_message @member, :username %>
   <%= f.text_field :username, class: 'form-control' %><br />
 </div>
 
 <div class="field">
-  <%= f.label :password %>
+  <%= f.label :password %><%= custom_error_message @member, :password %>
   <%= f.password_field :password, autocomplete: "off", class: 'form-control' %><br />
 </div>
 
@@ -20,7 +20,7 @@
 
 <hr/>
 
-<div class="field">
-  <%= f.label :referrer_code, "Referrer code (optional)" %>
+<div class="field"><%= custom_error_message @member, :referrer_code %>
+  <%= f.label :referrer_code, "Referrer code" %>
   <%= f.text_field :referrer_code, class: 'form-control' %><br />
 </div>  

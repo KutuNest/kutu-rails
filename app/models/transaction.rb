@@ -4,14 +4,9 @@ class Transaction < ApplicationRecord
 
   DisputeLimit = 3.days
 
-  #TODO: remove member_id here
-
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
-  belongs_to :member
   belongs_to :pool
-
-  default_scope { where("member_id is not null") }
 
   has_many :notifications, dependent: :nullify
 
@@ -42,7 +37,48 @@ class Transaction < ApplicationRecord
     end
   end
 
+  def notify_sender_confirmed
+    self.notifications.create(
+      account_id: self.eater.id,
+      notification_event: Notification::Events[:sender_confirmed], 
+      receiver_email: self.eater.member.email, 
+      receiver_mobile_number: self.eater.member.phone_number)    
+  end
+
+  def notify_receiver_confirmed
+    self.notifications.create(
+      account_id: self.eater.id,
+      notification_event: Notification::Events[:receiver_confirmed], 
+      receiver_email: self.feeder.member.email, 
+      receiver_mobile_number: self.eater.member.phone_number)        
+  end
+
+  def notify_disputed
+    self.notifications.create(
+      account_id: self.feeder.id,
+      notification_event: Notification::Events[:disputed], 
+      receiver_email: self.feeder.member.email, 
+      receiver_mobile_number: self.feeder.member.phone_number)        
+  end
+
+  def notify_failed
+    self.notifications.create(
+      account_id: self.feeder.id,
+      notification_event: Notification::Events[:failed], 
+      receiver_email: self.feeder.member.email, 
+      receiver_mobile_number: self.feeder.member.phone_number)        
+  end
+
+  def notify_resolved
+    self.notifications.create(
+      account_id: self.feeder.id,
+      notification_event: Notification::Events[:resolved], 
+      receiver_email: self.feeder.member.email, 
+      receiver_mobile_number: self.feeder.member.phone_number)        
+  end
+
 private
+
   def proceed_completed
     if confirmed?
       self.eater.proceed_last_transaction! 

@@ -9663,7 +9663,7 @@ body.rtl .footer-widget {
     padding-left: 180px;
   }
   .no-margin-grid .row-fluid [class*="span"] {
-    width: 100% !impotant;
+    width: 100% !important;
     margin: 0px;
     margin-bottom: 10px;
   }

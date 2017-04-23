@@ -26,6 +26,9 @@ class ApplicationController < ActionController::Base
     if member_signed_in?
       if params[:acc].present?
         @current_account = current_member.accounts.where(name: params[:acc]).first
+        session[:acc] = params[:acc]
+      elsif session[:acc].present?
+        @current_account = current_member.accounts.where(name: session[:acc]).first
       else
         @current_account = current_member.accounts.first
       end  

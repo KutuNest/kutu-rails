@@ -23,7 +23,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
@@ -86,6 +86,8 @@ Rails.application.configure do
 
   config.time_zone = "Kuala Lumpur"
   config.active_record.default_timezone = :local
+
+  config.action_mailer.default_url_options = { host: 'playkutu.com'}
 
   config.action_mailer.smtp_settings = {
     :address => "email-smtp.us-east-1.amazonaws.com",

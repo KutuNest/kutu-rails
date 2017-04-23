@@ -23,6 +23,7 @@ class TransactionController < ApplicationController
     if @transaction.present? and (@transaction.eater.member == current_member or @transaction.feeder.member == current_member)
       @transaction.dispute!
       @transaction.save
+      @transaction.notify_disputed
       redirect_to transaction_path(@transaction), notice: 'Transaction has been disputed'
     else
       redirect_to transaction_path(@transaction), notice: "Unable to dispute transaction: #{@transaction.errors.to_a.first}"
@@ -44,15 +45,18 @@ class TransactionController < ApplicationController
       @transaction = Transaction.where(id: params[:id]).first
     end
 
-    @transaction.receiver_confirmed = true
-    @transaction.admin_confirmed    = true
+    unless @transaction.disputed?
+      @transaction.receiver_confirmed = true
+      @transaction.admin_confirmed    = true
 
-    notice = if @transaction.save
-      "You've successfully confirmed settlement of the transfer"
-    else
-      "Unable to confirm settlement: #{@transaction.errors.to_a.first}"
+      if @transaction.save
+        @transaction.notify_receiver_confirmed
+        notice =  "You've successfully confirmed settlement of the transfer"
+      else
+        notice = "Unable to confirm settlement: #{@transaction.errors.to_a.first}"
+      end
+      redirect_to transaction_path(@transaction), notice: notice
     end
-    redirect_to transaction_path(@transaction), notice: notice
   end
 
   def confirm
@@ -66,6 +70,7 @@ class TransactionController < ApplicationController
         @transaction.failed   = false
         @transaction.disputed = false
         if @transaction.save
+          @transaction.notify_resolved
           redirect_to transaction_path(@transaction), notice: 'Transaction has been confirmed'
         else
           redirect_to transaction_path(@transaction), notice: "Unable to confirm transaction: #{@transaction.errors.to_a.first}"
@@ -83,6 +88,7 @@ class TransactionController < ApplicationController
         @transaction.admin_confirmed = false
         @transaction.failed          = true
         if @transaction.save
+          @transaction.notify_failed
           redirect_to transaction_path(@transaction), notice: 'Transaction has been rejected'
         else
           redirect_to transaction_path(@transaction), notice: "Unable to confirm transaction: #{@transaction.errors.to_a.first}"
@@ -98,16 +104,15 @@ class TransactionController < ApplicationController
   end
 
   def upload_receipt
-    if current_member.regular_member?
+    if current_member.regular_member? or current_member.group_admin?
       @transaction = Transaction.by_member(current_member).where(id: params[:id]).first 
-      @transaction.sender_receipt = params[:receipt]
       
-      if @transaction.valid? and params[:receipt].present?
-        @transaction.sender_confirmed = true
-      end
+      @transaction.sender_receipt = params[:receipt]
+      @transaction.sender_confirmed = true
 
       if @transaction.save
-        redirect_to transaction_path(@transaction.id), notice: 'Receipt has already been saved'
+        @transaction.notify_sender_confirmed
+        redirect_to transaction_path(@transaction.id), notice: "You have confirmed sending money to receiver"
       else
         redirect_to transaction_path(@transaction.id), notice: "Unable to save receipt: #{@transaction.errors.to_a.first}"
       end

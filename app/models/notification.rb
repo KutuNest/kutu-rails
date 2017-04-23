@@ -4,15 +4,29 @@ class Notification < ApplicationRecord
   SmsSender = "+601117223008"
   TitlePrefix = "PlayKutu: "
 
-  belongs_to :account_transaction, class_name: 'Transaction'
-  belongs_to :account
+  belongs_to :account_transaction, class_name: 'Transaction', required: false, foreign_key: 'transaction_id'
+  belongs_to :account, required: false
 
-  Types    = {sms: 'S', email: 'E'}
   Statuses = {new: 'N', delivered: 'D', error: 'E'}
 
-  validates :notification_type, presence: true, inclusion: {in: Types.values}
+  Events = {
+    disputed: 'TDP',
+    failed: 'TFL',
+    sender_confirmed: 'TSC',
+    receiver_confirmed: 'TRC',
+    limit_changed: 'MLC',
+    has_finished: 'AHF'
+  }
+
+  #validates :notification_type, presence: true, inclusion: {in: Types.values}
   validates :status, presence: true, inclusion: {in: Statuses.values}
-  validates :body, presence: true
+  validates :notification_event, presence: true, inclusion: {in: Events.values}
+  #validates :body, presence: true
+
+  before_validation :set_status
+
+  after_create :deliver_email
+  #after_create :deliver_sms
 
   def deliver_sms
     if Rails.env.production?
@@ -29,8 +43,16 @@ class Notification < ApplicationRecord
 
   def deliver_email
     if self.receiver_email.present?
-      AppMailer.notification(self).deliver_now
+      evt = Notification::Events.find{|e| e.last == self.notification_event }.first
+      email = self.receiver_email
+      trx = self.account_transaction
+      e = AppMailer.send(evt, trx, email)
+      e.deliver_now
     end
+  end
+
+  def set_status
+    self.status = Statuses[:new]
   end
 
   class << self

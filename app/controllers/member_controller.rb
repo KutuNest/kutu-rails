@@ -74,13 +74,13 @@ class MemberController < ApplicationController
   end
 
   def add_group
-    if current_member.super_user?
+    if current_member.super_admin?
       @group = Groupement.new
     end
   end
 
   def save_group
-    if current_member.super_user?
+    if current_member.super_admin?
       group_params = set_group_params
       @groupement = Groupement.new(group_params)
       if @groupement.save
@@ -92,7 +92,7 @@ class MemberController < ApplicationController
   end
 
   def edit_group
-    if current_member.super_user?
+    if current_member.super_admin?
       @group = Groupement.find(params[:id])
     elsif @current_member.group_admin?
       @group = current_member.groupement
@@ -100,7 +100,7 @@ class MemberController < ApplicationController
   end
 
   def update_group
-    if current_member.super_user?
+    if current_member.super_admin?
       @groupement = Groupement.find(params[:id])
 
       group_params = set_group_params
@@ -113,13 +113,13 @@ class MemberController < ApplicationController
   end
 
   def add_super_user
-    if current_member.super_user? or current_member.group_admin?
+    if current_member.super_admin? or current_member.group_admin?
       @member = Member.new
     end
   end
 
   def save_super_user
-    if current_member.super_user? or current_member.group_admin?
+    if current_member.super_admin? or current_member.group_admin?
       member_params = set_member_params.merge(referrer_code: params[:member][:referrer_code])
       @member = Member.new(member_params)
 
@@ -139,13 +139,13 @@ class MemberController < ApplicationController
   end
 
   def add_group_admin
-    if current_member.super_user?
+    if current_member.super_admin?
       @member = Member.new
     end
   end
 
   def add_group_admin
-    if current_member.super_user?
+    if current_member.super_admin?
       member_params = set_member_params.merge(groupement_id: params[:member][:groupement_id], referrer_code: params[:member][:referrer_code])
       @member = Member.new(member_params)
       if @member.save

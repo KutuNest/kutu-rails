@@ -8,8 +8,8 @@
               <%- resource.referrer_code = params[:referrer_code] if params[:referrer_code].present? %>
               
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                <%= devise_error_messages! %>
-
+                <%#= devise_error_messages! %>
+                <%- @member = resource %>
                 <%= render 'member/member_account', f: f %>  
 
                 <div class="actions">

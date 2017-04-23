@@ -19,20 +19,20 @@
               </strong>
               (<%= target.name %>)
             </a>
-            <br/>
+
             <i class="fa fa-bank"></i> <%= target.member.bank.try(:title).to_s %><br/>
             <%= target.member.account_holder_name %> <br/>
             <%= target.member.account_number.to_s %><br/>
           </div>
           
           <div class="pull-right text-right width-30pt p-t-10">
-            <a class="label label-success" href="<%= transaction_path(t.id) %>" style="display: inline">
+            <a class="label label-success font-xlarge" href="<%= transaction_path(t.id) %>" style="display: inline">
               <i class="fa fa-<%= t.eater.member == current_member ? 'plus' : 'minus' %>"></i>
               <%= number_to_currency t.value %>
-            </a><br/>
+            </a><br/><br/>
 
             <a class="label label-default" href="<%= transaction_path(t.id) %>" style="display: inline"><%= t.status.upcase %></a><br/>
-            <small><%= t.completed_date ||= "N/A" %></small><br/>
+            <small><%= t.completed_date ||= "N/A" %></small><br/>        
           </div>
         </div>
     </div>

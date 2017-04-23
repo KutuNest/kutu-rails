@@ -31,6 +31,7 @@ class PoolController < ApplicationController
     if current_member.super_admin? or current_member.group_admin?
       @pool = Pool.where(id: params[:id]).first
 
+      update_pool_params = pool_params
       if current_member.group_admin?
         update_pool_params.delete(:groupement_id)
         @pool.groupement   = current_member.groupement 
