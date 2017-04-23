@@ -18,7 +18,13 @@
         <div class=" p-l-20 p-r-20 p-b-20 p-t-20">
             
         <%- if current_transaction.timed_out? %>
-          <%- if !current_transaction.disputed? %>
+          <%- if current_transaction.disputed? %>
+            <div class="pull-right">
+              <a href="<%= transaction_path(current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
+                  More..
+              </a>
+            </div>            
+          <%- else %>
             <div class="pull-right">
               <a href="<%= dispute_path(current_transaction) %>" class="btn text-uppercase btn-primary btn-lg btn-outline-inverse"> 
               Dispute Transaction
