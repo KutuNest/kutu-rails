@@ -70,6 +70,10 @@ class Member < ApplicationRecord
     end
   end
 
+  def cycle_completed?
+    self.accounts.map {|a| a.has_finished_group? }.find {|a| a == true }
+  end      
+
   def notify_limit_changed
     Notification.create(
       transaction_id: nil,

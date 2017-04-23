@@ -11,16 +11,12 @@
             <li>
               <a href="#ac-tab-3" role="tab" data-toggle="tab">Notification</a>
             </li>
+            <%- if current_member.completed_cycle? %>
             <li>
               <a href="#ac-tab-4" role="tab" data-toggle="tab">Referal Code</a>
-            </li>            
+            </li>     
+            <%- end %>       
           </ul>
-          <div class="tools">
-            <a href="javascript:;" class="collapse"></a>
-            <a href="#grid-config" data-toggle="modal" class="config"></a>
-            <a href="javascript:;" class="reload"></a>
-            <a href="javascript:;" class="remove"></a>
-          </div>
           <div class="tab-content">
             <div class="tab-pane active max-500" id="ac-tab-1">
               <div class="box-inset--side">
@@ -102,6 +98,7 @@
               <% end %>
               </div>
             </div>
+            <%- if current_member.completed_cycle? %>
             <div class="tab-pane max-500" id="ac-tab-4">
               <div class="box-inset--side">
               <p>
@@ -109,7 +106,8 @@
                 <strong><%= resource.referral_code %></strong>
               </p>
               </div>
-            </div>            
+            </div> 
+            <%- end %>           
           </div>
       </div>
 
