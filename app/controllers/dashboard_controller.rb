@@ -9,16 +9,16 @@ class DashboardController < ApplicationController
     else 
       @groupements = [current_member.groupement].compact if current_member.group_admin?
       if @current_account.present?
-        @transaction_history = @current_account.transaction_history
-        @current_transaction = @transaction_history.pending.first
-        @transaction_history = @transaction_history.to_a - [@current_transaction]
+        @transaction_history  = @current_account.transaction_history
+        @current_transactions = @current_account.pending_transactions
+        @current_transaction  = @current_transactions.pop
       end
     end
   end
 
   def members
     if current_member.super_admin?
-      @members = Member.all #where.not(role: Member::Roles[:super_admin])
+      @members = Member.all
     elsif current_member.group_admin?
       @members = current_member.groupement.members rescue []
     end

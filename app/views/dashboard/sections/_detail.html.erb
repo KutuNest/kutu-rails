@@ -1,0 +1,38 @@
+              
+                <div class="tiles-body">
+                  <div class="row">
+
+                    <div class="width-30pct">
+                      <div class="preview-wrapper font-12 padding-top-5">Transaction Timeout</div>
+                      <p class="text-black">
+                        <i class="fa fa-clock-o m-r-3"></i>
+                        <span>
+                          <%= (current_transaction.created_at + current_transaction.timeout.seconds).to_s(:short) %>
+                        </span> 
+                        <br/>
+                      </p>
+                    </div>
+
+                    <div class="width-30pct current-divider">
+                      <div class="preview-wrapper font-12 padding-top-5">Bank Account</div>
+                      <p class="text-black">
+                        <i class="fa fa-bank m-r-3"></i>
+                        <span>
+                          <%= current_transaction.counter_part(current_member).member.bank.title %>
+                        </span> <br/>
+                        <%= current_transaction.counter_part(current_member).member.account_number %> <br/>
+                        <%= current_transaction.counter_part(current_member).member.account_holder_name %>
+                      </p>
+                    </div>
+
+                    <div class="width-30pct current-divider">
+                      <div class="preview-wrapper font-12 padding-top-5">Contact Info</div>
+                      <p class="text-black">
+                        <i class="fa fa-phone m-r-3"></i>
+                        <span><%= current_transaction.counter_part(current_member).member.phone_number %></span> <br/>
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+              

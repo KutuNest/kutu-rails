@@ -40,8 +40,36 @@ class Account < ApplicationRecord
   validates :member_id, presence: true
   validates :name, presence: true, uniqueness: {scope: :member_id}
 
-  def transaction_history
+  def transaction_scope
     Transaction.where("eater_id = ? OR feeder_id = ?", self.id, self.id).order("created_at desc")
+  end
+
+  def transaction_history
+    completed_transactions.to_a + failed_transactions.to_a
+  end
+
+  def pending_transactions
+    sending_transactions.to_a + receiving_transactions.to_a + disputed_transactions.to_a
+  end
+
+  def completed_transactions
+    transaction_scope.where(sender_confirmed: true, receiver_confirmed: true, admin_confirmed: true)
+  end
+
+  def disputed_transactions
+    transaction_scope.where(disputed: true)
+  end
+
+  def failed_transactions
+    transaction_scope.where(failed: true)
+  end  
+
+  def receiving_transactions
+    Transaction.where("eater_id = ?", self.id).order("created_at desc").where(sender_confirmed: true, receiver_confirmed: false)
+  end
+
+  def sending_transactions
+    Transaction.where("feeder_id = ?", self.id).order("created_at desc").where(receiver_confirmed: true, receiver_confirmed: false)
   end
 
   def kick_out!
@@ -55,7 +83,7 @@ class Account < ApplicationRecord
   def change_pool_order!(order)
     for a in self.pool.accounts do
       if a.pool_order.to_i >= order.to_i
-        a.pool_order = a.pool_order.to_i+1
+        a.pool_order = a.pool_order.to_i + 1
       elsif a.pool_order.to_i < order.to_i
         a.pool_order = a.pool_order + 1
       end
