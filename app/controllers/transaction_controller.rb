@@ -45,7 +45,9 @@ class TransactionController < ApplicationController
       @transaction = Transaction.where(id: params[:id]).first
     end
 
-    unless @transaction.disputed?
+    if @transaction.disputed?
+      redirect_to transaction_path(@transaction), notice: "Transaction is currently under dispute"
+    else
       @transaction.receiver_confirmed = true
       @transaction.admin_confirmed    = true
 
