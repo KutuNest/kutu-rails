@@ -10,6 +10,11 @@
     <div class="row no-gutters m-t-10">
       <%- if current_member.accounts.any? %>
         <%= render 'dashboard/current', current_transaction: @current_transaction if @current_transaction.present? %>
+
+        <%- for trx in @current_transactions do %>
+          <%= render 'dashboard/current', current_transaction: trx %>
+        <%- end %>
+
         <%= render 'dashboard/sections/waiting' if @current_transaction.blank? %>
       <%- else %>
         <%= render 'dashboard/sections/empty' %>
