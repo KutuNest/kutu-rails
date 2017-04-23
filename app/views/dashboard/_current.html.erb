@@ -1,62 +1,9 @@
-
-          <div class="col-md-12 m-b-10">
-            <div class="widget-item ">
-              <div class="tiles current-trx-wrapper">
-                <%- if current_member == @current_transaction.feeder.member %>
-                  <%= render 'dashboard/sender' %>
-                <%- else %>
-                  <%= render 'dashboard/receiver' %>
-                <%- end %>
-              </div>
-              <%- if !@current_transaction.timed_out? %>
-              <div class="tiles white border-envelope">
-                <div class="tiles-body">
-                  <div class="row">
-
-                    <div class="width-30pct">
-                      <div class="preview-wrapper font-12 padding-top-5">Transaction Timeout</div>
-                      <p class="text-black">
-                        <i class="fa fa-clock-o m-r-3"></i>
-                        <span>
-                          <%= (@current_transaction.created_at + @current_transaction.timeout.seconds).to_s(:short) %>
-                        </span> 
-                        <br/>
-                      </p>
-                    </div>
-
-                    <div class="width-30pct current-divider">
-                      <div class="preview-wrapper font-12 padding-top-5">Bank Account</div>
-                      <p class="text-black">
-                        <i class="fa fa-bank m-r-3"></i>
-                        <span>
-                          <%= @current_transaction.counter_part(current_member).member.bank.title %>
-                        </span> <br/>
-                        <%= @current_transaction.counter_part(current_member).member.account_number %> <br/>
-                        <%= @current_transaction.counter_part(current_member).member.account_holder_name %>
-                      </p>
-                    </div>
-
-                    <div class="width-30pct current-divider">
-                      <div class="preview-wrapper font-12 padding-top-5">Contact Info</div>
-                      <p class="text-black">
-                        <i class="fa fa-phone m-r-3"></i>
-                        <span><%= @current_transaction.counter_part(current_member).member.phone_number %></span> <br/>
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <%- else %>
-              <div class="tiles white border-envelope">
-                <div class="tiles-body">
-                  <div class="row">
-                    <div class="">
-                      <div class="preview-wrapper p-t-5 p-l-20">Both sender and receiver accounts will not be able to send/receive until this transaction resolved. You urgently need to contact admin for resolution.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>              
-              <%- end %>
-            </div>
-          </div>
+<div class="col-md-12 m-b-10">
+  <div class="widget-item ">
+    <%- if current_member == current_transaction.feeder.member %>
+      <%= render 'dashboard/sections/sender', current_transaction: current_transaction %>
+    <%- else %>
+      <%= render 'dashboard/sections/receiver', current_transaction: current_transaction %>
+    <%- end %>
+  </div>
+</div>

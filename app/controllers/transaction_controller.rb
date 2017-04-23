@@ -45,7 +45,9 @@ class TransactionController < ApplicationController
       @transaction = Transaction.where(id: params[:id]).first
     end
 
-    unless @transaction.disputed?
+    if @transaction.disputed?
+      redirect_to transaction_path(@transaction), notice: "Transaction is currently under dispute"
+    else
       @transaction.receiver_confirmed = true
       @transaction.admin_confirmed    = true
 
@@ -86,8 +88,14 @@ class TransactionController < ApplicationController
       @transaction = Transaction.where(id: params[:id]).first
       if @transaction.present?
         @transaction.admin_confirmed = false
+        @transaction.disputed        = false
         @transaction.failed          = true
+
         if @transaction.save
+          eater = @transaction.eater
+          eater.number_associations_left = eater.number_associations_left + 1
+          eater.save
+
           @transaction.notify_failed
           redirect_to transaction_path(@transaction), notice: 'Transaction has been rejected'
         else

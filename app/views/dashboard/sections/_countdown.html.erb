@@ -1,14 +1,14 @@
 <%- if t.timed_out? %>
 	<script type="text/javascript">
-		var countdown = document.getElementById('countdown');
+		var countdown = document.getElementById('countdown-'+<%= t.id.to_s %>);
 		countdown.innerHTML = "TIMED OUT"
 	</script>
 <%- else %>
 	<script type="text/javascript">
-	var target_date = new Date('<%= timeout_countdown(t) %>').getTime();
+	var target_date = new Date(<%= timeout_countdown(t) %>).getTime();
 
 	var days, hours, minutes, seconds;
-	var countdown = document.getElementById('countdown');
+	var countdown = document.getElementById('countdown-'+<%= t.id.to_s %>);
 	setInterval(function () {
 	    var current_date = <%= Time.zone.now.to_datetime.strftime('%Q') %>;
 	    var seconds_left = (target_date - current_date) / 1000;

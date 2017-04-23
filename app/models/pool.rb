@@ -22,7 +22,7 @@ class Pool < ApplicationRecord
     target = nil
     for a in accs do
       if Transaction.where(pool_id: self.id, eater_id: a.id).count < self.feeders_count
-        unless a.a_transactions.where(pool_id: self.id, disputed: true).any?
+        unless Transaction.where("eater_id = ? OR feeder_id = ?", a.id, a.id).where(pool_id: self.id, disputed: true).any?
           if Transaction.where(pool_id: self.id, feeder_id: a.id, sender_confirmed: true, receiver_confirmed: true, admin_confirmed: true).any?
             target = a
             break

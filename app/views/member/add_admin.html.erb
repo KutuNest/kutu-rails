@@ -1,0 +1,55 @@
+<div class="container padding-top-90">
+  <div class="row">
+    <div class="col-md-12" style="max-width: 500px">
+
+        <%= render 'layouts/notice' %>
+        <h1 class="title block">Add Super/Group Admin</h1>
+        
+        <%= form_for(@member, url: save_admin_path, method: :post) do |f| %>
+
+          <% if false #@member.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@member.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+              <ul>
+              <% @member.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= label_tag "Role" %>
+            <%= select_tag :role, options_for_select([['Super Admin', 's'], ['Group Admin', 'g']]), class: 'form-control' %>
+            <br />
+          </div>
+          
+          <div class="field">
+            <%= f.label :groupement_id, 'Groupement (only for group admin)' %>
+            <%- if current_member.super_admin? %>
+              <%= f.select :groupement_id, Groupement.all.map{|g| [g.title, g.id] }, class: 'form-control' %>
+            <%- elsif current_member.group_admin? %>    
+              <%= f.select :groupement_id, [current_member.groupement].map{|g| [g.title, g.id] }, class: 'form-control' %>
+            <%- end %>
+            <br /><br />
+          </div>    
+          
+
+          <%= render 'member/member_account', f: f %>
+          <br/>
+          <%= render 'member/form', f: f %>
+
+          <div class="actions">
+            <%= f.submit "Add Super User", class: 'btn btn-primary' %>
+          </div>                
+
+        <% end %>
+        <br/>
+<hr/>
+    </div>
+  </div>
+  
+</div>
+
+<%- page_title 'Add Super User' %>

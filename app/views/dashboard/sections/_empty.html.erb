@@ -18,12 +18,12 @@
                             ADD ACCOUNT
                             <i class="fa fa-chevron-circle-right "></i>
                           </a> 
-                          <%- if current_member.group_admin? and current_member.groupement.accounts.size.zero? %>
+                          <%- if false #current_member.group_admin? and current_member.groupement.accounts.size.zero? %>
                           <a href="<%= add_super_user_path %>" class="btn text-uppercase btn-primary btn-lg"> 
                             ADD SUPER USER
                             <i class="fa fa-chevron-circle-right "></i>
                           </a>          
-                          <%- end %>                 
+                          <%- end %>                
                         </div>
                         <div class="clearfix"></div>
                       </div>
