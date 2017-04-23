@@ -78,14 +78,14 @@
                           <a href="<%= confirm_path(transaction) %>" class="btn btn-white"><i class="fa fa-check"></i>&nbsp;confirm payment</a>
                           <a href="<%= reject_path(transaction) %>" class="btn btn-white"><i class="fa fa-times"></i>&nbsp;reject payment</a>
 			  <%- unless transaction.eater.kicked_out? %>
-                          <a href="<%= kick_out_path(transaction.eater) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick eater</a>    
+                          <a href="<%= kick_out_path(transaction.eater) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick receiver</a>    
 		          <%- else %>
 
 				  <label class="label label-default">RECEIVER KICKED OUT</label>
 		          <%- end %>
 
 			  <%- unless transaction.feeder.kicked_out? %>
-                          <a href="<%= kick_out_path(transaction.feeder) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick feeder</a>                                              
+                          <a href="<%= kick_out_path(transaction.feeder) %>" class="btn btn-white"><i class="fa fa-long-arrow-right"></i>&nbsp;kick sender</a>                                              
 			  <%- else %>
 				  <label class="label label-default">SENDER KICKED OUT</label>
 		          <%- end %>
