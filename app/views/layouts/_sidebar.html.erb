@@ -62,7 +62,6 @@
                     <a href="<%= members_path %>"><i class="fa fa-users" aria-hidden="true"></i> Members</a>
                   </li>
                     <%- if current_member.super_admin? or current_member.group_admin? %>
-
                       <li class="list-group-item">
                         <a href="<%= groups_path %>"><i class="fa fa-clone" aria-hidden="true"></i> Groupements</a>
                       </li>
