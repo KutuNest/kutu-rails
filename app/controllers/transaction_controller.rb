@@ -86,8 +86,14 @@ class TransactionController < ApplicationController
       @transaction = Transaction.where(id: params[:id]).first
       if @transaction.present?
         @transaction.admin_confirmed = false
+        @transaction.disputed        = false
         @transaction.failed          = true
+
         if @transaction.save
+          eater = @transaction.eater
+          eater.number_associations_left = eater.number_associations_left + 1
+          eater.save
+
           @transaction.notify_failed
           redirect_to transaction_path(@transaction), notice: 'Transaction has been rejected'
         else
