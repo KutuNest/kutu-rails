@@ -138,20 +138,28 @@ class MemberController < ApplicationController
     end
   end
 
-  def add_group_admin
+  def add_admin
     if current_member.super_admin?
       @member = Member.new
     end
   end
 
-  def add_group_admin
+  def save_admin
     if current_member.super_admin?
       member_params = set_member_params.merge(groupement_id: params[:member][:groupement_id], referrer_code: params[:member][:referrer_code])
       @member = Member.new(member_params)
+      
+      if params[:role] == 's'
+        @member.role = Member::Roles[:super_admin]
+        @member.groupement = nil
+      elsif params[:role] == 'g'
+        @member.role = Member::Roles[:super_admin]
+      end
+
       if @member.save
-        redirect_to dashboard_path, notice: "Member #{@member.try(:username)} as a group admin has been saved"
+        redirect_to dashboard_path, notice: "Member #{@member.try(:username)} as an admin has been saved"
       else
-        render action: 'group admin'
+        render action: 'add_admin'
       end  
     end
   end
