@@ -1,0 +1,4 @@
+id,amount,name,numberoffeeders,position,timetocomplete,groupement_id
+3,1000,p1,4,0,345600000,1
+4,2000,p2,4,1,345600000,1
+5,4000,p3,4,2,345600000,1

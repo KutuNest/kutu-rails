@@ -22,7 +22,7 @@ class Member < ApplicationRecord
 
   # Include default devise modules. Others available are:
   #  :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :lockable, #:confirmable, 
+  devise :database_authenticatable, :registerable, :lockable, :confirmable, 
          :recoverable, :rememberable, :trackable, :validatable
 
   #validates :account_holder_name, :bank_name, presence: true
@@ -63,10 +63,12 @@ class Member < ApplicationRecord
   end
 
   def referrer_code_match
-    if self.referrer_code.blank?
-      errors.add :referrer_code, "should not be blank"
-    elsif Member.where(referral_code: self.referrer_code).size.zero?
-      errors.add :referrer_code, "need a valid referral code. Please ask to refferals@playkutu.com"
+    if self.role != Roles[:super_admin]
+      if self.referrer_code.blank?
+        errors.add :referrer_code, "should not be blank"
+      elsif Member.where(referral_code: self.referrer_code).size.zero?
+        errors.add :referrer_code, "need a valid referral code. Please ask to refferals@playkutu.com"
+      end
     end
   end
 

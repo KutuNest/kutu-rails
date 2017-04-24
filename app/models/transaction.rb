@@ -35,6 +35,10 @@ class Transaction < ApplicationRecord
       account_ids = m.accounts.map(&:id)
       self.where(eater_id: account_ids).or(self.where(feeder_id: account_ids))
     end
+
+    def timeout_to_dispute
+      Transaction.where(disputed: false)
+    end
   end
 
   def notify_sender_confirmed

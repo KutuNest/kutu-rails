@@ -41,6 +41,7 @@ end
   "Maybank",
   "OCBC",
   "Public Bank",
+  "RHB Bank",
   "RHB",
   "Standard Chartered",
   "UOB"
@@ -54,111 +55,114 @@ end
   end  
 end
 
-# Groupement & Pool
-["Default Group", "Second Group"].each do |t|
-  g = Groupement.new
-  g.activated_on_create = false
-  g.initial_accounts = 1
-  g.maximum_accounts = 100
-  g.accounts_added_on_success = 8
-  g.title = t
-  if g.save
-    puts "Group: #{g.title} saved"
+if false
+  # Groupement & Pool
+  ["Default Group", "Second Group"].each do |t|
+    g = Groupement.new
+    g.activated_on_create = false
+    g.initial_accounts = 1
+    g.maximum_accounts = 100
+    g.accounts_added_on_success = 8
+    g.title = t
+    if g.save
+      puts "Group: #{g.title} saved"
 
-    ["First Pool", "Second Pool", "Third Pool"].each_with_index do |t, i|
-      p = g.pools.new
-      p.title = t
-      p.amount = [1000, 2000, 4000][i]
-      p.position = i
-      p.feeders_count = 4
-      p.timeout = 60*60*24*3
-      if p.save
-        puts "Pool: #{p.title} saved"
-      else
-        puts "Pool: #{p.title} error - #{p.errors.to_a.first}"
-      end  
-    end
+      ["First Pool", "Second Pool", "Third Pool"].each_with_index do |t, i|
+        p = g.pools.new
+        p.title = t
+        p.amount = [1000, 2000, 4000][i]
+        p.position = i
+        p.feeders_count = 4
+        p.timeout = 60*60*24*3
+        if p.save
+          puts "Pool: #{p.title} saved"
+        else
+          puts "Pool: #{p.title} error - #{p.errors.to_a.first}"
+        end  
+      end
 
+    else
+      puts "Group: #{g.title} error - #{g.errors.to_a.first}"
+    end      
+  end
+
+
+  # Super Admin & Admins
+  country = Country.first
+  bank    = Bank.where(title: 'Maybank').first
+
+  m = Member.new
+  m.country = country
+  m.bank = bank
+
+  m.account_holder_name = "Super Admin"
+  m.account_number = "0000-0000-0001"
+
+  m.username = "super"
+  m.email = "super@playkutu.com"
+  m.first_name = "Super"
+  m.last_name = "Admin"
+  m.phone_number = "+60123456789"
+  m.role = Member::Roles[:super_admin]
+
+  m.password = "password"
+  m.password_confirmation = "password"
+
+  if m.save
+    m.confirm
+    puts "Member: #{m.username} saved"
   else
-    puts "Group: #{g.title} error - #{g.errors.to_a.first}"
-  end      
-end
+    puts "Member: #{m.username} error - #{m.errors.to_a.first}"
+  end
 
+  m = Member.new
+  m.country = country
+  m.bank = bank
 
-# Super Admin & Admins
-country = Country.first
-bank    = Bank.where(title: 'Maybank').first
+  m.account_holder_name = "Default Admin"
+  m.account_number = "0000-0000-0002"
 
-m = Member.new
-m.country = country
-m.bank = bank
+  m.username = "default"
+  m.email = "default@playkutu.com"
+  m.first_name = "Default"
+  m.last_name = "Admin"
+  m.phone_number = "+60123456780"
+  m.role = Member::Roles[:group_admin]
 
-m.account_holder_name = "Super Admin"
-m.account_number = "0000-0000-0001"
+  m.password = "password"
+  m.password_confirmation = "password"
+  m.groupement = Groupement.first
 
-m.username = "super"
-m.email = "super@playkutu.com"
-m.first_name = "Super"
-m.last_name = "Admin"
-m.phone_number = "+60123456789"
-m.role = Member::Roles[:super_admin]
+  if m.save
+    m.confirm
+    puts "Member: #{m.username} saved"
+  else
+    puts "Member: #{m.username} error - #{m.errors.to_a.first}"
+  end
 
-m.password = "password"
-m.password_confirmation = "password"
+  m = Member.new
+  m.country = country
+  m.bank = bank
 
-if m.save
-  m.confirm
-  puts "Member: #{m.username} saved"
-else
-  puts "Member: #{m.username} error - #{m.errors.to_a.first}"
-end
+  m.account_holder_name = "Second Admin"
+  m.account_number = "0000-0000-0003"
 
-m = Member.new
-m.country = country
-m.bank = bank
+  m.username = "second"
+  m.email = "second@playkutu.com"
+  m.first_name = "Second"
+  m.last_name = "Admin"
+  m.phone_number = "+60123456781"
+  m.role = Member::Roles[:group_admin]
 
-m.account_holder_name = "Default Admin"
-m.account_number = "0000-0000-0002"
+  m.password = "password"
+  m.password_confirmation = "password"
+  m.groupement = Groupement.last
 
-m.username = "default"
-m.email = "default@playkutu.com"
-m.first_name = "Default"
-m.last_name = "Admin"
-m.phone_number = "+60123456780"
-m.role = Member::Roles[:group_admin]
+  if m.save
+    m.confirm
+    puts "Member: #{m.username} saved"
+  else
+    puts "Member: #{m.username} error - #{m.errors.to_a.first}"
+  end
 
-m.password = "password"
-m.password_confirmation = "password"
-m.groupement = Groupement.first
-
-if m.save
-  m.confirm
-  puts "Member: #{m.username} saved"
-else
-  puts "Member: #{m.username} error - #{m.errors.to_a.first}"
-end
-
-m = Member.new
-m.country = country
-m.bank = bank
-
-m.account_holder_name = "Second Admin"
-m.account_number = "0000-0000-0003"
-
-m.username = "second"
-m.email = "second@playkutu.com"
-m.first_name = "Second"
-m.last_name = "Admin"
-m.phone_number = "+60123456781"
-m.role = Member::Roles[:group_admin]
-
-m.password = "password"
-m.password_confirmation = "password"
-m.groupement = Groupement.last
-
-if m.save
-  m.confirm
-  puts "Member: #{m.username} saved"
-else
-  puts "Member: #{m.username} error - #{m.errors.to_a.first}"
 end
