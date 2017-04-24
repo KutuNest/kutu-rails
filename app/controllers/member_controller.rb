@@ -66,8 +66,11 @@ class MemberController < ApplicationController
 
     if @member.present? and @member.accounts_limit < params[:accounts_limit].to_i
       @member.accounts_limit = params[:accounts_limit].to_i
-      @member.save
-      redirect_to members_path, notice: "Account limit for #{@member.username} is now #{@member.accounts_limit}"
+      if @member.save
+        redirect_to members_path, notice: "Account limit for #{@member.username} is now #{@member.accounts_limit}"
+      else
+        redirect_to members_path, notice: "Failed to increase account limit: #{@member.errors.to_a.first}"
+      end
     else
       redirect_to members_path, notice: "Failed to increase account limit. Probably must greater than previous limit."
     end
