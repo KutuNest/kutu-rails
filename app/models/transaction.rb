@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
 
   DisputeLimit = 3.days
 
-  attr_accessor :unproceed_to_parties
+  attr_accessor :proceed_to_parties
 
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
@@ -24,7 +24,7 @@ class Transaction < ApplicationRecord
   validates :eater_id, :feeder_id, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
-  after_save :proceed_completed, unless: :unproceed_to_parties
+  after_save :proceed_completed, if: :proceed_to_parties
 
   mount_uploader :sender_receipt, ReceiptUploader
 

@@ -107,6 +107,8 @@ namespace :db do
           g.admin_account = c[2] == 't' ? true : false
           g.arrival_date = DateTime.parse c[3]
           g.name = c[6]
+
+          g.auto_create_transaction = false
         
           if g.save
             puts "Account: #{g.name} saved"
@@ -144,7 +146,7 @@ namespace :db do
           g.receiver_confirmed = true
           g.created_at = DateTime.parse c[1]
 
-          g.unproceed_to_parties = true
+          g.proceed_to_parties = false
   
           if g.save
             puts "Transaction: #{g.id} saved"

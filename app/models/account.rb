@@ -18,6 +18,8 @@ class Account < ApplicationRecord
 
   #TODO: ensure assignment not on kicked out accounts
 
+  attr_accessor :auto_create_transaction
+
   belongs_to :member
   belongs_to :groupement
   belongs_to :pool

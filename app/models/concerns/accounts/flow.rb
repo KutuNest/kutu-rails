@@ -3,7 +3,7 @@ module Accounts
     extend ActiveSupport::Concern
 
     included do
-      after_create :create_new_transaction
+      after_create :create_new_transaction, if: :auto_create_transaction
     end
 
     def proceed_last_transaction!
