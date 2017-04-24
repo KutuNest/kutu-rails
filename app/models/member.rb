@@ -65,7 +65,7 @@ class Member < ApplicationRecord
   def referrer_code_match
     if self.referrer_code.blank?
       errors.add :referrer_code, "should not be blank"
-    elsif Member.where(referral_code: self.referrer_code).any?
+    elsif Member.where(referral_code: self.referrer_code).size.zero?
       errors.add :referrer_code, "doesn't belongs to anyone"
     end
   end
