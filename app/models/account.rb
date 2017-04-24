@@ -49,7 +49,7 @@ class Account < ApplicationRecord
   end
 
   def pending_transactions
-    (sending_transactions.to_a + receiving_transactions.to_a + disputed_transactions.to_a).uniq
+    (sending_transactions.to_a + receiving_transactions.to_a).uniq
   end
 
   def completed_transactions
