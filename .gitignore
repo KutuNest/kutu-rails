@@ -26,3 +26,12 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 
 **/.DS_Store
+
+/config/database.yml
+/config/cucumber.yml
+/features/*
+/script/*
+/config/deploy.rb
+/config/deploy/*
+Capfile
+/lib/tasks/cucumber.rake
