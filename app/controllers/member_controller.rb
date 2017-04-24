@@ -66,6 +66,7 @@ class MemberController < ApplicationController
 
     if @member.present? and @member.accounts_limit < params[:accounts_limit].to_i
       @member.accounts_limit = params[:accounts_limit].to_i
+      @member.referrer_code = Member.first.referral_code
       if @member.save
         redirect_to members_path, notice: "Account limit for #{@member.username} is now #{@member.accounts_limit}"
       else
