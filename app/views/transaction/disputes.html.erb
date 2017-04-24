@@ -20,7 +20,7 @@
                         </h4>
                         <p>
                           <i class="fa fa-bank"></i>&nbsp;
-                          <%= transaction.eater.member.bank.title %> <br/>
+                          <%= transaction.eater.member.bank.title rescue "N/A" %> <br/>
                           <%= transaction.eater.member.account_number %> <br/>
                           <%= transaction.eater.member.account_holder_name %>
                           <br/><br/>

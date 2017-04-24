@@ -10,6 +10,8 @@ class Member < ApplicationRecord
     regular_member: 'RM' # Have privilege to his all accounts
   }
 
+  attr_accessor :skip_referrer_code
+
   belongs_to :country, required: false
   belongs_to :bank, required: false
   belongs_to :groupement, required: false
@@ -34,7 +36,7 @@ class Member < ApplicationRecord
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   validates :username, presence: true, uniqueness: true
-  validate :referrer_code_match
+  validate :referrer_code_match, unless: :skip_referrer_code
   validates :phone_number, allow_blank: true, format: {with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/i}
   phony_normalize :phone_number, default_country_code: 'MY'
   

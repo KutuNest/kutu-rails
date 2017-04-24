@@ -63,8 +63,8 @@ namespace :db do
           g.password = c[9]
           g.password_confirmation = c[9]
           g.referral_code = (i == 1) ? "OldKutu" : nil
-          g.role = (i == 1) ? Member::Roles[:super_admin] : Member::Roles[:regular_member]
-          g.referrer_code = Member.all.any? ? Member.first.referral_code : "OldKutu"
+          g.role = (i == 1) ? Member::Roles[:group_admin] : Member::Roles[:regular_member]
+          g.referrer_code = "OldKutu"
           g.bank = Bank.where(title: c[3]).first
           g.country = Country.where(title: c[4]).first
           g.sms_notification = false
@@ -76,6 +76,8 @@ namespace :db do
             g.phone_number = "60000000000"
           end
         
+          g.skip_referrer_code = true
+
           if g.save
             g.confirm
             puts "Member: #{g.username} saved"
@@ -119,6 +121,7 @@ namespace :db do
       csv = CSV.read(Rails.root.join("lib/tasks/db/transaction.csv"))
       csv.each_with_index do |c,i|
         unless i == 0
+
           pool = case c[8].to_i
           when 1000 then Pool.where(amount: 1000).first
           when 2000 then Pool.where(amount: 2000).first
@@ -139,6 +142,7 @@ namespace :db do
           g.admin_confirmed = true
           g.sender_confirmed = true
           g.receiver_confirmed = true
+          g.created_at = c[1]
   
           if g.save
             puts "Transaction: #{g.id} saved"
