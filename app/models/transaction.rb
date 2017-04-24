@@ -4,6 +4,8 @@ class Transaction < ApplicationRecord
 
   DisputeLimit = 3.days
 
+  attr_accessor :unproceed_to_parties
+
   belongs_to :eater, class_name: 'Account', foreign_key: 'eater_id'
   belongs_to :feeder, class_name: 'Account', foreign_key: 'feeder_id'
   belongs_to :pool
@@ -22,7 +24,7 @@ class Transaction < ApplicationRecord
   validates :eater_id, :feeder_id, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
-  after_save :proceed_completed
+  after_save :proceed_completed, unless: :unproceed_to_parties
 
   mount_uploader :sender_receipt, ReceiptUploader
 
@@ -94,12 +96,12 @@ private
 
   def set_defaults
     if self.new_record?
-      self.sender_confirmed = false
-      self.receiver_confirmed = false
-      self.admin_confirmed = false
-      self.failed = false
-      self.disputed = false
-      self.completed_date = false
+      self.sender_confirmed = false if self.sender_confirmed.blank?
+      self.receiver_confirmed = false if self.receiver_confirmed.blank?
+      self.admin_confirmed = false if self.admin_confirmed.blank?
+      self.failed = false if self.failed.blank?
+      self.disputed = false if self.disputed.blank?
+      self.completed_date = false if self.completed_date.blank?
     end
   end  
 

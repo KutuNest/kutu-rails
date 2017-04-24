@@ -95,7 +95,7 @@ namespace :db do
         unless i == 0
           g = Account.new
           g.id = c[0]
-          g.groupement_id = c[6]
+          g.groupement_id = c[9]
           g.member_id = c[10]
           g.pool_id = c[11]
           g.pool_order = c[12]
@@ -132,17 +132,19 @@ namespace :db do
           g.id = c[0]
           g.eater_id = c[2]
           g.feeder_id = c[4]
-          g.completed_date = c[1]
+          g.completed_date = DateTime.parse(c[1])
           g.value = c[8]
           g.timeout = c[7].to_i
-          g.failed = c[3]
+          g.failed = c[3] == 'f' ? false : true
           g.pool = pool
           g.disputed = false
           g.sender_receipt = nil
           g.admin_confirmed = true
           g.sender_confirmed = true
           g.receiver_confirmed = true
-          g.created_at = c[1]
+          g.created_at = DateTime.parse c[1]
+
+          g.unproceed_to_parties = true
   
           if g.save
             puts "Transaction: #{g.id} saved"
