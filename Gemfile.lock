@@ -119,6 +119,7 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    pg (0.20.0)
     phony (2.15.42)
     phony_rails (0.14.5)
       activesupport (>= 3.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  pg
   phony_rails
   puma (~> 3.0)
   rails (~> 5.0.1)
