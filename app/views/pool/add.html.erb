@@ -4,7 +4,7 @@
         <%= render 'layouts/notice' %>
         <h1 class="title block">Add Pool</h1>
         
-        <%= form_for(@pool, url: save_pool_path) do |f| %>
+        <%= form_for(@pool, url: save_pool_path, method: :post) do |f| %>
           <%= render 'pool/form', f: f %>
 
           <div class="actions">
