@@ -67,7 +67,7 @@ class Account < ApplicationRecord
   end  
 
   def receiving_transactions
-    Transaction.where("eater_id = ? AND pool_id = ?", self.id, self.pool.id).order("created_at desc").where(sender_confirmed: true, receiver_confirmed: false)
+    Transaction.where("eater_id = ? AND pool_id = ?", self.id, self.pool.id).order("created_at desc").where(sender_confirmed: true, receiver_confirmed: false).to_a + Transaction.where("eater_id = ? AND pool_id = ?", self.id, self.pool.id).order("created_at desc").where(sender_confirmed: false, receiver_confirmed: false).to_a
   end
 
   def sending_transactions
