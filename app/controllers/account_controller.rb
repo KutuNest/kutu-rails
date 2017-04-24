@@ -7,7 +7,7 @@ class AccountController < ApplicationController
     else
       account = current_member.generate_new_account
       if account
-        redirect_to dashboard_path, notice: "New account: #{account.name} has been successfully created"
+        redirect_to dashboard_path(acc: account.name), notice: "New account: #{account.name} has been successfully created"
       else
         redirect_to dashboard_path, notice: 'Unable to create new account. Please contact admin'
       end
