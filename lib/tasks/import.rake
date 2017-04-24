@@ -11,7 +11,7 @@ namespace :db do
           g = Groupement.new
           g. title = "Default"
           g.id = c[0]
-          g.activated_on_create = c[1]
+          g.activated_on_create = c[1] == 't' ? true : false
           g.initial_accounts = c[10]
           g.maximum_accounts = c[7]
           g.accounts_added_on_success = c[2]
@@ -99,13 +99,13 @@ namespace :db do
           g.member_id = c[10]
           g.pool_id = c[11]
           g.pool_order = c[12]
-          g.has_finished = c[4]
+          g.has_finished = c[4] == 't' ? true : false
           g.number_associations_left = c[7]
-          g.kicked_out = c[5]
-          g.action_available = c[1]
-          g.super_user = c[8]
-          g.admin_account = c[2]
-          g.arrival_date = c[3]
+          g.kicked_out = c[5] == 't' ? true : false
+          g.action_available = c[1] == 't' ? true : false
+          g.super_user = c[8] == 't' ? true : false
+          g.admin_account = c[2] == 't' ? true : false
+          g.arrival_date = DateTime.parse c[3]
           g.name = c[6]
         
           if g.save
