@@ -71,7 +71,7 @@ class Account < ApplicationRecord
   end
 
   def sending_transactions
-    Transaction.where("feeder_id = ?", self.id).order("created_at desc").where(receiver_confirmed: true, receiver_confirmed: false)
+    Transaction.where("feeder_id = ?", self.id).order("created_at desc").where(sender_confirmed: true, receiver_confirmed: false)
   end
 
   def kick_out!
