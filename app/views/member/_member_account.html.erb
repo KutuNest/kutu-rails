@@ -20,7 +20,7 @@
 
 <hr/>
 
-<div class="field"><%= custom_error_message @member, :referrer_code %>
-  <%= f.label :referrer_code, "Referrer code" %>
+<div class="field">
+  <%= f.label :referrer_code, "Referrer code" %><%= custom_error_message @member, :referrer_code %>
   <%= f.text_field :referrer_code, class: 'form-control' %><br />
 </div>  

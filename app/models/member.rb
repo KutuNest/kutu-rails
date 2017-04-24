@@ -66,7 +66,7 @@ class Member < ApplicationRecord
     if self.referrer_code.blank?
       errors.add :referrer_code, "should not be blank"
     elsif Member.where(referral_code: self.referrer_code).size.zero?
-      errors.add :referrer_code, "doesn't belongs to anyone"
+      errors.add :referrer_code, "need a valid referral code. Please ask to refferals@playkutu.com"
     end
   end
 
