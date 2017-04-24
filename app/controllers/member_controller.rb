@@ -157,7 +157,7 @@ class MemberController < ApplicationController
         @member.role = Member::Roles[:super_admin]
         @member.groupement = nil
       elsif params[:role] == 'g'
-        @member.role = Member::Roles[:super_admin]
+        @member.role = Member::Roles[:group_admin]
       end
 
       if @member.save
