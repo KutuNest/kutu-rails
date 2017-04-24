@@ -55,6 +55,34 @@ end
   end  
 end
 
+  # Super Admin & Admins
+  country = Country.first
+  bank    = Bank.where(title: 'Maybank').first
+
+  m = Member.new
+  m.country = country
+  m.bank = bank
+
+  m.account_holder_name = "Super Admin"
+  m.account_number = "0000-0000-0001"
+
+  m.username = "superadmin"
+  m.email = "superadmin@playkutu.com"
+  m.first_name = "Super"
+  m.last_name = "Admin"
+  m.phone_number = "+60123456789"
+  m.role = Member::Roles[:super_admin]
+
+  m.password = "password"
+  m.password_confirmation = "password"
+
+  if m.save
+    m.confirm
+    puts "Member: #{m.username} saved"
+  else
+    puts "Member: #{m.username} error - #{m.errors.to_a.first}"
+  end
+
 if false
   # Groupement & Pool
   ["Default Group", "Second Group"].each do |t|
@@ -87,33 +115,7 @@ if false
   end
 
 
-  # Super Admin & Admins
-  country = Country.first
-  bank    = Bank.where(title: 'Maybank').first
 
-  m = Member.new
-  m.country = country
-  m.bank = bank
-
-  m.account_holder_name = "Super Admin"
-  m.account_number = "0000-0000-0001"
-
-  m.username = "super"
-  m.email = "super@playkutu.com"
-  m.first_name = "Super"
-  m.last_name = "Admin"
-  m.phone_number = "+60123456789"
-  m.role = Member::Roles[:super_admin]
-
-  m.password = "password"
-  m.password_confirmation = "password"
-
-  if m.save
-    m.confirm
-    puts "Member: #{m.username} saved"
-  else
-    puts "Member: #{m.username} error - #{m.errors.to_a.first}"
-  end
 
   m = Member.new
   m.country = country
