@@ -26,15 +26,26 @@ class Notification < ApplicationRecord
   before_validation :set_status
 
   after_create :deliver_email
-  #after_create :deliver_sms
+  after_create :deliver_sms
 
   def deliver_sms
-    if Rails.env.production?
+    if !Rails.env.production? and self.receiver_mobile_number.present? and self.account.member.sms_notification == true
+      counter_part = account_transaction.eater == account ? account_transaction.feeder : account_transaction.eater
+
+      text_body = case Notification::Events.find{|e| e.last == self.notification_event }.first
+        when :disputed then "Your PlayKutu transaction with #{counter_part.name} is being disputed. Go to PlayKutu.com"
+        when :failed then "Your PlayKutu transaction with #{counter_part.name} is failed. Go to PlayKutu.com"
+        when :sender_confirmed then "Your PlayKutu transaction with #{counter_part.name} has been confirmed by sender. Go to PlayKutu.com"
+        when :receiver_confirmed then "Your PlayKutu transaction with #{counter_part.name} has been confirmed by receiver. Go to PlayKutu.com"
+        when :limit_changed then "Your PlayKutu #{self.account.member.username} accounts limit has been increased. Go to PlayKutu.com"
+        when :has_finished then "Your PlayKutu account #{self.account.name} has finished send/receive. Go to PlayKutu.com"
+      end
+
       @client = Twilio::REST::Client.new
       @client.messages.create(
         from: Notification::SmsSender,
         to: self.receiver_mobile_number,
-        body: self.short_body
+        body: text_body
       )
     else
       true
@@ -42,7 +53,7 @@ class Notification < ApplicationRecord
   end
 
   def deliver_email
-    if self.receiver_email.present?
+    if Rails.env.production? and self.receiver_email.present? and self.account.member.email_notification == true
       evt = Notification::Events.find{|e| e.last == self.notification_event }.first
       email = self.receiver_email
       trx = self.account_transaction
@@ -53,16 +64,6 @@ class Notification < ApplicationRecord
 
   def set_status
     self.status = Statuses[:new]
-  end
-
-  class << self
-    def money_sent(trx)
-      n = Notification.new
-      n.account = eater
-      n.title = "#{Notification::TitlePrefix} #{trx.feeder.member.username} just sent you money!"
-      n.body  = "#{trx.feeder.member.full_name} (#{trx.feeder.member.username}) sent you amount of #{trx.value}"
-      n.status = Statuses[:n]
-    end
   end
 
 end
