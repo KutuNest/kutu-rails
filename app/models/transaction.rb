@@ -12,8 +12,6 @@ class Transaction < ApplicationRecord
 
   has_many :notifications, dependent: :nullify
 
-  #has_and_belongs_to_many :accounts
-
   before_validation :set_defaults
 
   scope :success, -> { where(admin_confirmed: true, sender_confirmed: true, receiver_confirmed: true) }
@@ -109,7 +107,7 @@ private
       self.admin_confirmed = false if self.admin_confirmed.blank?
       self.failed = false if self.failed.blank?
       self.disputed = false if self.disputed.blank?
-      self.completed_date = false if self.completed_date.blank?
+      self.completed_date = nil if self.completed_date.blank?
     end
   end  
 

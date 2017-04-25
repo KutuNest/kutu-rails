@@ -83,13 +83,14 @@ module Accounts
     def create_new_transaction
       if !self.super_user? and self.number_associations_left > 0
         t = Transaction.new
+
         t.timeout = self.pool.timeout.to_i.seconds
         t.pool = self.pool
         t.value = self.pool.amount
 
-        #TODO: eater from pool, that hasn't been sent limit from pool
         t.feeder = self
         t.eater = self.pool.first_target(self)
+        
         if t.save
           t_eater = t.eater
           t_eater.number_associations_left = t_eater.number_associations_left.to_i - 1
