@@ -87,7 +87,7 @@ Rails.application.configure do
   config.time_zone = "Kuala Lumpur"
   config.active_record.default_timezone = :local
 
-  config.action_mailer.default_url_options = { host: 'playkutu.com'}
+  config.action_mailer.default_url_options = { host: 'www.playkutu.com'}
 
   config.action_mailer.smtp_settings = {
     :address => "email-smtp.us-east-1.amazonaws.com",
