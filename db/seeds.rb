@@ -37,6 +37,7 @@ end
   "Citibank",
   "HSBC",
   "Hong Leong Bank",
+  "Hong Leong",
   "Kuwait Finance",
   "Maybank",
   "OCBC",
