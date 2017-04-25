@@ -69,7 +69,7 @@ class Member < ApplicationRecord
       if self.referrer_code.blank?
         errors.add :referrer_code, "should not be blank"
       elsif Member.where(referral_code: self.referrer_code).size.zero?
-        errors.add :referrer_code, "need a valid referral code. Please ask to referrals@playkutu.com"
+        errors.add :referrer_code, "need a valid referral code. Please ask to <a href='mailto:referrals@playkutu.com'>referrals@playkutu.com</a>"
       end
     end
   end
