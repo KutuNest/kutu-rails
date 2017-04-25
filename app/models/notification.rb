@@ -12,6 +12,8 @@ class Notification < ApplicationRecord
   Events = {
     disputed: 'TDP',
     failed: 'TFL',
+    resolved: 'TRV',
+    new_transaction: 'TNW',
     sender_confirmed: 'TSC',
     receiver_confirmed: 'TRC',
     limit_changed: 'MLC',
@@ -35,6 +37,8 @@ class Notification < ApplicationRecord
       text_body = case Notification::Events.find{|e| e.last == self.notification_event }.first
         when :disputed then "Your PlayKutu transaction with #{counter_part.name} is being disputed. Go to PlayKutu.com"
         when :failed then "Your PlayKutu transaction with #{counter_part.name} is failed. Go to PlayKutu.com"
+        when :resolved then "Your PlayKutu transaction dispute with #{counter_part.name} has been resolved. Go to PlayKutu.com"
+        when :new_transaction then "Your PlayKutu transaction with #{counter_part.name} is now available. Go to PlayKutu.com"
         when :sender_confirmed then "Your PlayKutu transaction with #{counter_part.name} has been confirmed by sender. Go to PlayKutu.com"
         when :receiver_confirmed then "Your PlayKutu transaction with #{counter_part.name} has been confirmed by receiver. Go to PlayKutu.com"
         when :limit_changed then "Your PlayKutu #{self.account.member.username} accounts limit has been increased. Go to PlayKutu.com"

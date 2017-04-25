@@ -94,6 +94,7 @@ module Accounts
           t_eater = t.eater
           t_eater.number_associations_left = t_eater.number_associations_left.to_i - 1
           t_eater.save
+          t.notify_new_transaction
         end
       end
     end

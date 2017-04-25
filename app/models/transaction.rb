@@ -51,6 +51,14 @@ class Transaction < ApplicationRecord
       receiver_mobile_number: self.eater.member.phone_number)    
   end
 
+  def notify_new_transaction
+    self.notifications.create(
+      account_id: self.feeder.id,
+      notification_event: Notification::Events[:new_transaction], 
+      receiver_email: self.feeder.member.email, 
+      receiver_mobile_number: self.feeder.member.phone_number)    
+  end
+
   def notify_receiver_confirmed
     self.notifications.create(
       account_id: self.eater.id,

@@ -15,6 +15,22 @@ class AppMailer < ApplicationMailer
     )    
   end
 
+  def resolved(t,n)
+    @transaction = t
+    mail(
+      to: n,
+      subject: 'PlayKutu: Your transaction has been resolved'
+    )    
+  end
+
+  def new_transaction(t,n)
+    @transaction = t
+    mail(
+      to: n,
+      subject: 'PlayKutu: A new transaction is available'
+    )    
+  end  
+
   def receiver_confirmed(t,n)
     @transaction = t
     mail(
