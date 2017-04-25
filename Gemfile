@@ -59,6 +59,7 @@ gem 'carrierwave'
 gem 'twilio-ruby'
 gem 'config'
 gem 'phony_rails'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'
