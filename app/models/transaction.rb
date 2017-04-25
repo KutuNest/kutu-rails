@@ -2,7 +2,8 @@ class Transaction < ApplicationRecord
 
   include Transactions::Status
 
-  DisputeLimit = 3.days
+  # DisputeLimit = 4.days
+  DisputeLimit = 1.hour
 
   attr_accessor :proceed_to_parties
 
@@ -36,8 +37,26 @@ class Transaction < ApplicationRecord
       self.where(eater_id: account_ids).or(self.where(feeder_id: account_ids))
     end
 
-    def timeout_to_dispute
-      Transaction.where(disputed: false)
+    def disputed_by_timeout!
+      trxs = Transaction.where(disputed: false, sender_confirmed: [false, true], admin_confirmed: false, receiver_confirmed: false)
+      for t in trxs do
+        if (t.created_at + DisputeLimit) < Time.zone.now.to_date
+          t.disputed = true
+          t.save
+        end
+      end
+    end
+  end
+
+  def dispute_allowed?
+    if confirmed?
+      if self.completed_date.present?
+        (self.completed_date + DisputeLimit) < Time.zone.now.to_date
+      end
+    elsif self.sender_confirmed? and (self.created_at + DisputeLimit) < Time.zone.now.to_date
+      true
+    elsif disputed?
+      false
     end
   end
 

@@ -114,7 +114,7 @@
 
                     <%- end %>
 
-                    <%- if (@transaction.sender_confirmed? and !@transaction.disputed?) or (@transaction.timed_out? and !@transaction.confirmed? and !@transaction.failed? and !@transaction.disputed?) #and @transaction.completed_date < (Date.today + Transaction::DisputeLimit) %>
+                    <%- if @transaction.dispute_allowed? %>
                       <a href="<%= dispute_path(@transaction.id) %>" class="btn btn-default m-r-10">
                         <i class="fa fa-random"></i>
                         Dispute transaction

@@ -65,4 +65,5 @@ gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'
+  gem 'whenever', require: false
 end
