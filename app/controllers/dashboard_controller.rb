@@ -18,7 +18,7 @@ class DashboardController < ApplicationController
 
   def members
     if current_member.super_admin?
-      @members = Member.all.includes(:accounts => :a_transactions)
+      @members = Member.all
     elsif current_member.group_admin?
       @members = current_member.groupement.members rescue []
     end

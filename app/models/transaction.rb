@@ -12,7 +12,7 @@ class Transaction < ApplicationRecord
 
   has_many :notifications, dependent: :nullify
 
-  has_and_belongs_to_many :accounts
+  #has_and_belongs_to_many :accounts
 
   before_validation :set_defaults
 
