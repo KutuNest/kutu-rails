@@ -20,10 +20,8 @@ class Notification < ApplicationRecord
     has_finished: 'AHF'
   }
 
-  #validates :notification_type, presence: true, inclusion: {in: Types.values}
   validates :status, presence: true, inclusion: {in: Statuses.values}
   validates :notification_event, presence: true, inclusion: {in: Events.values}
-  #validates :body, presence: true
 
   before_validation :set_status
 
@@ -31,7 +29,7 @@ class Notification < ApplicationRecord
   after_create :deliver_sms
 
   def deliver_sms
-    if !Rails.env.production? and self.receiver_mobile_number.present? and self.account.member.sms_notification == true
+    if Rails.env.production? and self.receiver_mobile_number.present? and self.account.member.sms_notification == true
       counter_part = account_transaction.eater == account ? account_transaction.feeder : account_transaction.eater
 
       text_body = case Notification::Events.find{|e| e.last == self.notification_event }.first

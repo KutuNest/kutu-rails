@@ -43,7 +43,7 @@
                         <p class="semi-bold">AMOUNT</p>
                         <h3><span class="item-count semi-bold">
                           <span class="label label-success label-lg"><%= number_to_currency transaction.value %></span>
-                          <span class="label label-danger label-lg"><%= time_ago_in_words transaction.timeout_datetime.to_s(:short) %> left</span>
+                          <span class="label label-danger label-lg"><%= transaction.pool.title %></span>
                         </h3>
                         <span>
                           <i class="fa fa-clock-o"></i>
@@ -65,7 +65,7 @@
 
                         </td>
                         <td class="v-align-middle bold text-success pull-right">
-                          <span class="label label-default">
+                          <span class="label label-default" style="font-size: 14px">
                             <i class="fa fa-exchange"></i>
                             <%= transaction.status.upcase %>
                           </span>

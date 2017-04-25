@@ -4,7 +4,13 @@
 
         <%= render 'layouts/notice' %>
         <h1 class="title block">Member</h1>
+        <p>
+        	Referral Code: <%= @member.referral_code %>
+        </p>
 
+        <p>
+        	Referrer Code: <%= @member.referrer_code %>
+        </p>        
         <br/>
 
     </div>

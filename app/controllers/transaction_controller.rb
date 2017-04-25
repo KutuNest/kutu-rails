@@ -3,9 +3,9 @@ class TransactionController < ApplicationController
 
   def list
     if current_member.super_admin?
-      @transactions = Transaction.all
+      @transactions = Transaction.order(updated_at: :desc)
     elsif current_member.group_admin?
-      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id)) rescue []
+      @transactions = Transaction.where(pool_id: current_member.groupement.pools.map(&:id)).order(updated_at: :desc) rescue []
     end
   end
 
