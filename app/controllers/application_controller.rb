@@ -17,9 +17,11 @@ class ApplicationController < ActionController::Base
 
   protected
   def protect_staging
-    authenticate_or_request_with_http_basic do |username, password|
-      username == "play" && password == "kutu"
-    end  
+    unless Rails.env.production?
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "play" && password == "kutu"
+      end  
+    end
   end
 
   def set_current_account
