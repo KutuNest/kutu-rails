@@ -11,10 +11,14 @@ module Members
         pool = self.groupement.first_pool
         a = self.accounts.new
         a.auto_populate(pool)
+
         if super_user
           a.action_available = false
           a.super_user = true
         end
+
+        a.auto_create_transaction = true
+        
         if a.save
           a
         else
