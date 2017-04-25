@@ -22,7 +22,7 @@ class Transaction < ApplicationRecord
   validates :eater_id, :feeder_id, presence: true
   validates :timeout, :value, numericality: true, presence: true
 
-  after_save :proceed_completed, if: :proceed_to_parties
+  after_save :proceed_completed #, if: :proceed_to_parties
 
   mount_uploader :sender_receipt, ReceiptUploader
 
