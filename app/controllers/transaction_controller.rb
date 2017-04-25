@@ -20,7 +20,7 @@ class TransactionController < ApplicationController
   def dispute
     @transaction = Transaction.where(id: params[:id]).first
 
-    if @transaction.present? and (@transaction.eater.member == current_member or @transaction.feeder.member == current_member)
+    if @transaction.present? and @transaction.dispute_allowed? and (@transaction.eater.member == current_member or @transaction.feeder.member == current_member)
       @transaction.dispute!
       @transaction.save
       @transaction.notify_disputed
