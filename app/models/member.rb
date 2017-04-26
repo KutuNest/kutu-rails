@@ -47,7 +47,7 @@ class Member < ApplicationRecord
   before_validation :set_defaults
   before_create :set_accounts_limit
 
-  after_create :send_welcome_sms
+  #after_create :send_welcome_sms
 
   def send_welcome_sms
     @client = Twilio::REST::Client.new

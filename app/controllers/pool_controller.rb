@@ -18,7 +18,6 @@ class PoolController < ApplicationController
   def save
     if current_member.super_admin? or current_member.group_admin?
       @pool = Pool.new(pool_params)
-      #@pool.groupement = current_member.groupement if current_member.group_admin?
       if @pool.save
         redirect_to :back, notice: "Pool #{@pool.title} has been saved"
       else

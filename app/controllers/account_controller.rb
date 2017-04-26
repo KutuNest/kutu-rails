@@ -5,8 +5,13 @@ class AccountController < ApplicationController
     if !current_member.super_admin? and current_member.groupement.accounts.size.zero?
       redirect_to dashboard_path, notice: "Sorry group and pool setup not finished yet. Please contact admin.."
     else
-      account = current_member.generate_new_account
-      if account
+      if current_member.accounts.where(super_user: true).any?
+        account = current_member.generate_new_account(true)
+      else
+        account = current_member.generate_new_account
+      end
+
+      if account.present?
         redirect_to dashboard_path(acc: account.name), notice: "New account: #{account.name} has been successfully created"
       else
         redirect_to dashboard_path, notice: 'Unable to create new account. Please contact admin'
