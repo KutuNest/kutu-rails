@@ -72,8 +72,8 @@
                         <td class="v-align-middle red pull-left">
                         </td>
                         <td class="v-align-middle bold text-success pull-right">
-                          <%- if transaction.sender_receipt.url.present? %>
-                            <a href="<%= transaction.sender_receipt.url %>" class="btn btn-white"><i class="fa fa-file"></i>&nbsp;show receipt</a>
+                          <%- if transaction.sender_receipt.present? and transaction.sender_receipt.file.present? %>
+                            <a href="<%= receipt_path(transaction) %>" class="btn btn-white"><i class="fa fa-file"></i>&nbsp;show receipt</a>
                           <%- end %>
                           <a href="<%= confirm_path(transaction) %>" class="btn btn-white"><i class="fa fa-check"></i>&nbsp;confirm payment</a>
                           <a href="<%= reject_path(transaction) %>" class="btn btn-white"><i class="fa fa-times"></i>&nbsp;reject payment</a>
