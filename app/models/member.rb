@@ -45,6 +45,17 @@ class Member < ApplicationRecord
   before_validation :set_defaults
   before_create :set_accounts_limit
 
+  after_create :send_welcome_sms
+
+  def send_welcome_sms
+    @client = Twilio::REST::Client.new
+    @client.messages.create(
+      from: Notification::SmsSender,
+      to: self.phone_number,
+      body: "Welcome to playkutu.com, #{self.email}. Please check your email inbox for account confirmation."
+    )    
+  end
+
   def summary
     {
       total_accounts: self.accounts.count,
