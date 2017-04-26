@@ -1,3 +1,5 @@
+require 'twilio-ruby'
+
 class Member < ApplicationRecord
 
   include Members::Translator
