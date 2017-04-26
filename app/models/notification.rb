@@ -71,7 +71,7 @@ class Notification < ApplicationRecord
   end
 
   def sms_sending_allowed?
-    self.receiver_mobile_number.present? and self.account.member.sms_notification == true
+    self.receiver_mobile_number.present? and (self.account.present? and self.account.member.sms_notification == true)
   end
 
 private
