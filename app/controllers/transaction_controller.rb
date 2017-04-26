@@ -133,7 +133,11 @@ class TransactionController < ApplicationController
     else
       @transaction = Transaction.where(id: params[:id]).first
     end
-    send_file File.open(@transaction.sender_receipt.file.file) if @transaction.present? and @transaction.sender_receipt.file.present?
+    if @transaction.present? and @transaction.sender_receipt.file.present?
+      send_file File.open(@transaction.sender_receipt.file.file) 
+    else
+      redirect_to :back, notice: "Receipt is not available at the moment"
+    end
   end
 
 end
