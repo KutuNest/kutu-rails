@@ -19,22 +19,14 @@ class Member < ApplicationRecord
   belongs_to :groupement, required: false
 
   has_many :accounts, dependent: :nullify
+  has_many :notifications, dependent: :nullify
 
   scope :super_admin, -> {where(role: Roles[:super_admin])}
   scope :group_admin, -> {where(role: Roles[:group_admin])}
   scope :regular_member, -> {where(role: Roles[:regular_member])}
 
-  # Include default devise modules. Others available are:
-  #  :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :lockable, :confirmable, 
          :recoverable, :rememberable, :trackable, :validatable
-
-  #validates :account_holder_name, :bank_name, presence: true
-  #validates :country, presence: true
-  #validates :country_id, :bank_id, presence: true
-  #validates :account_holder_name, presence: true
-  #validates :account_number, presence: true, uniqueness: {scope: :bank_id}
-  #validates :first_name, :last_name, presence: true
 
   validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   validates :username, presence: true, uniqueness: true
@@ -47,15 +39,26 @@ class Member < ApplicationRecord
   before_validation :set_defaults
   before_create :set_accounts_limit
 
-  #after_create :send_welcome_sms
+  after_create :send_welcome_sms
 
   def send_welcome_sms
-    @client = Twilio::REST::Client.new
-    @client.messages.create(
-      from: Notification::SmsSender,
-      to: self.phone_number,
-      body: "Welcome to playkutu.com, #{self.email}. Please check your email inbox for account confirmation."
-    )    
+    n = self.notifications.where(notification_event: Notification::Events[:welcome_sms]).first
+    if n.present?
+      if n.status == Notification::Statuses[:delivered]
+        true
+      else
+        if n.deliver_sms
+          n.status = Notification::Statuses[:delivered]
+          n.save
+        end
+      end
+    else
+      self.notifications.create(
+        transaction_id: nil,
+        notification_event: Notification::Events[:welcome_sms], 
+        receiver_email: self.email, 
+        receiver_mobile_number: self.phone_number)          
+    end
   end
 
   def summary

@@ -28,8 +28,8 @@ class Account < ApplicationRecord
 
   #has_and_belongs_to_many :a_transactions, class_name: 'Transaction', dependent: :nullify
 
-  has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id'
-  has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id'
+  has_many :transaction_feeders, class_name: 'Transaction', foreign_key: 'feeder_id', dependent: :nullify
+  has_many :transaction_eaters, class_name: 'Transaction', foreign_key: 'eater_id', dependent: :nullify
 
   scope :active, -> { where(has_finished: false, kicked_out: false) }
   scope :completed, -> { where(has_finished: true, kicked_out: false) }

@@ -1,7 +1,7 @@
 class Pool < ApplicationRecord
   belongs_to :groupement
 
-  has_many :p_transactions, class_name: 'Transaction', foreign_key: 'pool_id'
+  has_many :p_transactions, class_name: 'Transaction', foreign_key: 'pool_id', dependent: :nullify
   has_many :accounts, dependent: :nullify
 
   validates :groupement_id, presence: true
