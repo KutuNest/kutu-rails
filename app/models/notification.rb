@@ -67,7 +67,7 @@ class Notification < ApplicationRecord
   end
 
   def email_sending_allowed?
-    self.receiver_email.present? and self.account.member.email_notification == true and self.notification_event != Events[:welcome_sms]
+    self.receiver_email.present? and (self.account.present? and self.account.member.email_notification == true) and self.notification_event != Events[:welcome_sms]
   end
 
   def sms_sending_allowed?
