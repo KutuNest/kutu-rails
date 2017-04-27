@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426103148) do
+ActiveRecord::Schema.define(version: 20170427045918) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "member_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170426103148) do
     t.integer  "pool_order"
     t.boolean  "has_finished"
     t.index ["groupement_id"], name: "index_accounts_on_groupement_id"
+    t.index ["member_id", "name"], name: "index_accounts_on_member_id_and_name", unique: true
     t.index ["member_id"], name: "index_accounts_on_member_id"
     t.index ["pool_id"], name: "index_accounts_on_pool_id"
   end
