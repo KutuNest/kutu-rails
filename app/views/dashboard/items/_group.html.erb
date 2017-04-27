@@ -79,6 +79,58 @@
       <%- end %>
       <div class="tab-pane" id="tab-pool-<%= "#{group.id}-completed" %>">
         <div class="table-responsive">
+          <table class="table table-hover table-dash ">
+            <thead>
+              <tr>
+                <th>Finished Accounts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <%- for a in p.accounts.completed.order(updated_at: :asc) do %>
+                    <div class="flex group-item-separator">                      
+                      <figure class="item-img m-r-10">
+                        <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
+                      </figure>
+                      <div class="item-desc">
+                        <a href="#">
+                          <strong><%= a.member.account_holder_name %> (<%= a.name %>)</strong>
+                        </a><br>
+                        <i class="fa fa-credit-card"></i> <%= a.member.bank.title %> <br/>
+                        <%= a.member.account_number %> <br/>
+
+                        <label class="label label-success label-lg">
+                          <i class="fa fa-chevron-circle-up"></i>
+                          <%= p.p_transactions.where(feeder_id: a.id).count %>
+                        </label>
+                        <label class="label label-success label-lg m-l-10">
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <%= p.p_transactions.where(eater_id: a.id).count %>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="flex pull-right">
+                      
+                    </div>
+                  <%- end %>
+                </td>               
+              </tr>
+              <tr>
+                <td>
+                  <label class="btn btn-green">
+                    Amount <i class="fa fa-money"></i> <%= p.amount %>
+                  </label>
+                  <a href="<%= edit_pool_path(p) %>" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit Pool
+                  </a>
+                  <a href="<%= edit_group_path(group) %>" class="btn btn-primary">
+                    <i class="fa fa-edit"></i> Edit Group
+                  </a>                       
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
       </div>
