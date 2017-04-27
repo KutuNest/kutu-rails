@@ -35,7 +35,7 @@
                     <div class="container-fluid no-gutters padding-0">
                       <div class="row no-gutters">
                       <div class="col-5">Name</div>
-                      <div class="col-7"><label class="details-text"><%= target.member.try(:full_name) %> </label></div>
+                      <div class="col-7"><label class="details-text"><%= target.member.try(:account_holder_name) %> </label></div>
                       </div>
                     </div>
                   </li>
@@ -43,7 +43,7 @@
                     <div class="container-fluid no-gutters padding-0">
                       <div class="row no-gutters">
                       <div class="col-5">Bank Name</div>
-                      <div class="col-7 text-uppercase"><label class="details-text"><%= target.member.bank.title %></label></div>
+                      <div class="col-7 text-uppercase"><label class="details-text"><%= target.member.bank.title rescue "N/A" %></label></div>
                       </div>
                     </div>
                   </li>
@@ -51,7 +51,7 @@
                     <div class="container-fluid no-gutters padding-0">
                       <div class="row no-gutters">
                       <div class="col-5">Account Number</div>
-                      <div class="col-7 text-uppercase"><label class="details-text"><%= target.member.account_number %></label></div>
+                      <div class="col-7 text-uppercase"><label class="details-text"><%= target.member.try(:account_number) %></label></div>
                       </div>
                     </div>
                   </li>
