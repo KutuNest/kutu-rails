@@ -26,9 +26,9 @@ class DashboardController < ApplicationController
 
   def groups
     if current_member.super_admin?
-      @groupements = Groupement.includes(:pools).all
+      @groupements = Groupement.includes(pools: :accounts).all
     elsif current_member.group_admin?
-      @groupements = [current_member.groupement].compact
+      @groupements = [current_member.groupement.includes(:pools)].compact
     end
   end
 

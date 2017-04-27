@@ -62,6 +62,7 @@ gem 'twilio-ruby'
 gem 'config'
 gem 'phony_rails'
 gem 'newrelic_rpm'
+gem 'kaminari'
 
 group :production do
   gem 'pg'
