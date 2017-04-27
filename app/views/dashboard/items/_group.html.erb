@@ -102,11 +102,11 @@
 
                         <label class="label label-success label-lg">
                           <i class="fa fa-chevron-circle-up"></i>
-                          <%= Transaction.where(feeder_id: a.id, pool_id: [group.pool.map(&:id)]).count %>
+                          <%= Transaction.where(feeder_id: a.id, pool_id: [group.pools.map(&:id)]).count %>
                         </label>
                         <label class="label label-success label-lg m-l-10">
                           <i class="fa fa-chevron-circle-down"></i>
-                          <%= Transaction.where(eater_id: a.id, pool_id: [group.pool.map(&:id)]).count %>
+                          <%= Transaction.where(eater_id: a.id, pool_id: [group.pools.map(&:id)]).count %>
                         </label>
                       </div>
                     </div>
