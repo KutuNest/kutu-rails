@@ -88,7 +88,7 @@
             <tbody>
               <tr>
                 <td>
-                  <%- for a in p.accounts.completed.order(updated_at: :asc) do %>
+                  <%- for a in group.pools.order(:position).last.accounts.completed.order(updated_at: :asc) do %>
                     <div class="flex group-item-separator">                      
                       <figure class="item-img m-r-10">
                         <a href="#"> &nbsp; <i class="fa fa-user text-lg"></i></a>
