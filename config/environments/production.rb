@@ -59,7 +59,7 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -89,13 +89,13 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'www.playkutu.com'}
 
-  # config.action_mailer.smtp_settings = {
-  #   :address => "email-smtp.us-west-2.amazonaws.com",
-  #   :port => 587,
-  #   :user_name => "AKIAIVXCEW3UJSWVT4WQ",
-  #   :password => "AgnbwsykAWFO5rE5O8/GN6rQnszFNWduq9NT2iU6pYxe",
-  #   :authentication => :login,
-  #   :enable_starttls_auto => true
-  # }
+  config.action_mailer.smtp_settings = {
+    :address => "email-smtp.us-west-2.amazonaws.com",
+    :port => 587,
+    :user_name => "AKIAJJUQIEQ54CR2F6AA",
+    :password => "AgDrZi5+Pue5P4tfZrVXl0g44MgBEeXM9B9lO/a3pvmb",
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
 
 end
