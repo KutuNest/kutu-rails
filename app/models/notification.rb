@@ -57,7 +57,7 @@ class Notification < ApplicationRecord
   end
 
   def deliver_email
-    if true #Rails.env.production? and email_sending_allowed?
+    if Rails.env.production? and email_sending_allowed?
       evt = Notification::Events.find{|e| e.last == self.notification_event }.first
       email = self.receiver_email
       trx = self.account_transaction
