@@ -1,2 +1,9 @@
-notification:
-  sms_sender: +17088882081
+smtp:
+  address: "email-smtp.us-west-2.amazonaws.com"
+  port: 587
+  user_name: "AKIAJJUQIEQ54CR2F6AA"
+  password: "AgDrZi5+Pue5P4tfZrVXl0g44MgBEeXM9B9lO/a3pvmb"
+
+sms_sender: "+601117223008"
+
+

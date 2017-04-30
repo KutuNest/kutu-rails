@@ -90,10 +90,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'www.playkutu.com'}
 
   config.action_mailer.smtp_settings = {
-    :address => "email-smtp.us-west-2.amazonaws.com",
-    :port => 587,
-    :user_name => "AKIAJJUQIEQ54CR2F6AA",
-    :password => "AgDrZi5+Pue5P4tfZrVXl0g44MgBEeXM9B9lO/a3pvmb",
+    :address => Settings.smtp.address,
+    :port => Settings.smtp.port,
+    :user_name => Settings.smtp.user_name,
+    :password => Settings.smtp.password,
     :authentication => :login,
     :enable_starttls_auto => true
   }

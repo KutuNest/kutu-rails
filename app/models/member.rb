@@ -99,8 +99,8 @@ class Member < ApplicationRecord
       transaction_id: nil,
       account_id: nil,
       notification_event: Notification::Events[:limit_changed], 
-      receiver_email: self.member.email, 
-      receiver_mobile_number: self.member.phone_number)    
+      receiver_email: self.email, 
+      receiver_mobile_number: self.phone_number)    
   end
   
 private
