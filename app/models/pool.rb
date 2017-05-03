@@ -21,7 +21,7 @@ class Pool < ApplicationRecord
     accs = self.accounts.active.where.not(id: acc.id).order(:pool_order)
     target = nil
     for a in accs do
-      if Transaction.where(pool_id: self.id, eater_id: a.id).count < self.feeders_count
+      if Transaction.where(failed: false, pool_id: self.id, eater_id: a.id).count < self.feeders_count
         if Transaction.where("eater_id = ? OR feeder_id = ?", a.id, a.id).where(pool_id: self.id, disputed: true).to_a.size.zero?
           if Transaction.where(pool_id: self.id, feeder_id: a.id, sender_confirmed: true, receiver_confirmed: true, admin_confirmed: true).any? or a.super_user?
             target = a
