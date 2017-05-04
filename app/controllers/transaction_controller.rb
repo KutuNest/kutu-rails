@@ -95,6 +95,7 @@ class TransactionController < ApplicationController
         if @transaction.save
           eater = @transaction.eater
           eater.number_associations_left = eater.number_associations_left + 1
+          eater.pool_order = eater.pool.accounts.minimum(:pool_order).to_i - 1
           eater.save
 
           @transaction.notify_failed
