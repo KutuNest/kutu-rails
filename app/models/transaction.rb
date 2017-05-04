@@ -2,7 +2,7 @@ class Transaction < ApplicationRecord
 
   include Transactions::Status
 
-  DisputeLimit = 3.days
+  DisputeLimit = 4.days
   #DisputeLimit = 1.hour
 
   attr_accessor :proceed_to_parties
