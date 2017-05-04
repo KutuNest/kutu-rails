@@ -65,11 +65,11 @@ class Account < ApplicationRecord
   end  
 
   def receiving_transactions
-    Transaction.where("eater_id = ? AND pool_id = ?", self.id, self.pool.id).order("created_at desc").where("sender_confirmed = ? OR receiver_confirmed = ?", false, false)
+    Transaction.where("eater_id = ? AND pool_id = ? AND disputed = ?", self.id, self.pool.id, false).order("created_at desc").where("sender_confirmed = ? OR receiver_confirmed = ?", false, false)
   end
 
   def sending_transactions
-    Transaction.where("feeder_id = ? AND pool_id = ?", self.id, self.pool.id).order("created_at desc").where("sender_confirmed = ? OR receiver_confirmed = ?", false, false)
+    Transaction.where("feeder_id = ? AND pool_id = ? AND disputed = ?", self.id, self.pool.id, false).order("created_at desc").where("sender_confirmed = ? OR receiver_confirmed = ?", false, false)
   end
 
   def kick_out!
