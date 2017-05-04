@@ -2,8 +2,8 @@ class Transaction < ApplicationRecord
 
   include Transactions::Status
 
-  # DisputeLimit = 4.days
-  DisputeLimit = 1.hour
+  DisputeLimit = 3.days
+  #DisputeLimit = 1.hour
 
   attr_accessor :proceed_to_parties
 
@@ -38,12 +38,34 @@ class Transaction < ApplicationRecord
     end
 
     def disputed_by_timeout!
-      trxs = Transaction.where(disputed: false, sender_confirmed: [false, true], admin_confirmed: false, receiver_confirmed: false)
+      trxs = Transaction.where(disputed: false, failed: false, sender_confirmed: false, admin_confirmed: false, receiver_confirmed: false)
       for t in trxs do
-        if (t.created_at + DisputeLimit) < Time.zone.now.to_date
+        if (t.created_at + DisputeLimit) < Time.zone.now
           t.disputed = true
           t.save
         end
+      end
+
+      trxs = Transaction.where(disputed: false, failed: false, sender_confirmed: true, admin_confirmed: false, receiver_confirmed: false)
+      for t in trxs do
+        if (t.sender_confirmed_at + DisputeLimit) < Time.zone.now
+          t.disputed = true
+          t.save
+        end
+      end      
+    end
+
+    def update_confirmation_dates
+      trxs = Transaction.where(sender_confirmed: true, receiver_confirmed: false)
+      for t in trxs do
+        t.sender_confirmed_at = t.updated_at
+        t.save
+      end
+
+      trxs = Transaction.where(sender_confirmed: true, receiver_confirmed: true)
+      for t in trxs do
+        t.receiver_confirmed_at = t.updated_at
+        t.save
       end
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427045918) do
+ActiveRecord::Schema.define(version: 20170504065037) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "member_id"
@@ -140,11 +140,13 @@ ActiveRecord::Schema.define(version: 20170427045918) do
     t.boolean  "receiver_confirmed"
     t.boolean  "failed"
     t.boolean  "admin_confirmed"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "sender_receipt"
     t.boolean  "disputed"
     t.integer  "pool_id"
+    t.datetime "sender_confirmed_at"
+    t.datetime "receiver_confirmed_at"
     t.index ["pool_id"], name: "index_transactions_on_pool_id"
   end
 
