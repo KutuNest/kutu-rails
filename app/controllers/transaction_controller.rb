@@ -50,6 +50,7 @@ class TransactionController < ApplicationController
     else
       @transaction.receiver_confirmed = true
       @transaction.admin_confirmed    = true
+      @transaction.receiver_confirmed_at = DateTime.now
 
       if @transaction.save
         @transaction.notify_receiver_confirmed
@@ -117,6 +118,7 @@ class TransactionController < ApplicationController
       
       @transaction.sender_receipt = params[:receipt]
       @transaction.sender_confirmed = true
+      @transaction.sender_confirmed_at = DateTime.now
 
       if @transaction.save
         @transaction.notify_sender_confirmed
