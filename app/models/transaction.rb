@@ -123,6 +123,7 @@ class Transaction < ApplicationRecord
   def notify_failed
     self.notifications.create(
       account_id: self.feeder.id,
+      transaction_id: self.id,
       notification_event: Notification::Events[:failed], 
       receiver_email: self.feeder.member.email, 
       receiver_mobile_number: self.feeder.member.phone_number)        
